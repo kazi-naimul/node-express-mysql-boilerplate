@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
-            User.belongsTo(models.agency, { foreignKey: 'agency_id', targetKey: 'id' });
+          //  User.belongsTo(models.agency, { foreignKey: 'agency_id', targetKey: 'id' });
         }
     }
 
@@ -21,13 +21,9 @@ module.exports = (sequelize, DataTypes) => {
             email: DataTypes.STRING,
             password: DataTypes.STRING,
             status: DataTypes.INTEGER,
-            role: DataTypes.INTEGER,
             email_verified: DataTypes.INTEGER,
-            default_user: DataTypes.INTEGER,
-            agency_id: DataTypes.INTEGER,
             address: DataTypes.STRING,
             phone_number: DataTypes.STRING,
-            google_id: DataTypes.STRING,
         },
         {
             sequelize,
