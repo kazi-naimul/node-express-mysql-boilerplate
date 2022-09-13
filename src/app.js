@@ -1,7 +1,9 @@
 const express = require('express');
 const cors = require('cors');
+const passport = require('passport');
 const httpStatus = require('http-status');
 const routes = require('./route');
+const { jwtStrategy } = require('./config/passport');
 const { errorConverter, errorHandler } = require('./middlewares/error');
 const ApiError = require('./helper/ApiError');
 
@@ -17,6 +19,10 @@ app.use(express.static(`${process.env.PWD}/public`));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+// jwt authentication
+app.use(passport.initialize());
+passport.use('jwt', jwtStrategy);
 
 app.get('/', async (req, res) => {
     res.status(200).send('Congratulations! API is working!');
