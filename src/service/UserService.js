@@ -37,7 +37,7 @@ class UserService {
                 message = 'Registration Failed! Please Try again.';
                 return responseHandler.returnError(httpStatus.BAD_REQUEST, message);
             }
-            await this.sendVerificationEmail(uuid, userBody.first_name, userBody.email);
+          
             userData = userData.toJSON();
             delete userData.password;
 
