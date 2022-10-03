@@ -39,7 +39,6 @@ app.use(errorConverter);
 
 // handle error
 app.use(errorHandler);
-require('pg').defaults.parseInt8 = true;
 const db = require('./models');
 
 db.sequelize.sync();
