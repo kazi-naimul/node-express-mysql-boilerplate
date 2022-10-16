@@ -28,8 +28,6 @@ class UserService {
             userBody.uuid = uuid;
             userBody.status = userConstant.STATUS_ACTIVE;
             userBody.email_verified = userConstant.EMAIL_VERIFIED_FALSE;
-            userBody.default_user = userConstant.DEFAULT_USER_YES;
-            userBody.role = userConstant.ROLE_AGENCY_ADMIN;
 
             let userData = await this.userDao.create(userBody);
 
