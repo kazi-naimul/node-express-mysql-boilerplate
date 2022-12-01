@@ -12,6 +12,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "axios": "^1.2.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",
@@ -23,7 +24,9 @@
     "jsonwebtoken": "^8.5.1",
     "md5": "^2.3.0",
     "moment": "^2.29.2",
+    "mysql2": "^2.3.3",
     "node-cron": "^3.0.0",
+    "otp-generator": "^4.0.0",
     "passport": "^0.5.2",
     "passport-jwt": "^4.0.0",
     "redis": "^4.0.6",
@@ -31,7 +34,6 @@
     "sequelize-cli": "^6.2.0",
     "socket.io": "^4.4.1",
     "winston": "^3.3.3",
-    "mysql2": "^2.3.3",
     "winston-daily-rotate-file": "^4.5.5"
   },
   "devDependencies": {

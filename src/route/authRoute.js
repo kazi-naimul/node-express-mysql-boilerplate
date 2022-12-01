@@ -12,6 +12,8 @@ router.post('/register', userValidator.userCreateValidator, authController.regis
 router.post('/email-exists', userValidator.checkEmailValidator, authController.checkEmail);
 router.post('/login', userValidator.userLoginValidator, authController.login);
 router.post('/refresh-token', authController.refreshTokens);
+router.post('/send-otp', authController.sendOtp);
+
 router.post('/logout', authController.logout);
 router.put(
     '/change-password',
