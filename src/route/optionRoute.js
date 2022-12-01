@@ -6,7 +6,7 @@ const router = express.Router();
 const optionController = new OptionController();
 
 
-router.post('/get-fields', optionController.getFields);
+router.get('/get-fields', optionController.getFields);
 
 
 
