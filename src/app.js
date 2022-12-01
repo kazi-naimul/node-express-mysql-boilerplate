@@ -25,6 +25,7 @@ app.use(passport.initialize());
 passport.use('jwt', jwtStrategy);
 
 app.get('/', async (req, res) => {
+    console.log('test')
     res.status(200).send('Congratulations! API is working!');
 });
 app.use('/api', routes);

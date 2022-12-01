@@ -17,17 +17,20 @@ class UserService {
      * @returns {Object}
      */
     createUser = async (userBody) => {
+        console.log(userBody);
         try {
-            let message = 'Successfully Registered the account! Please Verify your email.';
+            let message = 'Business registration successful,pending for activation.Will get back on 48 hours';
             if (await this.userDao.isEmailExists(userBody.email)) {
                 return responseHandler.returnError(httpStatus.BAD_REQUEST, 'Email already taken');
             }
             const uuid = uuidv4();
             userBody.email = userBody.email.toLowerCase();
-            userBody.password = bcrypt.hashSync(userBody.password, 8);
+            if(userBody.mpin){
+                userBody.mpin = bcrypt.hashSync(userBody.mpin, 8);
+
+            }
             userBody.uuid = uuid;
-            userBody.status = userConstant.STATUS_ACTIVE;
-            userBody.email_verified = userConstant.EMAIL_VERIFIED_FALSE;
+            userBody.status = userConstant.STATUS_INACTIVE;
 
             let userData = await this.userDao.create(userBody);
 

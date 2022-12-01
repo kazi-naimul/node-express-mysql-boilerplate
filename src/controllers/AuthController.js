@@ -17,6 +17,7 @@ class AuthController {
             const user = await this.userService.createUser(req.body);
             let tokens = {};
             const { status } = user.response;
+            console.log(status)
             if (user.response.status) {
                 tokens = await this.tokenService.generateAuthTokens(user.response.data);
             }

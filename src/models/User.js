@@ -16,14 +16,55 @@ module.exports = (sequelize, DataTypes) => {
     User.init(
         {
             uuid: DataTypes.UUID,
-            first_name: DataTypes.STRING,
-            last_name: DataTypes.STRING,
+            name: DataTypes.STRING,
+            // lastName: DataTypes.STRING,
+            // middleName: DataTypes.STRING,
+            // dob: DataTypes.STRING,
+            // idProofType:DataTypes.STRING,
+            // idProofNumber:DataTypes.STRING,
+            // idProofImage:DataTypes.STRING,
+            // addressProofType:DataTypes.STRING,
+            // addressProofNumber:DataTypes.STRING,
+            // addressProofImage:DataTypes.STRING,
+            // photo:DataTypes.STRING,
             email: DataTypes.STRING,
-            password: DataTypes.STRING,
+            mpin:DataTypes.STRING,
+            business_name: DataTypes.STRING,
+            business_phone_number: DataTypes.STRING,
             status: DataTypes.INTEGER,
-            email_verified: DataTypes.INTEGER,
             address: DataTypes.STRING,
             phone_number: DataTypes.STRING,
+            business_type:DataTypes.INTEGER,
+            mode:DataTypes.INTEGER,
+            mode: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                get() {
+                    return this.getDataValue('mode').split(';')
+                },
+                set(val) {
+                   this.setDataValue('mode',val.join(';'));
+                },
+            },
+
+            // business_type: { 
+            //     type: DataTypes.STRING, 
+            //     get: function() {
+            //         return JSON.parse(this.getDataValue('business_type'));
+            //     }, 
+            //     set: function(val) {
+            //         return this.setDataValue('business_type', JSON.stringify(val));
+            //     }
+            // },
+            gst: DataTypes.STRING,
+            address1: DataTypes.STRING,
+            city: DataTypes.STRING,
+            zipcode: DataTypes.STRING,
+            latitude: DataTypes.FLOAT,
+            longitude: DataTypes.FLOAT,
+            referal_code: DataTypes.STRING,
+            whatsapp_communication: DataTypes.BOOLEAN
+
         },
         {
             sequelize,
