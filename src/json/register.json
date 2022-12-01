@@ -1,89 +1,112 @@
 [
-    {
-      "title": "Owner Details",
-      "details": [
-        {
-          "title": "RegisterMobileNo",
-          "fields": [
-            {
-              "label": "MobileNo",
-              "isMandatory": true
-            }
-          ]
-        },
-        {
-          "title": "Owner Information",
-          "fields": [
-            {
-              "label": "Name"
-            },
-            {
-              "label": "Email ID"
-            }
-          ]
-        },
-        {
-          "title": "Generate MPIN ",
-          "fields": [
-            {
-              "label": "Enter MPIN"
-            },
-            {
-              "label": "Re confirm MPIN"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "BusinessDetails": [
-        {
-          "title": "Business Information",
-          "fields": [
-            {
-              "label": "Business Name",
-              "error": "Please enter valid Business Name"
-            },
-            {
-              "label": "Business Number",
-              "error": "Please enter valid Business Number"
-            }
-          ]
-        },
-        {
-          "title": "Business ",
-          "fields": [
-            {
-              "url": "",
-              "type": 1,
-              "label": "Fashion"
-            }
-          ]
-        },
-        {
-          "title": "GST ",
-          "fields": [
-            {
-              "label": "GST Number"
-            }
-          ]
-        },
-        {
-          "title": "Business Location",
-          "fields": []
-        }
-      ]
-    },
-    {
-      "LegalTeams": [
-        {
-          "title": "Referral Code ",
-          "fields": [
-            {
-              "label": "Referral Code"
-            }
-          ]
-        }
-      ]
-    }
-  ]
+  {
+    "title": "Owner Details",
+    "details": [
+      {
+        "title": "RegisterMobileNo",
+        "fields": [
+          {
+            "label": "MobileNo",
+            "isMandatory": true
+          }
+        ]
+      },
+      {
+        "title": "Owner Information",
+        "fields": [
+          {
+            "label": "Name",
+            "isMandatory": true
+          },
+          {
+            "label": "Email ID",
+            "isMandatory": true
+          }
+        ]
+      },
+      {
+        "title": "Generate MPIN ",
+        "fields": [
+          {
+            "label": "Enter MPIN"
+          },
+          {
+            "label": "Re confirm MPIN"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "BusinessDetails",
+    "details": [
+      {
+        "title": "Business Information",
+        "fields": [
+          {
+            "label": "Business Name",
+            "isMandatory": true,
+            "error": "Please enter valid Business Name"
+          },
+          {
+            "label": "Business Number",
+            "error": "Please enter valid Business Number"
+          }
+        ]
+      },
+      {
+        "title": "Business ",
+        "fields": [
+          {
+            "url": "https://cdn2.assets-servd.host/pebble-mag/production/images/_1200x630_crop_center-center_82_none/What%E2%80%99s-Wrong-With-Fast-Fashion_-header.jpg?mtime=1583424325",
+            "type": 1,
+            "label": "Fashion"
+          },
+          {
+            "url": "https://img.freepik.com/premium-psd/hygiene-beauty-concept-mock-up_23-2148688773.jpg?w=2000",
+            "type": 2,
+            "label": "Beauty"
+          },
+          {
+            "url": "https://images.unsplash.com/photo-1602734846297-9299fc2d4703?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dGVkZHl8ZW58MHx8MHx8&w=1000&q=80",
+            "type": 3,
+            "label": "Gift & Toys"
+          }
+        ]
+      },
+      {
+        "title": "GST ",
+        "fields": [
+          {
+            "label": "GST Number"
+          }
+        ]
+      },
+      {
+        "title": "Business Location",
+        "fields": []
+      }
+    ]
+  },
+  {
+    "title": "LegalTeams",
+    "details": [
+      {
+        "title": "Referral Code ",
+        "fields": [
+          {
+            "label": "Referral Code"
+          },
+          {
+            "type": "checkbox",
+            "label": "I want to receive communications from mabliz on Whatsapp"
+          },
+          {
+            "type": "checkbox",
+            "label": "I agree to mabliz <a href='https://www.google.co.in/'>Terms & condition</a>"
+          }
+        ]
+      }
+    ]
+  }
+]
