@@ -32,19 +32,20 @@ class AuthController {
     }
   };
 
-  login = async (req, res) => {};
   sendOtp = async (req, res) => {
     console.log(req.body);
-    const data = await createNewOTP(req.body.phone_number);
+    const hash = await createNewOTP(req.body.phone_number);
     res.json(
       responseHandler.returnSuccess(
         httpStatus[200],
         "OTP Sent successfully",
-        data
+        hash
       )
     );
   };
 
+
+  
   checkEmail = async (req, res) => {
     try {
       const isExists = await this.userService.isEmailExists(
@@ -57,12 +58,11 @@ class AuthController {
     }
   };
 
-  login = async (req, res) => {
+  loginWithOtp = async (req, res) => {
     try {
-      const { email, password } = req.body;
-      const user = await this.authService.loginWithEmailPassword(
-        email.toLowerCase(),
-        password
+      const {  phone_number , otp, hash } = req.body;
+      const user = await this.authService.loginWithOtp(
+        phone_number , hash,otp
       );
       const { message } = user.response;
       const { data } = user.response;
