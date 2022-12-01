@@ -20,8 +20,11 @@ class UserService {
         console.log(userBody);
         try {
             let message = 'Business registration successful,pending for activation. We will get back on 48 hours';
-            if (await this.userDao.isEmailExists(userBody.email)) {
-                return responseHandler.returnError(httpStatus.BAD_REQUEST, 'Email already taken');
+            if (await this.userDao.isAlreadyExists(userBody.email,'email')) {
+                return responseHandler.returnError(httpStatus.BAD_REQUEST, 'Email already registered');
+            }
+            if (await this.userDao.isAlreadyExists(userBody.phone_number,'phone_number')) {
+                return responseHandler.returnError(httpStatus.BAD_REQUEST, 'Phone Number already registered');
             }
             const uuid = uuidv4();
             userBody.email = userBody.email.toLowerCase();

@@ -21,6 +21,16 @@ class UserDao extends SuperDao {
         });
     }
 
+    async isAlreadyExists(value, key) {
+        return User.count({ where: {[key]: value } }).then((count) => {
+            if (count != 0) {
+                return true;
+            }
+            return false;
+        });
+    }
+    
+
     async createWithTransaction(user, transaction) {
         return User.create(user, { transaction });
     }
