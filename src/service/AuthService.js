@@ -68,7 +68,7 @@ class AuthService {
 
       let user = await this.userDao.findByPhoneNumber(phone_number);
       if (user == null) {
-        return responseHandler.returnSuccess(
+        return responseHandler.returnError(
           httpStatus.OK,
           "User not found,continue with registration"
         );

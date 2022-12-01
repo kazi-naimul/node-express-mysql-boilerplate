@@ -38,7 +38,7 @@ async function sendSMS(phone, otp) {
 
 async function createNewOTP(phone) {
   // Generate a 6 digit numeric OTP
-  const otp = otpGenerator.generate(4, {
+  const otp = otpGenerator.generate(6, {
     lowerCaseAlphabets: false,
     upperCaseAlphabets: false,
     specialChars: false,
