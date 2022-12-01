@@ -19,7 +19,7 @@ class UserService {
     createUser = async (userBody) => {
         console.log(userBody);
         try {
-            let message = 'Business registration successful,pending for activation.We will get back on 48 hours';
+            let message = 'Business registration successful,pending for activation. We will get back on 48 hours';
             if (await this.userDao.isEmailExists(userBody.email)) {
                 return responseHandler.returnError(httpStatus.BAD_REQUEST, 'Email already taken');
             }
