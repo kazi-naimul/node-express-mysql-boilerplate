@@ -1,0 +1,89 @@
+[
+    {
+      "title": "Owner Details",
+      "details": [
+        {
+          "title": "RegisterMobileNo",
+          "fields": [
+            {
+              "label": "MobileNo",
+              "isMandatory": true
+            }
+          ]
+        },
+        {
+          "title": "Owner Information",
+          "fields": [
+            {
+              "label": "Name"
+            },
+            {
+              "label": "Email ID"
+            }
+          ]
+        },
+        {
+          "title": "Generate MPIN ",
+          "fields": [
+            {
+              "label": "Enter MPIN"
+            },
+            {
+              "label": "Re confirm MPIN"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "BusinessDetails": [
+        {
+          "title": "Business Information",
+          "fields": [
+            {
+              "label": "Business Name",
+              "error": "Please enter valid Business Name"
+            },
+            {
+              "label": "Business Number",
+              "error": "Please enter valid Business Number"
+            }
+          ]
+        },
+        {
+          "title": "Business ",
+          "fields": [
+            {
+              "url": "",
+              "type": 1,
+              "label": "Fashion"
+            }
+          ]
+        },
+        {
+          "title": "GST ",
+          "fields": [
+            {
+              "label": "GST Number"
+            }
+          ]
+        },
+        {
+          "title": "Business Location",
+          "fields": []
+        }
+      ]
+    },
+    {
+      "LegalTeams": [
+        {
+          "title": "Referral Code ",
+          "fields": [
+            {
+              "label": "Referral Code"
+            }
+          ]
+        }
+      ]
+    }
+  ]
