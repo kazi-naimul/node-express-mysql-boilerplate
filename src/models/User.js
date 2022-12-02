@@ -56,7 +56,7 @@ module.exports = (sequelize, DataTypes) => {
             //         return this.setDataValue('business_type', JSON.stringify(val));
             //     }
             // },
-            gst_no: DataTypes.STRING,
+            gst_number: DataTypes.STRING,
             gst_image:DataTypes.TEXT('long'),
             address1: DataTypes.STRING,
             city: DataTypes.STRING,
