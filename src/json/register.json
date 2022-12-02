@@ -1,11 +1,15 @@
 [
   {
     "title": "Owner Details",
+    "eligility":["PARTNER"],
     "details": [
       {
         "title": "Register Mobile No",
+        "eligility":["PARTNER"],
+
         "fields": [
           {
+            "eligility":["PARTNER"],
             "label": "Mobile No",
             "type": "number",
             "isMandatory": true,
@@ -15,8 +19,11 @@
       },
       {
         "title": "Owner Information",
+        "eligility":["PARTNER","CUSTOMER"],
         "fields": [
           {
+            "eligility":["PARTNER","CUSTOMER"],
+
             "label": "Name",
             "type": "textbox",
             "isMandatory": true,
@@ -26,7 +33,9 @@
             "label": "Email ID",
             "type":"textbox",
             "isMandatory": true,
-            "requestKey":"email"
+            "requestKey":"email",
+            "eligility":["PARTNER","CUSTOMER"]
+
           }
         ]
       },
