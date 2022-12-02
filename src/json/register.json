@@ -68,14 +68,14 @@
             "label": "Business Name",
             "type":"textbox",
             "isMandatory": true,
-            "error": "Please enter valid Business Name",
+            "error": "Please enter valid business Name",
             "requestKey":"business_name",
             "eligility":["PARTNER"]
           },
           {
             "label": "Business Number",
             "type":"textbox",
-            "error": "Please enter valid Business Number",
+            "error": "Please enter valid business Number",
             "requestKey":"business_phone_number",
             "eligility":["PARTNER"]
           }
