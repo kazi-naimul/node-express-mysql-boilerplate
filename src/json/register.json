@@ -64,11 +64,13 @@
         "fields": [
           {
             "label": "Business Name",
+            "type":"textbox",
             "isMandatory": true,
             "error": "Please enter valid Business Name"
           },
           {
-            "label": "Business Number"
+            "label": "Business Number",
+            "error": "Please enter valid Business Number"
           }
         ]
       },
