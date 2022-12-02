@@ -39,91 +39,134 @@
           }
         ]
       },
-      {
+      {"eligility":["PARTNER"],
         "title": "Generate MPIN ",
         "fields": [
           {
             "label": "Enter MPIN",
             "type": "textboxPassword",
-            "requestKey":"mpin"
+            "requestKey":"mpin",
+            "eligility":["PARTNER"]
           },
           {
             "label": "Re confirm MPIN",
             "type":"textboxPassword",
-            "requestKey":"mpin"
+            "requestKey":"mpin",
+            "eligility":["PARTNER"]
           }
         ]
       }
     ]
   },
-  {
+  {"eligility":["PARTNER"],
     "title": "BusinessDetails",
     "details": [
-      {
+      {"eligility":["PARTNER"],
         "title": "Business Information",
         "fields": [
           {
             "label": "Business Name",
             "type":"textbox",
             "isMandatory": true,
-            "error": "Please enter valid Business Name"
+            "error": "Please enter valid Business Name",
+            "requestKey":"business_name",
+            "eligility":["PARTNER"]
           },
           {
             "label": "Business Number",
-            "error": "Please enter valid Business Number"
+            "type":"textbox",
+            "error": "Please enter valid Business Number",
+            "requestKey":"business_phone_number",
+            "eligility":["PARTNER"]
           }
         ]
       },
       {
         "title": "Business ",
+        "eligility":["PARTNER"],
+        "type":"grid",
         "fields": [
           {
             "url": "https://cdn2.assets-servd.host/pebble-mag/production/images/_1200x630_crop_center-center_82_none/What%E2%80%99s-Wrong-With-Fast-Fashion_-header.jpg?mtime=1583424325",
-            "type": 1,
-            "label": "Fashion"
-          },
-          {
+            "id": 1,
+            "type":"option",
+            "label": "Fashion",
+            "requestKey":"business_type",
+            "eligility":["PARTNER"]
+        },
+        {
             "url": "https://img.freepik.com/premium-psd/hygiene-beauty-concept-mock-up_23-2148688773.jpg?w=2000",
-            "type": 2,
-            "label": "Beauty"
-          },
-          {
+            "id": 2,
+            "type":"option",
+            "label": "Beauty",
+            "requestKey":"business_type",
+            "eligility":["PARTNER"]
+        },
+        {
             "url": "https://images.unsplash.com/photo-1602734846297-9299fc2d4703?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dGVkZHl8ZW58MHx8MHx8&w=1000&q=80",
-            "type": 3,
-            "label": "Gift & Toys"
-          }
+            "id": 3,
+            "type":"option",
+            "label": "Gift & Toys",
+            "requestKey":"business_type",
+            "eligility":["PARTNER"]
+        }
         ]
       },
       {
         "title": "GST ",
+        "eligility":["PARTNER"],
         "fields": [
           {
-            "label": "GST Number"
+            "label": "GST Number",
+            "type":"number",
+            "requestKey":"gst_number",
+            "eligility":["PARTNER"]
+          },{
+            "label": "GST Image",
+            "type":"image_picker",
+            "requestKey":"gst_image",
+            "eligility":["PARTNER"]
           }
         ]
       },
       {
         "title": "Business Location",
-        "fields": []
+        "eligility":["PARTNER"],
+        "fields": [{
+          "label": "Business Location",
+        "type":"location_picker",
+        "requestKey":"business_location",
+        "eligility":["PARTNER"]
+         }
+        ]
       }
     ]
   },
   {
     "title": "LegalTeams",
+    "eligility":["PARTNER"],
     "details": [
       {
         "title": "Referral Code ",
+        "eligility":["PARTNER"],
         "fields": [
           {
-            "label": "Referral Code"
+            "label": "Referral Code",
+            "type": "textbox",
+            "requestKey":"referral_code",
+            "eligility":["PARTNER"]
           },
           {
             "type": "checkbox",
-            "label": "I want to receive communications from mabliz on Whatsapp"
+            "label": "I want to receive communications from mabliz on Whatsapp",
+            "validValue":true,
+            "eligility":["PARTNER"]
           },
           {
             "type": "checkbox",
-            "label": "<p>I agree to mabliz <a href='https://www.google.co.in/'>Terms & condition</a></p>"
+            "label": "<p>I agree to mabliz <a href='https://www.google.co.in/'>Terms & condition</a></p>",
+            "validValue":true,
+            "eligility":["PARTNER"]
           }
         ]
       }
