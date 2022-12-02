@@ -3,10 +3,10 @@
     "title": "Owner Details",
     "details": [
       {
-        "title": "RegisterMobileNo",
+        "title": "Register Mobile No",
         "fields": [
           {
-            "label": "MobileNo",
+            "label": "Mobile No",
             "isMandatory": true
           }
         ]
