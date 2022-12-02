@@ -13,6 +13,7 @@ class UserValidator {
             email:  Joi.string(),
             mode:Joi.array(),
             business_name:  Joi.string(),
+            photo:Joi.string(),
             business_phone_number:  Joi.string(),
             address:  Joi.string(),
             phone_number:  Joi.string(),
