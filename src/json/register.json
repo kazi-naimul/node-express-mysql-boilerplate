@@ -102,7 +102,7 @@
           },
           {
             "type": "checkbox",
-            "label": "I agree to mabliz <a href='https://www.google.co.in/'>Terms & condition</a>"
+            "label": "<p>I agree to mabliz <a href='https://www.google.co.in/'>Terms & condition</a></p>"
           }
         ]
       }
