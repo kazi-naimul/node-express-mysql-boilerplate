@@ -7,7 +7,9 @@
         "fields": [
           {
             "label": "Mobile No",
-            "isMandatory": true
+            "type": "number",
+            "isMandatory": true,
+            "requestKey":"phone_number"
           }
         ]
       },
@@ -16,11 +18,15 @@
         "fields": [
           {
             "label": "Name",
-            "isMandatory": true
+            "type": "textbox",
+            "isMandatory": true,
+            "requestKey":"name"
           },
           {
             "label": "Email ID",
-            "isMandatory": true
+            "type":"email",
+            "isMandatory": true,
+            "requestKey":"email"
           }
         ]
       },
@@ -28,10 +34,14 @@
         "title": "Generate MPIN ",
         "fields": [
           {
-            "label": "Enter MPIN"
+            "label": "Enter MPIN",
+            "type": "textboxPassword",
+            "requestKey":"mpin"
           },
           {
-            "label": "Re confirm MPIN"
+            "label": "Re confirm MPIN",
+            "type":"textboxPassword",
+            "requestKey":"mpin"
           }
         ]
       }
