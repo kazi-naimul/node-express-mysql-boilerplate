@@ -1,15 +1,15 @@
 [
   {
     "title": "Owner Details",
-    "eligility":["PARTNER"],
+    "eligility": ["PARTNER"],
     "details": [
       {
         "title": "Register Mobile No",
-        "eligility":["PARTNER"],
+        "eligility": ["PARTNER"],
 
         "fields": [
           {
-            "eligility":["PARTNER"],
+            "eligility": ["PARTNER"],
             "label": "Mobile No",
             "isMandatory": true,
             "type": "textbox",
@@ -20,7 +20,7 @@
       },
       {
         "title": "Owner Information",
-        "eligility":["PARTNER","CUSTOMER"],
+        "eligility": ["PARTNER", "CUSTOMER"],
         "fields": [
           {
             "eligility":["PARTNER","CUSTOMER"],
@@ -28,20 +28,20 @@
             "type": "textbox",
             "input": "text",
             "isMandatory": true,
-            "requestKey":"name"
+            "requestKey": "name"
           },
           {
             "label": "Email ID",
             "type":"textbox",
             "input":"email",
             "isMandatory": true,
-            "requestKey":"email",
-            "eligility":["PARTNER","CUSTOMER"]
-
+            "requestKey": "email",
+            "eligility": ["PARTNER", "CUSTOMER"]
           }
         ]
       },
-      {"eligility":["PARTNER"],
+      {
+        "eligility": ["PARTNER"],
         "title": "Generate MPIN ",
         "fields": [
           {
@@ -57,10 +57,12 @@
       }
     ]
   },
-  {"eligility":["PARTNER"],
-    "title": "BusinessDetails",
+  {
+    "eligility": ["PARTNER"],
+    "title": "Business Details",
     "details": [
-      {"eligility":["PARTNER"],
+      {
+        "eligility": ["PARTNER"],
         "title": "Business Information",
         "fields": [
           {
@@ -68,9 +70,9 @@
             "type":"textbox",
             "input":"text",
             "isMandatory": true,
-            "error": "Please enter valid Business Name",
-            "requestKey":"business_name",
-            "eligility":["PARTNER"]
+            "error": "Please enter valid business Name",
+            "requestKey": "business_name",
+            "eligility": ["PARTNER"]
           },
           {
             "label": "Business Number",
@@ -84,38 +86,43 @@
       },
       {
         "title": "Business",
-        "eligility":["PARTNER"],
-        "type":"grid",
+        "eligility": ["PARTNER"],
+        "type": "grid",
         "fields": [
           {
-            "url": "https://cdn2.assets-servd.host/pebble-mag/production/images/_1200x630_crop_center-center_82_none/What%E2%80%99s-Wrong-With-Fast-Fashion_-header.jpg?mtime=1583424325",
-            "id": 1,
-            "type":"option",
-            "label": "Fashion",
-            "requestKey":"business_type",
-            "eligility":["PARTNER"]
-        },
-        {
-            "url": "https://img.freepik.com/premium-psd/hygiene-beauty-concept-mock-up_23-2148688773.jpg?w=2000",
-            "id": 2,
-            "type":"option",
-            "label": "Beauty",
-            "requestKey":"business_type",
-            "eligility":["PARTNER"]
-        },
-        {
-            "url": "https://images.unsplash.com/photo-1602734846297-9299fc2d4703?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dGVkZHl8ZW58MHx8MHx8&w=1000&q=80",
-            "id": 3,
-            "type":"option",
-            "label": "Gift & Toys",
-            "requestKey":"business_type",
-            "eligility":["PARTNER"]
-        }
+            "type": "grid",
+            "fields": [
+              {
+                "url": "https://cdn2.assets-servd.host/pebble-mag/production/images/_1200x630_crop_center-center_82_none/What%E2%80%99s-Wrong-With-Fast-Fashion_-header.jpg?mtime=1583424325",
+                "id": 1,
+                "type": "option",
+                "label": "Fashion",
+                "requestKey": "business_type",
+                "eligility": ["PARTNER"]
+              },
+              {
+                "url": "https://img.freepik.com/premium-psd/hygiene-beauty-concept-mock-up_23-2148688773.jpg?w=2000",
+                "id": 2,
+                "type": "option",
+                "label": "Beauty",
+                "requestKey": "business_type",
+                "eligility": ["PARTNER"]
+              },
+              {
+                "url": "https://images.unsplash.com/photo-1602734846297-9299fc2d4703?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dGVkZHl8ZW58MHx8MHx8&w=1000&q=80",
+                "id": 3,
+                "type": "option",
+                "label": "Gift & Toys",
+                "requestKey": "business_type",
+                "eligility": ["PARTNER"]
+              }
+            ]
+          }
         ]
       },
       {
         "title": "GST",
-        "eligility":["PARTNER"],
+        "eligility": ["PARTNER"],
         "fields": [
           {
             "label": "GST Number",
@@ -131,24 +138,25 @@
       },
       {
         "title": "Business Location",
-        "eligility":["PARTNER"],
-        "fields": [{
-          "label": "Business Location",
-        "type":"location_picker",
-        "requestKey":"business_location",
-        "eligility":["PARTNER"]
-         }
+        "eligility": ["PARTNER"],
+        "fields": [
+          {
+            "label": "Business Location",
+            "type": "location_picker",
+            "requestKey": "business_location",
+            "eligility": ["PARTNER"]
+          }
         ]
       }
     ]
   },
   {
     "title": "Legal Terms",
-    "eligility":["PARTNER"],
+    "eligility": ["PARTNER"],
     "details": [
       {
         "title": "Referral Code ",
-        "eligility":["PARTNER"],
+        "eligility": ["PARTNER"],
         "fields": [
           {
             "label": "Referral Code",
@@ -160,14 +168,14 @@
           {
             "type": "checkbox",
             "label": "I want to receive communications from mabliz on Whatsapp",
-            "requestKey":"whatsapp_communication",
-            "eligility":["PARTNER"]
+            "requestKey": "whatsapp_communication",
+            "eligility": ["PARTNER"]
           },
           {
             "type": "checkbox",
             "label": "<p>I agree to mabliz <a href='https://www.google.co.in/'>Terms & condition</a></p>",
-            "validValue":true,
-            "eligility":["PARTNER"]
+            "validValue": true,
+            "eligility": ["PARTNER"]
           }
         ]
       }
