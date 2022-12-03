@@ -55,6 +55,6 @@ Business.belongsTo(User);
 Business.hasMany(Branch);
 Branch.belongsTo(Business);
 
-db.sequelize.sync({force:true});
-// db.sequelize.sync();
+// db.sequelize.sync({force:true});
+db.sequelize.sync();
 module.exports = app;

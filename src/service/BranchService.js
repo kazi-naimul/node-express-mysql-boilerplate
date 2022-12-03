@@ -3,6 +3,8 @@ const bcrypt = require("bcryptjs");
 const { v4: uuidv4 } = require("uuid");
 const BranchDao = require("../dao/BranchDao");
 const BusinessDao = require("../dao/BusinessDao");
+const UserDao = require("../dao/UserDao");
+
 const {groupBy} = require('lodash');
 const responseHandler = require("../helper/responseHandler");
 const logger = require("../config/logger");
@@ -12,11 +14,16 @@ class BranchService {
   constructor() {
     this.branchDao = new BranchDao();
     this.businessDao = new BusinessDao();
+    this.userDao = new UserDao();
+
   }
 
   getBranchesForActivation = async () => {
     const branches = await this.branchDao.findAll({
-      include: this.businessDao.Model,
+      include: [
+        {model: this.businessDao.Model, include: [{model:this.userDao.Model}] }
+      ],
+
     });
 
     const groups = groupBy(branches,'business.business_type_label');
