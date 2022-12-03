@@ -11,9 +11,10 @@
           {
             "eligility": ["PARTNER"],
             "label": "Mobile No",
-            "type": "number",
             "isMandatory": true,
-            "requestKey": "phone_number"
+            "type": "textbox",
+            "input": "number",
+            "requestKey":"phone_number"
           }
         ]
       },
@@ -22,16 +23,17 @@
         "eligility": ["PARTNER", "CUSTOMER"],
         "fields": [
           {
-            "eligility": ["PARTNER", "CUSTOMER"],
-
+            "eligility":["PARTNER","CUSTOMER"],
             "label": "Name",
             "type": "textbox",
+            "input": "text",
             "isMandatory": true,
             "requestKey": "name"
           },
           {
             "label": "Email ID",
-            "type": "textbox",
+            "type":"textbox",
+            "input":"email",
             "isMandatory": true,
             "requestKey": "email",
             "eligility": ["PARTNER", "CUSTOMER"]
@@ -44,15 +46,12 @@
         "fields": [
           {
             "label": "Enter MPIN",
-            "type": "textboxPassword",
+            "type": "confirm_pin",
+            "input": "number",
             "requestKey": "mpin",
-            "eligility": ["PARTNER"]
-          },
-          {
-            "label": "Re confirm MPIN",
-            "type": "textboxPassword",
-            "requestKey": "mpin",
-            "eligility": ["PARTNER"]
+            "eligility": [
+              "PARTNER"
+            ]
           }
         ]
       }
@@ -68,7 +67,8 @@
         "fields": [
           {
             "label": "Business Name",
-            "type": "textbox",
+            "type":"textbox",
+            "input":"text",
             "isMandatory": true,
             "error": "Please enter valid business Name",
             "requestKey": "business_name",
@@ -76,10 +76,11 @@
           },
           {
             "label": "Business Number",
-            "type": "textbox",
-            "error": "Please enter valid business Number",
-            "requestKey": "business_phone_number",
-            "eligility": ["PARTNER"]
+            "type":"textbox",
+            "input":"number",
+            "error": "Please enter valid Business Number",
+            "requestKey":"business_phone_number",
+            "eligility":["PARTNER"]
           }
         ]
       },
@@ -125,15 +126,13 @@
         "fields": [
           {
             "label": "GST Number",
-            "type": "number",
+            "type": "textbox_image_picker",
+            "input": "number",
             "requestKey": "gst_number",
-            "eligility": ["PARTNER"]
-          },
-          {
-            "label": "GST Image",
-            "type": "image_picker",
-            "requestKey": "gst_image",
-            "eligility": ["PARTNER"]
+            "imageKey": "gst_image",
+            "eligility": [
+              "PARTNER"
+            ]
           }
         ]
       },
@@ -162,8 +161,9 @@
           {
             "label": "Referral Code",
             "type": "textbox",
-            "requestKey": "referral_code",
-            "eligility": ["PARTNER"]
+            "input": "text",
+            "requestKey":"referral_code",
+            "eligility":["PARTNER"]
           },
           {
             "type": "checkbox",
