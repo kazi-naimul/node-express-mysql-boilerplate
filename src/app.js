@@ -6,6 +6,7 @@ const routes = require('./route');
 const { jwtStrategy } = require('./config/passport');
 const { errorConverter, errorHandler } = require('./middlewares/error');
 const ApiError = require('./helper/ApiError');
+const models = require('./models/');
 
 process.env.PWD = process.cwd();
 
@@ -42,6 +43,18 @@ app.use(errorConverter);
 app.use(errorHandler);
 const db = require('./models');
 
-db.sequelize.sync({alter:true});
-// db.sequelize.sync();
+
+
+const User = models.user;
+const Business = models.business;
+const Branch = models.branch;
+console.log(Business,User,Branch)
+User.hasMany(Business);
+Business.belongsTo(User);
+
+Business.hasMany(Branch);
+Branch.belongsTo(Business);
+
+// db.sequelize.sync({force:true});
+db.sequelize.sync();
 module.exports = app;

@@ -29,13 +29,13 @@ module.exports = (sequelize, DataTypes) => {
             photo:DataTypes.TEXT('long'),
             email: DataTypes.STRING,
             mpin:DataTypes.STRING,
-            business_name: DataTypes.STRING,
-            business_phone_number: DataTypes.STRING,
+           
             status: DataTypes.INTEGER,
-            address: DataTypes.STRING,
             phone_number: DataTypes.STRING,
-            business_type:DataTypes.INTEGER,
-            mode:DataTypes.INTEGER,
+            isAdmin:{
+                defaultValue:false,
+                type:DataTypes.BOOLEAN
+            },
             mode: {
                 type: DataTypes.STRING,
                 allowNull: false,
@@ -47,24 +47,9 @@ module.exports = (sequelize, DataTypes) => {
                 },
             },
 
-            // business_type: { 
-            //     type: DataTypes.STRING, 
-            //     get: function() {
-            //         return JSON.parse(this.getDataValue('business_type'));
-            //     }, 
-            //     set: function(val) {
-            //         return this.setDataValue('business_type', JSON.stringify(val));
-            //     }
-            // },
-            gst_number: DataTypes.STRING,
-            gst_image:DataTypes.TEXT('long'),
-            address1: DataTypes.STRING,
-            city: DataTypes.STRING,
-            zipcode: DataTypes.STRING,
-            latitude: DataTypes.FLOAT,
-            longitude: DataTypes.FLOAT,
+     
+            
             referal_code: DataTypes.STRING,
-            whatsapp_communication: DataTypes.BOOLEAN
 
         },
         {

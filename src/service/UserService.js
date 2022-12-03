@@ -32,10 +32,13 @@ class UserService {
                 userBody.mpin = bcrypt.hashSync(userBody.mpin, 8);
             }
             userBody.uuid = uuid;
-            userBody.status = userConstant.STATUS_INACTIVE;
+            userBody.status = userConstant.STATUS_ACTIVE;
 
             let userData = await this.userDao.create(userBody);
-
+            console.log(userData);
+             const businessData = await userData.createBusiness(userBody);
+             const branchData =await businessData.createBranch(userBody)
+console.log({businessData,branchData})
             if (!userData) {
                 message = 'Registration Failed! Please Try again.';
                 return responseHandler.returnError(httpStatus.BAD_REQUEST, message);
@@ -44,7 +47,7 @@ class UserService {
             userData = userData.toJSON();
             delete userData.password;
 
-            return responseHandler.returnSuccess(httpStatus.CREATED, message, userData);
+            return responseHandler.returnSuccess(httpStatus.CREATED, message, {user:userData,business:businessData?.dataValues,branch:branchData?.dataValues});
         } catch (e) {
             logger.error(e);
             return responseHandler.returnError(httpStatus.BAD_REQUEST, 'Something went wrong!');
