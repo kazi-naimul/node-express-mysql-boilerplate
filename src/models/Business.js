@@ -20,13 +20,14 @@ module.exports = (sequelize, DataTypes) => {
       business_name: DataTypes.STRING,
       // lastName: DataTypes.STRING,
       // middleName: DataTypes.STRING,
-      business_type: {
-        type: DataTypes.STRING,
-        get: function () {
-          return JSON.parse(this.getDataValue("type"));
-        },
+      business_type_label:DataTypes.STRING,
+      business_type_id: {
+        type: DataTypes.INTEGER,
+      
         set: function (val) {
-          return this.setDataValue("type", JSON.stringify(val));
+            this.setDataValue("business_type_label", val.label)
+         
+          return  this.setDataValue('business_type_id',val.id);
         },
       },
 

@@ -79,7 +79,7 @@
             "type":"textbox",
             "input":"number",
             "error": "Please enter valid Business Number",
-            "requestKey":"business_phone_number",
+            "requestKey":"branch_phone_number",
             "eligility":["PARTNER"]
           }
         ]
@@ -97,7 +97,7 @@
                 "id": 1,
                 "type": "option",
                 "label": "Fashion",
-                "requestKey": "business_type",
+                "requestKey": "business_type_id",
                 "eligility": ["PARTNER"]
               },
               {
@@ -105,7 +105,7 @@
                 "id": 2,
                 "type": "option",
                 "label": "Beauty",
-                "requestKey": "business_type",
+                "requestKey": "business_type_id",
                 "eligility": ["PARTNER"]
               },
               {
@@ -113,7 +113,7 @@
                 "id": 3,
                 "type": "option",
                 "label": "Gift & Toys",
-                "requestKey": "business_type",
+                "requestKey": "business_type_id",
                 "eligility": ["PARTNER"]
               }
             ]

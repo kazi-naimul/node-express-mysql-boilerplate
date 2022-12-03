@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
       // lastName: DataTypes.STRING,
       // middleName: DataTypes.STRING,
       branch_type: DataTypes.STRING,
-
+branch_phone_number:DataTypes.STRING,
       branch_sub_type: DataTypes.STRING,
       open_timing: DataTypes.DATE,
       close_timing: DataTypes.DATE,
