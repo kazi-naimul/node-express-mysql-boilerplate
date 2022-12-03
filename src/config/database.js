@@ -9,7 +9,11 @@ module.exports = {
         dialect: 'mysql',
         dialectOptions: {
             bigNumberStrings: true,
+            useUTC: false, // for reading from database
+
         },
+ 
+          timezone: '+05:30', 
     },
     test: {
         username: config.dbUser,
@@ -19,7 +23,10 @@ module.exports = {
         dialect: 'mysql',
         dialectOptions: {
             bigNumberStrings: true,
+            useUTC: false, // for reading from database
+
         },
+        timezone: '+05:30', 
     },
     production: {
         username: config.dbUser,
@@ -30,6 +37,10 @@ module.exports = {
         dialect: 'mysql',
         dialectOptions: {
             bigNumberStrings: true,
+            useUTC: false, // for reading from database
+
         },
+        timezone: '+05:30', 
+
     },
 };

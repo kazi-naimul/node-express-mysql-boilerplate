@@ -16,6 +16,17 @@ class SuperDao {
             });
     }
 
+    async findAll(attributes) {
+        return this.Model.findAll(attributes)
+            .then((result) => {
+                return result;
+            })
+            .catch((e) => {
+                logger.error(e);
+                console.log(e);
+            });
+    }
+
     async findById(id) {
         return this.Model.findOne({ where: { id } })
             .then((result) => {

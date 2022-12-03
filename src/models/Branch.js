@@ -1,7 +1,7 @@
 const { Model } = require("sequelize");
 
 const { branchStatus } = require("./../config/constant");
-
+const {differenceInMinutes} = require('date-fns')
 module.exports = (sequelize, DataTypes) => {
   class Branch extends Model {
     /**
@@ -29,12 +29,22 @@ module.exports = (sequelize, DataTypes) => {
       // lastName: DataTypes.STRING,
       // middleName: DataTypes.STRING,
       branch_type: DataTypes.STRING,
-branch_phone_number:DataTypes.STRING,
+      branch_phone_number: DataTypes.STRING,
       branch_sub_type: DataTypes.STRING,
       open_timing: DataTypes.DATE,
       close_timing: DataTypes.DATE,
       is_closed: DataTypes.BOOLEAN,
-
+      time_distance_from_activation: {
+        type: DataTypes.INTEGER,
+        get () {
+            console.log(this.getDataValue("createdAt"))
+          return differenceInMinutes(
+           
+            new Date(),
+            this.getDataValue("createdAt"),
+          );
+        },
+      },
       status: {
         defaultValue: branchStatus.STATUS_INACTIVE,
         type: DataTypes.INTEGER,
@@ -53,12 +63,11 @@ branch_phone_number:DataTypes.STRING,
       zipcode: DataTypes.STRING,
       latitude: DataTypes.FLOAT,
       longitude: DataTypes.FLOAT,
-      head_office: {defaultValue:true,
-        type:DataTypes.BOOLEAN},
+      head_office: { defaultValue: true, type: DataTypes.BOOLEAN },
       divisions: {
         type: DataTypes.STRING,
         get() {
-          return this.getDataValue("divisions").split(";");
+          return this.getDataValue("divisions")?.split(";");
         },
         set(val) {
           this.setDataValue("divisions", val.join(";"));
