@@ -11,8 +11,9 @@
           {
             "eligility":["PARTNER"],
             "label": "Mobile No",
-            "type": "number",
             "isMandatory": true,
+            "type": "textbox",
+            "input": "number",
             "requestKey":"phone_number"
           }
         ]
@@ -23,15 +24,16 @@
         "fields": [
           {
             "eligility":["PARTNER","CUSTOMER"],
-
             "label": "Name",
             "type": "textbox",
+            "input": "text",
             "isMandatory": true,
             "requestKey":"name"
           },
           {
             "label": "Email ID",
             "type":"textbox",
+            "input":"email",
             "isMandatory": true,
             "requestKey":"email",
             "eligility":["PARTNER","CUSTOMER"]
@@ -44,15 +46,12 @@
         "fields": [
           {
             "label": "Enter MPIN",
-            "type": "textboxPassword",
-            "requestKey":"mpin",
-            "eligility":["PARTNER"]
-          },
-          {
-            "label": "Re confirm MPIN",
-            "type":"textboxPassword",
-            "requestKey":"mpin",
-            "eligility":["PARTNER"]
+            "type": "confirm_pin",
+            "input": "number",
+            "requestKey": "mpin",
+            "eligility": [
+              "PARTNER"
+            ]
           }
         ]
       }
@@ -67,6 +66,7 @@
           {
             "label": "Business Name",
             "type":"textbox",
+            "input":"text",
             "isMandatory": true,
             "error": "Please enter valid Business Name",
             "requestKey":"business_name",
@@ -75,6 +75,7 @@
           {
             "label": "Business Number",
             "type":"textbox",
+            "input":"number",
             "error": "Please enter valid Business Number",
             "requestKey":"business_phone_number",
             "eligility":["PARTNER"]
@@ -118,14 +119,13 @@
         "fields": [
           {
             "label": "GST Number",
-            "type":"number",
-            "requestKey":"gst_number",
-            "eligility":["PARTNER"]
-          },{
-            "label": "GST Image",
-            "type":"image_picker",
-            "requestKey":"gst_image",
-            "eligility":["PARTNER"]
+            "type": "textbox_image_picker",
+            "input": "number",
+            "requestKey": "gst_number",
+            "imageKey": "gst_image",
+            "eligility": [
+              "PARTNER"
+            ]
           }
         ]
       },
@@ -153,6 +153,7 @@
           {
             "label": "Referral Code",
             "type": "textbox",
+            "input": "text",
             "requestKey":"referral_code",
             "eligility":["PARTNER"]
           },
