@@ -47,7 +47,7 @@ module.exports = (sequelize, DataTypes) => {
       fssai_no: DataTypes.STRING,
       fssai_expiry: DataTypes.DATE,
       fssai_image: DataTypes.TEXT("long"),
-      business_image: {
+      business_card_image: {
           defaultValue:"",
         type: DataTypes.TEXT("long"),
         allowNull: false,
@@ -60,6 +60,8 @@ module.exports = (sequelize, DataTypes) => {
       },
 
       logo: DataTypes.TEXT("long"),
+      business_card_image: DataTypes.TEXT("long"),
+
 
       whatsapp_communication: DataTypes.BOOLEAN,
     },

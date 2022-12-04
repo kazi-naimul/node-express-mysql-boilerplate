@@ -1,15 +1,15 @@
 [
   {
-    "title": "Owner Details",
-    "eligility": ["PARTNER"],
+    "title": "Personal Details",
+    "eligility": ["PARTNER","CUSTOMER"],
     "details": [
       {
         "title": "Register Mobile No",
-        "eligility": ["PARTNER"],
+        "eligility": ["PARTNER","CUSTOMER"],
 
         "fields": [
           {
-            "eligility": ["PARTNER"],
+            "eligility": ["PARTNER","CUSTOMER"],
             "label": "Mobile No",
             "isMandatory": true,
             "type": "textbox",

@@ -77,15 +77,10 @@ module.exports = (sequelize, DataTypes) => {
       fssai_no: DataTypes.STRING,
       fssai_expiry: DataTypes.DATE,
       fssai_image: DataTypes.TEXT("long"),
-      business_image: {
-        type: DataTypes.TEXT("long"),
-        get() {
-          return this.getDataValue("business_image")?.split(";");
-        },
-        set(val) {
-          this.setDataValue("business_image", val.join(";"));
-        },
-      },
+      branch_photo: DataTypes.TEXT("long"),
+      business_card_image: DataTypes.TEXT("long"),
+      sign_board_image: DataTypes.TEXT("long"),
+      
     },
     {
       sequelize,
