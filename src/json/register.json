@@ -87,6 +87,8 @@
       {
         "title": "Business",
         "eligility": ["PARTNER"],
+        "requestKey": "business_type_id",
+
         "type": "grid",
         "fields": [
           {
