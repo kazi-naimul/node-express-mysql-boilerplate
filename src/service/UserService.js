@@ -47,7 +47,7 @@ console.log({businessData,branchData})
             userData = userData.toJSON();
             delete userData.password;
 
-            return responseHandler.returnSuccess(httpStatus.CREATED, message, {user:userData,business:businessData?.dataValues,branch:branchData?.dataValues});
+            return responseHandler.returnSuccess(httpStatus.CREATED, message, userData);
         } catch (e) {
             logger.error(e);
             return responseHandler.returnError(httpStatus.BAD_REQUEST, 'Something went wrong!');
