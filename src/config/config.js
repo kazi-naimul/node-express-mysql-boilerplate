@@ -24,7 +24,7 @@ const envValidation = Joi.object()
             .description('minutes after which reset password token expires'),
         JWT_VERIFY_EMAIL_EXPIRATION_MINUTES: Joi.number()
             .default(10)
-            .description('minutes after which verify email token expires'),
+            .description('minutes after which verify email token expires.'),
         LOG_FOLDER: Joi.string().required(),
         LOG_FILE: Joi.string().required(),
         LOG_LEVEL: Joi.string().required(),
