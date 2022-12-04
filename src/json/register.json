@@ -93,6 +93,8 @@
         "fields": [
           {
             "type": "grid",
+            "eligility": ["PARTNER"],
+            "requestKey": "business_type_id",
             "fields": [
               {
                 "url": "https://cdn2.assets-servd.host/pebble-mag/production/images/_1200x630_crop_center-center_82_none/What%E2%80%99s-Wrong-With-Fast-Fashion_-header.jpg?mtime=1583424325",
