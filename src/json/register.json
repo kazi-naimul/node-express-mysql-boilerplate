@@ -156,30 +156,30 @@
   },
   {
     "title": "Legal Terms",
-    "eligility": ["PARTNER"],
+    "eligility": ["PARTNER","CUSTOMER"],
     "details": [
       {
         "title": "Referral Code ",
-        "eligility": ["PARTNER"],
+        "eligility": ["PARTNER","CUSTOMER"],
         "fields": [
           {
             "label": "Referral Code",
             "type": "textbox",
             "input": "text",
             "requestKey":"referral_code",
-            "eligility":["PARTNER"]
+            "eligility":["PARTNER","CUSTOMER"]
           },
           {
             "type": "checkbox",
             "label": "I want to receive communications from mabliz on Whatsapp",
             "requestKey": "whatsapp_communication",
-            "eligility": ["PARTNER"]
+            "eligility": ["PARTNER","CUSTOMER"]
           },
           {
             "type": "checkbox",
             "label": "<p>I agree to mabliz <a href='https://www.google.co.in/'>Terms & condition</a></p>",
             "validValue": true,
-            "eligility": ["PARTNER"]
+            "eligility": ["PARTNER","CUSTOMER"]
           }
         ]
       }
