@@ -45,24 +45,23 @@ class ProfileController {
 
     switch (req.method) {
       case "GET":
-        data = await req.user.getAddresses();
-        res.json(responseHandler.returnSuccess(httpStatus.OK, "Success", data));
+        const addresses = await req.user.getAddresses();
+        res.json(responseHandler.returnSuccess(httpStatus.OK, "Success", addresses));
         break;
       case "POST":
-        data = await req.user.createAddress(req.body);
-        res.json(responseHandler.returnSuccess(httpStatus.OK, "Success", data));
+        const address = await req.user.createAddress(req.body);
+        res.json(responseHandler.returnSuccess(httpStatus.OK, "Success", address));
         break;
       case "PUT":
         record = await this.getRecord(req, res);
-console.log({record})
-        const data = await record[0].update(req.body);
-        res.json(responseHandler.returnSuccess(httpStatus.OK, "Success", data));
+        const newAddress = await record[0].update(req.body);
+        res.json(responseHandler.returnSuccess(httpStatus.OK, "Success", newAddress));
         break;
 
       case "DELETE":
         record = await this.getRecord(req, res);
 
-        data = await record[0].destroy();
+        await record[0].destroy();
         res.json(responseHandler.returnSuccess(httpStatus.OK, "Success"));
         break;
     }
