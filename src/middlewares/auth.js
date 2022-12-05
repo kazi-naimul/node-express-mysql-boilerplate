@@ -4,10 +4,10 @@ const ApiError = require('../helper/ApiError');
 const responseHandler = require("../helper/responseHandler");
 
 
-const verifyCallback = (req, res, resolve, reject) => {
+const verifyCallback = (req, res, resolve, reject,isAdmin) => {
 
     return async (err, user, info) => {
-        if (err || info || !user) {
+        if (err || info || !user || isAdmin && !user.isAdmin) {
             return reject(new ApiError(httpStatus.UNAUTHORIZED, 'Please authenticate'));
         }
         req.user = user;
@@ -16,7 +16,7 @@ const verifyCallback = (req, res, resolve, reject) => {
     };
 };
 
-const auth = () => {
+const auth = (isAdmin=false) => {
 
     return async (req, res, next) => {
         return new Promise((resolve, reject) => {
@@ -24,7 +24,7 @@ const auth = () => {
             passport.authenticate(
                 'jwt',
                 { session: false },
-                verifyCallback(req, res, resolve, reject),
+                verifyCallback(req, res, resolve, reject,isAdmin),
             )(req, res, next);
         })
             .then(() => {
