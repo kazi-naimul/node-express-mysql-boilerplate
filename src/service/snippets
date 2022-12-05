@@ -1,0 +1,83 @@
+{"sequlize model": {
+	"prefix": "seqmodel",
+	"body": [
+	  "const { Model } = require(\"sequelize\");",
+	  "",
+	  "module.exports = (sequelize, DataTypes) => {",
+	  "  class  $TM_FILENAME_BASE extends Model {",
+	  "  ",
+	  "    static associate(models) {",
+	  "      // define association here",
+	  "      //  User.belongsTo(models.agency, { foreignKey: 'agency_id', targetKey: 'id' });",
+	  "    }",
+	  "  }",
+	  "",
+	  "   $TM_FILENAME_BASE.init(",
+	  "    {",
+	  "      uuid: DataTypes.UUID,",
+	  "     ",
+	  "    },",
+	  "$1",
+
+	  "    {",
+	  "      sequelize,",
+	  "      modelName: \"${TM_FILENAME_BASE/(.*)/${1:/downcase}/}\",",
+	  "      underscored: true,",
+	  "    }",
+	  "  );",
+	  "  return  $TM_FILENAME_BASE;",
+	  "};",
+	  "",
+	  ""
+	],
+	"description": ""
+  },
+
+  "seqservice": {
+	"prefix": "seqservice",
+	"body": [
+	  "const httpStatus = require('http-status');",
+	  "const { v4: uuidv4 } = require('uuid');",
+	  "const ${TM_FILENAME_BASE/Service//}Dao = require('../dao/${TM_FILENAME_BASE/Service//}Dao');",
+	  "const responseHandler = require('../helper/responseHandler');",
+	  "const logger = require('../config/logger');",
+	  "",
+	  "class $TM_FILENAME_BASE {",
+	  "    constructor() {",
+	  "        this.${TM_FILENAME_BASE/(.)([^-]*)(Service)-?/${1:/downcase}${2}/}Dao = new ${TM_FILENAME_BASE/Service//}Dao();",
+	  "    }",
+	  "",
+	  "$1",
+
+	  "    ",
+	  "   ",
+	  "}",
+	  "",
+	  "module.exports = $TM_FILENAME_BASE;",
+	  ""
+	],
+	"description": ""
+  },
+  "seqdao": {
+	"prefix": "seqdao",
+	"body": [
+	  "const SuperDao = require('./SuperDao');",
+	  "const models = require('../models');",
+	  "",
+	  "const ${TM_FILENAME_BASE/Dao//} = models.branch;",
+	  "",
+	  "class ${TM_FILENAME_BASE} extends SuperDao {",
+	  "    constructor() {",
+	  "        super(${TM_FILENAME_BASE/Dao//});",
+	  "    }",
+	  "",
+	  "$1",
+	  "   ",
+	  "}",
+	  "",
+	  "module.exports = ${TM_FILENAME_BASE};",
+	  ""
+	],
+	"description": ""
+  }
+}
