@@ -15,7 +15,9 @@ class ProfileController {
   }
 
   getRecord = async (req, res) => {
-    if (!req.body?.id) {
+
+    const {id} = req.body;
+    if (!id) {
       return res.send(
         responseHandler.returnError(httpStatus.BAD_REQUEST, "Id is mandatory")
       );
@@ -23,7 +25,7 @@ class ProfileController {
 
     const record = await req.user.getAddresses({
       where: {
-        id: req.body?.id,
+        id
       },
     });
 
