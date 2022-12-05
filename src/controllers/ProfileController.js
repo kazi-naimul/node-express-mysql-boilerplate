@@ -18,9 +18,10 @@ class ProfileController {
 
     const {id} = req.body;
     if (!id) {
-      return res.send(
+       res.send(
         responseHandler.returnError(httpStatus.BAD_REQUEST, "Id is mandatory")
       );
+      return;
     }
 
     const record = await req.user.getAddresses({
@@ -30,12 +31,14 @@ class ProfileController {
     });
 
     if (record.length === 0) {
-      return res.send(
+       res.send(
         responseHandler.returnError(
           httpStatus.BAD_REQUEST,
           "Id: " + id + " Not found"
         )
       );
+      return;
+
     }
 
     return record;
@@ -56,15 +59,20 @@ class ProfileController {
         break;
       case "PUT":
         record = await this.getRecord(req, res);
-        const newAddress = await record[0].update(req.body);
-        res.json(responseHandler.returnSuccess(httpStatus.OK, "Success", newAddress));
+        if(record){
+          const newAddress = await record[0].update(req.body);
+          res.json(responseHandler.returnSuccess(httpStatus.OK, "Success", newAddress));
+        }
+       
         break;
 
       case "DELETE":
         record = await this.getRecord(req, res);
+        if(record){
 
         await record[0].destroy();
         res.json(responseHandler.returnSuccess(httpStatus.OK, "Success"));
+        }
         break;
     }
   };
