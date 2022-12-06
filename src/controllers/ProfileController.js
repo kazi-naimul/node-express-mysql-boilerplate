@@ -5,6 +5,8 @@ const UserService = require("../service/UserService");
 const logger = require("../config/logger");
 const { tokenTypes } = require("../config/tokens");
 const { createNewOTP } = require("../helper/otpHelper");
+const { branchStatus } = require('../config/constant');
+
 const responseHandler = require("../helper/responseHandler");
 const { omit } = require("lodash");
 class ProfileController {
@@ -45,7 +47,7 @@ class ProfileController {
   updateDetailsForActivation = async (req, res) => {
     const { user } = req;
     try {
-      const result = omit(req.body, [
+      let result = omit(req.body, [
         "phone_number",
         "mpin",
         "isAdmin",
@@ -61,7 +63,11 @@ class ProfileController {
       const branch = (
         await business.getBranches({ where: { id: result.id } })
       )[0];
+      if(user.isAdmin && req.body.changeActivation){
+        result.status =branchStatus.STATUS_ACTIVE
+      }
       await branch.update(result);
+
 
       // await user.setBusiness(result);
 
