@@ -5,10 +5,11 @@ var path = require('path')
 
 const router = express.Router();
 const auth = require('../middlewares/auth');
-const multer = require("multer");
 
 const authController = new AuthController();
 const userValidator = new UserValidator();
+const multer = require("multer");
+
 const fileStorage = multer.diskStorage({
     destination: (req, file, cb) => {
       cb(null, "registration");
