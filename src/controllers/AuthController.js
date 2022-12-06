@@ -6,6 +6,7 @@ const logger = require("../config/logger");
 const { tokenTypes } = require("../config/tokens");
 const { createNewOTP } = require("../helper/otpHelper");
 const responseHandler = require("../helper/responseHandler");
+const utilHandler = require("../helper/utilHelper");
 
 class AuthController {
   constructor() {
@@ -15,10 +16,17 @@ class AuthController {
   }
 
   register = async (req, res) => {
-    console.log(req.file);
-    const details = req.body.text;
+    console.log(req.files);
+    const images ={}
+     req.files.forEach((file)=>{
+
+      images[file.fieldname]= utilHandler.getAbsolutePath(file.path);
+    })
+    const details = {...JSON.parse(req.body.details),...images}
+    console.log(details)
+
     try {
-      const user = await this.userService.createUser(JSON.parse(details));
+      const user = await this.userService.createUser((details));
       let tokens = {};
       const { status } = user.response;
       console.log(status);

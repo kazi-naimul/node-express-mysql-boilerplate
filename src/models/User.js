@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
             addressProofType:DataTypes.STRING,
             addressProofNumber:DataTypes.STRING,
             addressProofImage:DataTypes.STRING,
-            photo:DataTypes.TEXT('long'),
+            photo:DataTypes.STRING,
             email: DataTypes.STRING,
             mpin:DataTypes.STRING,
            
