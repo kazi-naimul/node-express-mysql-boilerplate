@@ -33,6 +33,53 @@ module.exports = (sequelize, DataTypes) => {
       branch_sub_type: DataTypes.STRING,
       open_timing: DataTypes.DATE,
       close_timing: DataTypes.DATE,
+
+
+      business_category: DataTypes.STRING,
+
+      business_activities: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        get() {
+          return this.getDataValue("business_activities")?.split(";");
+        },
+        set(val) {
+          this.setDataValue("business_activities", val.join(";"));
+        },
+      },
+      order_type: {
+        type: DataTypes.STRING,
+        defaultValue: "mabliz",
+      },
+
+      price_type_label: DataTypes.STRING,
+      price_type_id: {
+        type: DataTypes.INTEGER,
+      },
+      price_type: {
+        type: DataTypes.STRING,
+
+        set: function (val) {
+          this.setDataValue("price_type_label", val.label);
+
+          return this.setDataValue("price_type_id", val.id);
+        },
+      },
+
+
+      business_timings: {
+        type: DataTypes.TEXT,
+        get: function () {
+          return JSON.parse(this.getDataValue("business_timings"));
+        },
+        set: function (value) {
+          // this.setDataValue('open_timing',value[0].time[0].start_time);
+          // this.setDataValue('open_timing',value[0].time[value[0].time.length-1].end_time);
+
+          this.setDataValue("business_timings", JSON.stringify(value));
+        },
+      },
+
       is_closed: DataTypes.BOOLEAN,
       time_distance_from_activation: {
         type: DataTypes.VIRTUAL,
@@ -64,15 +111,7 @@ module.exports = (sequelize, DataTypes) => {
       latitude: DataTypes.FLOAT,
       longitude: DataTypes.FLOAT,
       head_office: { defaultValue: true, type: DataTypes.BOOLEAN },
-      divisions: {
-        type: DataTypes.STRING,
-        get() {
-          return this.getDataValue("divisions")?.split(";");
-        },
-        set(val) {
-          this.setDataValue("divisions", val.join(";"));
-        },
-      },
+      
 
       fssai_no: DataTypes.STRING,
       fssai_expiry: DataTypes.DATE,

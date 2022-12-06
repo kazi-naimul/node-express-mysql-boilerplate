@@ -20,14 +20,17 @@ module.exports = (sequelize, DataTypes) => {
       business_name: DataTypes.STRING,
       // lastName: DataTypes.STRING,
       // middleName: DataTypes.STRING,
-      business_type_label:DataTypes.STRING,
+      business_type_label: DataTypes.STRING,
+      business_type: {
+        type: DataTypes.STRING,
+      },
       business_type_id: {
         type: DataTypes.INTEGER,
-      
+
         set: function (val) {
-            this.setDataValue("business_type_label", val.label)
-         
-          return  this.setDataValue('business_type_id',val.id);
+          this.setDataValue("business_type", val.label);
+
+          return this.setDataValue("business_type", val.id);
         },
       },
 
@@ -38,7 +41,7 @@ module.exports = (sequelize, DataTypes) => {
 
       license_no: DataTypes.STRING,
       license_expiry: DataTypes.DATE,
-      license_image:  DataTypes.STRING,
+      license_image: DataTypes.STRING,
       status: {
         defaultValue: businessStatus.STATUS_INACTIVE,
         type: DataTypes.INTEGER,
@@ -46,12 +49,13 @@ module.exports = (sequelize, DataTypes) => {
 
       fssai_no: DataTypes.STRING,
       fssai_expiry: DataTypes.DATE,
-      fssai_image:  DataTypes.STRING,
-   
+      fssai_image: DataTypes.STRING,
 
-      logo:  DataTypes.STRING,
-      business_card_image:  DataTypes.STRING,
+      
+  
 
+      logo: DataTypes.STRING,
+      business_card_image: DataTypes.STRING,
 
       whatsapp_communication: DataTypes.BOOLEAN,
     },
