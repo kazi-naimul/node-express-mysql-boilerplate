@@ -59,15 +59,18 @@ console.log({businessData,branchData})
 
 
     updateDetailsForActivation = async (userBody) => {
-        console.log(userBody);
+
+        const {phone_number} = userBody;
         try {
-            let message = 'Business registration successful,pending for activation. We will get back on 48 hours';
-            if (await this.userDao.isAlreadyExists(userBody.email,'email')) {
-                return responseHandler.returnError(httpStatus.BAD_REQUEST, 'Email already registered');
+            let message = 'Updation Successful';
+            let user = await this.userDao.findByPhoneNumber(phone_number);
+            if (user == null) {
+              return responseHandler.returnError(
+                httpStatus.BAD_REQUEST,
+                "User not found with the phone_number_provided"
+              );
             }
-            if (await this.userDao.isAlreadyExists(userBody.phone_number,'phone_number')) {
-                return responseHandler.returnError(httpStatus.BAD_REQUEST, 'Phone Number already registered');
-            }
+            
             const uuid = uuidv4();
             userBody.email = userBody.email.toLowerCase();
             if(userBody.mpin){
