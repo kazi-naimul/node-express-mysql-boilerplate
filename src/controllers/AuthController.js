@@ -15,9 +15,10 @@ class AuthController {
   }
 
   register = async (req, res) => {
-    console.log(req.body);
+    console.log(req.file);
+    const details = req.body.text;
     try {
-      const user = await this.userService.createUser(req.body);
+      const user = await this.userService.createUser(JSON.parse(details));
       let tokens = {};
       const { status } = user.response;
       console.log(status);
