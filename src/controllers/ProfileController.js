@@ -6,7 +6,7 @@ const logger = require("../config/logger");
 const { tokenTypes } = require("../config/tokens");
 const { createNewOTP } = require("../helper/otpHelper");
 const responseHandler = require("../helper/responseHandler");
-
+const {omit}  = require('lodash');
 class ProfileController {
   constructor() {
     this.userService = new UserService();
@@ -15,10 +15,9 @@ class ProfileController {
   }
 
   getRecord = async (req, res) => {
-
-    const {id} = req.body;
+    const { id } = req.body;
     if (!id) {
-       res.send(
+      res.send(
         responseHandler.returnError(httpStatus.BAD_REQUEST, "Id is mandatory")
       );
       return;
@@ -26,22 +25,34 @@ class ProfileController {
 
     const record = await req.user.getAddresses({
       where: {
-        id
+        id,
       },
     });
 
     if (record.length === 0) {
-       res.send(
+      res.send(
         responseHandler.returnError(
           httpStatus.BAD_REQUEST,
           "Id: " + id + " Not found"
         )
       );
       return;
-
     }
 
     return record;
+  };
+
+  updateDetailsForActivation = async (req, res) => {
+
+    const {user} = req;
+
+    const result = omit(req.body, ['phone_number','mpin']);
+console.log(result);
+    await user.update(result);
+
+    res.json(
+      responseHandler.returnSuccess(httpStatus.OK, "Success", {...user})
+    );
   };
 
   addressCurd = async (req, res) => {
@@ -51,27 +62,32 @@ class ProfileController {
     switch (req.method) {
       case "GET":
         const addresses = await req.user.getAddresses();
-        res.json(responseHandler.returnSuccess(httpStatus.OK, "Success", addresses));
+        res.json(
+          responseHandler.returnSuccess(httpStatus.OK, "Success", addresses)
+        );
         break;
       case "POST":
         const address = await req.user.createAddress(req.body);
-        res.json(responseHandler.returnSuccess(httpStatus.OK, "Success", address));
+        res.json(
+          responseHandler.returnSuccess(httpStatus.OK, "Success", address)
+        );
         break;
       case "PUT":
         record = await this.getRecord(req, res);
-        if(record){
+        if (record) {
           const newAddress = await record[0].update(req.body);
-          res.json(responseHandler.returnSuccess(httpStatus.OK, "Success", newAddress));
+          res.json(
+            responseHandler.returnSuccess(httpStatus.OK, "Success", newAddress)
+          );
         }
-       
+
         break;
 
       case "DELETE":
         record = await this.getRecord(req, res);
-        if(record){
-
-        await record[0].destroy();
-        res.json(responseHandler.returnSuccess(httpStatus.OK, "Success"));
+        if (record) {
+          await record[0].destroy();
+          res.json(responseHandler.returnSuccess(httpStatus.OK, "Success"));
         }
         break;
     }

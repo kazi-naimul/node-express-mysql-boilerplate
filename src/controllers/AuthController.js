@@ -60,7 +60,7 @@ class AuthController {
 
   loginWithOtp = async (req, res) => {
     try {
-      const {  phone_number , otp, hash } = req.body;
+      const {  phone_number , otp, hash,mode } = req.body;
       const user = await this.authService.loginWithOtp(
         phone_number , hash,otp
       );
@@ -70,6 +70,9 @@ class AuthController {
       const code = user.statusCode;
       let tokens = {};
       if (user.response.status) {
+        // if(!user.mode.includes(mode)){
+        //   console.log({user});
+        // }
         tokens = await this.tokenService.generateAuthTokens(data);
       }
       res.status(user.statusCode).send({ status, code, message, data, tokens });

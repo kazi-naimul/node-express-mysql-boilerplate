@@ -10,6 +10,7 @@ router.put('/address', profileController.addressCurd);
 router.get('/address', profileController.addressCurd);
 router.delete('/address',  profileController.addressCurd);
 
+router.post('/update-for-activation',  profileController.updateDetailsForActivation);
 
 
 module.exports = router;

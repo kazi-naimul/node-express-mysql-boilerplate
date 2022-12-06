@@ -54,6 +54,48 @@ console.log({businessData,branchData})
         }
     };
 
+
+
+
+
+    updateDetailsForActivation = async (userBody) => {
+        console.log(userBody);
+        try {
+            let message = 'Business registration successful,pending for activation. We will get back on 48 hours';
+            if (await this.userDao.isAlreadyExists(userBody.email,'email')) {
+                return responseHandler.returnError(httpStatus.BAD_REQUEST, 'Email already registered');
+            }
+            if (await this.userDao.isAlreadyExists(userBody.phone_number,'phone_number')) {
+                return responseHandler.returnError(httpStatus.BAD_REQUEST, 'Phone Number already registered');
+            }
+            const uuid = uuidv4();
+            userBody.email = userBody.email.toLowerCase();
+            if(userBody.mpin){
+                userBody.mpin = bcrypt.hashSync(userBody.mpin, 8);
+            }
+            userBody.uuid = uuid;
+            userBody.status = userConstant.STATUS_ACTIVE;
+
+            let userData = await this.userDao.create(userBody);
+            console.log(userData);
+             const businessData = await userData.createBusiness(userBody);
+             const branchData =await businessData.createBranch(userBody)
+console.log({businessData,branchData})
+            if (!userData) {
+                message = 'Registration Failed! Please Try again.';
+                return responseHandler.returnError(httpStatus.BAD_REQUEST, message);
+            }
+          
+            userData = userData.toJSON();
+            delete userData.password;
+
+            return responseHandler.returnSuccess(httpStatus.CREATED, message, userData);
+        } catch (e) {
+            logger.error(e);
+            return responseHandler.returnError(httpStatus.BAD_REQUEST, 'Something went wrong!');
+        }
+    };
+
     /**
      * Get user
      * @param {String} email

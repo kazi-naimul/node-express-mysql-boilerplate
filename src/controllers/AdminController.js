@@ -16,7 +16,8 @@ class AdminController {
 
   getActivationGroup=async (req,res)=>{
       console.log(this)
-      const response = await this.branchService.getBranchesForActivation()
+      const response = await this.branchService.getBranchesForActivation();
+      console.log(response.data);
       res.json(response);
   }
 }

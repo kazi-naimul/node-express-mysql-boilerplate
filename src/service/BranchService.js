@@ -9,7 +9,7 @@ const {groupBy} = require('lodash');
 const responseHandler = require("../helper/responseHandler");
 const logger = require("../config/logger");
 const { userConstant } = require("../config/constant");
-
+const {omit} = require('lodash');
 class BranchService {
   constructor() {
     this.branchDao = new BranchDao();
@@ -19,14 +19,23 @@ class BranchService {
   }
 
   getBranchesForActivation = async () => {
-    const branches = await this.branchDao.findAll({
+    const branches = (await this.branchDao.Model.findAll({
       include: [
         {model: this.businessDao.Model, include: [{model:this.userDao.Model}] }
       ],
 
+    })) .map(el => el.get({ plain: true })) ;
+
+    console.log({branches})
+
+    const flattenBranches = branches.map((branch) => {
+
+      const temp = { ...branch, ...branch.business, ...branch.business.user };
+
+      return omit(temp, ["business", "user"]);
     });
 
-    const groups = groupBy(branches,'business.business_type_label');
+    const groups = groupBy(flattenBranches,'business_type_label');
     console.log(groups);
     // console.log(branches[0].business.whatsapp_communication)
     return responseHandler.returnSuccess(
