@@ -6,6 +6,8 @@ const responseHandler = require('../helper/responseHandler');
 const logger = require('../config/logger');
 const { userConstant } = require('../config/constant');
 
+const {omit} = require('lodash');
+
 class UserService {
     constructor() {
         this.userDao = new UserDao();
@@ -16,8 +18,9 @@ class UserService {
      * @param {Object} userBody
      * @returns {Object}
      */
-    createUser = async (userBody) => {
-        console.log(userBody);
+    createUser = async (tempUserBody) => {
+        const userBody = omit(tempUserBody, ['isAdmin','status']);
+
         try {
             let message = 'Business registration successful,pending for activation. We will get back on 48 hours';
             if (await this.userDao.isAlreadyExists(userBody.email,'email')) {
@@ -58,46 +61,6 @@ console.log({businessData,branchData})
 
 
 
-    updateDetailsForActivation = async (userBody) => {
-
-        const {phone_number} = userBody;
-        try {
-            let message = 'Updation Successful';
-            let user = await this.userDao.findByPhoneNumber(phone_number);
-            if (user == null) {
-              return responseHandler.returnError(
-                httpStatus.BAD_REQUEST,
-                "User not found with the phone_number_provided"
-              );
-            }
-            
-            const uuid = uuidv4();
-            userBody.email = userBody.email.toLowerCase();
-            if(userBody.mpin){
-                userBody.mpin = bcrypt.hashSync(userBody.mpin, 8);
-            }
-            userBody.uuid = uuid;
-            userBody.status = userConstant.STATUS_ACTIVE;
-
-            let userData = await this.userDao.create(userBody);
-            console.log(userData);
-             const businessData = await userData.createBusiness(userBody);
-             const branchData =await businessData.createBranch(userBody)
-console.log({businessData,branchData})
-            if (!userData) {
-                message = 'Registration Failed! Please Try again.';
-                return responseHandler.returnError(httpStatus.BAD_REQUEST, message);
-            }
-          
-            userData = userData.toJSON();
-            delete userData.password;
-
-            return responseHandler.returnSuccess(httpStatus.CREATED, message, userData);
-        } catch (e) {
-            logger.error(e);
-            return responseHandler.returnError(httpStatus.BAD_REQUEST, 'Something went wrong!');
-        }
-    };
 
     /**
      * Get user

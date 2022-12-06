@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
       close_timing: DataTypes.DATE,
       is_closed: DataTypes.BOOLEAN,
       time_distance_from_activation: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.VIRTUAL,
         get () {
             console.log(this.getDataValue("createdAt"))
           return differenceInMinutes(
