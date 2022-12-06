@@ -23,7 +23,6 @@ class AuthController {
       images[file.fieldname]= utilHandler.getAbsolutePath(file.path);
     })
     const details = {...JSON.parse(req.body.details),...images}
-    console.log(details)
 
     try {
       const user = await this.userService.createUser((details));

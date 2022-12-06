@@ -51,11 +51,11 @@ module.exports = (sequelize, DataTypes) => {
       },
 
       gst_number: DataTypes.STRING,
-      gst_image: DataTypes.TEXT("long"),
+      gst_image: DataTypes.STRING,
 
       license_no: DataTypes.STRING,
       license_expiry: DataTypes.DATE,
-      license_image: DataTypes.TEXT("long"),
+      license_image:DataTypes.STRING,
 
       address: DataTypes.STRING,
       locality: DataTypes.STRING,
@@ -76,10 +76,10 @@ module.exports = (sequelize, DataTypes) => {
 
       fssai_no: DataTypes.STRING,
       fssai_expiry: DataTypes.DATE,
-      fssai_image: DataTypes.TEXT("long"),
-      branch_photo: DataTypes.TEXT("long"),
-      business_card_image: DataTypes.TEXT("long"),
-      sign_board_image: DataTypes.TEXT("long"),
+      fssai_image:  DataTypes.STRING,
+      branch_photo:  DataTypes.STRING,
+      business_card_image:  DataTypes.STRING,
+      sign_board_image:  DataTypes.STRING,
       
     },
     {
