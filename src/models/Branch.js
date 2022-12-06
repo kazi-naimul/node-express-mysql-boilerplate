@@ -39,7 +39,6 @@ module.exports = (sequelize, DataTypes) => {
 
       business_activities: {
         type: DataTypes.STRING,
-        allowNull: false,
         get() {
           return this.getDataValue("business_activities")?.split(";");
         },
@@ -70,13 +69,14 @@ module.exports = (sequelize, DataTypes) => {
       business_timings: {
         type: DataTypes.TEXT,
         get: function () {
-          return JSON.parse(this.getDataValue("business_timings"));
+          console.log(this.getDataValue("business_timings"));
+          return JSON.parse(this.getDataValue("business_timings") || '{}');
         },
         set: function (value) {
           // this.setDataValue('open_timing',value[0].time[0].start_time);
           // this.setDataValue('open_timing',value[0].time[value[0].time.length-1].end_time);
 
-          this.setDataValue("business_timings", JSON.stringify(value));
+          this.setDataValue("business_timings", JSON.stringify(value || {}));
         },
       },
 
