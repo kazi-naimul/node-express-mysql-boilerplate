@@ -20,7 +20,7 @@ class AuthController {
     const images ={}
      req.files.forEach((file)=>{
 
-      images[file.fieldname]= utilHandler.getAbsolutePath(file.path);
+      images[file.fieldname]= utilHandler.getAbsolutePath(file.filename);
     })
     const details = {...JSON.parse(req.body.details),...images}
 
