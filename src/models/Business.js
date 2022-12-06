@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
       // middleName: DataTypes.STRING,
       business_type_label: DataTypes.STRING,
       business_type: {
-        type: DataTypes.STRING,
+        type: DataTypes.JSON,
       },
       business_type_id: {
         type: DataTypes.INTEGER,
