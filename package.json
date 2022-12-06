@@ -26,6 +26,7 @@
     "lodash": "^4.17.21",
     "md5": "^2.3.0",
     "moment": "^2.29.2",
+    "multer": "^1.4.5-lts.1",
     "mysql2": "^2.3.3",
     "node-cron": "^3.0.0",
     "otp-generator": "^4.0.0",

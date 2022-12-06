@@ -8,7 +8,7 @@ const auth = require('../middlewares/auth');
 const authController = new AuthController();
 const userValidator = new UserValidator();
 
-router.post('/register', userValidator.userCreateValidator, authController.register);
+router.post('/register',  authController.register);
 router.post('/email-exists', userValidator.checkEmailValidator, authController.checkEmail);
 // router.post('/login', userValidator.userLoginValidator, authController.login);
 router.post('/refresh-token', authController.refreshTokens);

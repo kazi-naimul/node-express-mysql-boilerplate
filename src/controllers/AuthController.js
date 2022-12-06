@@ -15,6 +15,7 @@ class AuthController {
   }
 
   register = async (req, res) => {
+    console.log(req.body);
     try {
       const user = await this.userService.createUser(req.body);
       let tokens = {};
