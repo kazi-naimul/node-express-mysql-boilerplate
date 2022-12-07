@@ -2,12 +2,13 @@ const capitalize = require("capitalize");
 const pluralize = require("pluralize");
 const responseHandler = require("../helper/responseHandler");
 const httpStatus = require("http-status");
+const { omit } = require("lodash");
 
 const getAbsolutePath = (path) => {
   return "https://mabliz.onrender.com/" + path;
 };
 
-const getRecord = async ({ id, sourceModel, getMixin }) => {
+const getRecord = async ({ id, sourceModel, getMixin,res }) => {
   if (!id) {
     res.send(
       responseHandler.returnError(httpStatus.BAD_REQUEST, "Id is mandatory")
@@ -34,15 +35,16 @@ const getRecord = async ({ id, sourceModel, getMixin }) => {
   return record;
 };
 
-const crudOperations = async ({ req, res, source, target }) => {
+const crudOperations = async ({ req, res, source, target,id }) => {
   const targetModelName = capitalize(target);
+  
 
   const targetModelName_plural = pluralize(targetModelName);
 
   const sourceModelName = source || "user";
   const sourceModel = req[sourceModelName];
   const getMixin = "get" + targetModelName_plural;
-
+//  console.log(req.body)
   switch (req.method) {
     case "GET":
       const modelListData = await sourceModel[getMixin]();
@@ -59,8 +61,9 @@ const crudOperations = async ({ req, res, source, target }) => {
       );
       break;
     case "PUT":
-      record = await getRecord({ ...req.body, sourceModel, getMixin });
+      record = await getRecord({ id, sourceModel, getMixin,res });
       if (record) {
+         
         const modelUpdateData = await record[0].update(req.body);
         res.json(
           responseHandler.returnSuccess(httpStatus.OK, "Success", modelUpdateData)
@@ -70,7 +73,7 @@ const crudOperations = async ({ req, res, source, target }) => {
       break;
 
     case "DELETE":
-      record = await getRecord({ ...req.body, sourceModel, getMixin });
+      record = await getRecord({ id, sourceModel, getMixin,res });
       if (record) {
         await record[0].destroy();
         res.json(responseHandler.returnSuccess(httpStatus.OK, "Success"));

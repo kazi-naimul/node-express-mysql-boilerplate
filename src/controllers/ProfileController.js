@@ -98,10 +98,18 @@ class ProfileController {
   };
 
   curdUserAssociated = async (req, res) => {
-
+   
     const { source, target } = req.params;
-
-     crudOperations({req,res,source,target})
+    const {id} = req.body;
+    req.body = omit(req.body, [
+      "phone_number",
+      "mpin",
+      'id',
+      "isAdmin",
+      "uuid",
+      "status",
+    ]);
+     crudOperations({req,res,source,target,id})
   };
 }
 

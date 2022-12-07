@@ -9,6 +9,8 @@ const { jwtStrategy } = require("./config/passport");
 const { errorConverter, errorHandler } = require("./middlewares/error");
 const ApiError = require("./helper/ApiError");
 const models = require("./models/");
+const utilHandler = require("./helper/utilHelper");
+
 process.env.PWD = process.cwd();
 
 const app = express();
@@ -27,7 +29,35 @@ app.use(express.static(`${process.env.PWD}/registration`));
 app.use(bodyParser.json({ limit: "50mb" }));
 
 app.use(bodyParser.urlencoded({ limit: "25mb", extended: true }));
+const multer = require("multer");
 
+const fileStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, "registration");
+    },
+    filename: (req, file, cb) => {
+      cb(null,  file.fieldname+'_'+Date.now()+path.extname(file.originalname) );
+    },
+  });
+  const imagesMiddleWare = (req, res, next) => {
+    console.log(req.get('content-type'),req.files)
+  
+    if (req.is("multipart/form-data")) {
+      const images ={}
+  console.log(req.files)
+      req.files?.forEach((file) => {
+        images[file.fieldname] = utilHandler.getAbsolutePath(file.filename);
+      });
+      req.body = { ...JSON.parse(req.body.details), ...images };
+      req.headers['content-type'] = 'application/json';
+
+      console.log(req.body);    }
+    next();
+  };
+  
+
+app.use(multer({storage:fileStorage}).any("images"));
+app.use(imagesMiddleWare);
 // jwt authentication
 app.use(passport.initialize());
 passport.use("jwt", jwtStrategy);
