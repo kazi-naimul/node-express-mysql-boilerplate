@@ -10,7 +10,7 @@ const auth = require('../middlewares/auth');
 
 router.use(auth());
 const profileController = new ProfileController();
-router.all('/:source/:target', profileController.curdUserAssociated);
+router.all('/user/:target', profileController.curdUserAssociated);
 
 
 router.post('/update-for-activation',  profileController.updateDetailsForActivation);
