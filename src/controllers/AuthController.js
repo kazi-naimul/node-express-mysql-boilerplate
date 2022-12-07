@@ -66,6 +66,7 @@ deleteUserTemp = async(req,res)=>{
         "id not found",
       )
     );
+    return;
   }
   await user.destroy()
   res.json(
