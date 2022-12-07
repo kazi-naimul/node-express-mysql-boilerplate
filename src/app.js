@@ -83,10 +83,13 @@ const db = require("./models");
 const User = models.user;
 const Business = models.business;
 const Branch = models.branch;
+const BusinessTypes = models.businesstype;
+console.log(models.businessType)
 console.log(Business, User, Branch);
 User.hasMany(Business);
 Business.belongsTo(User);
-
+BusinessTypes.belongsTo(User);
+User.hasMany(BusinessTypes)
 Business.hasMany(Branch);
 Branch.belongsTo(Business);
 
