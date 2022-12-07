@@ -23,15 +23,17 @@ module.exports = (sequelize, DataTypes) => {
       business_type_label: DataTypes.STRING,
       business_type: {
         type: DataTypes.JSON,
-      },
-      business_type_id: {
-        type: DataTypes.INTEGER,
-
         set: function (val) {
+          console.log('vinodh',val,typeof val);
           this.setDataValue("business_type_label", val.label);
 
           return this.setDataValue("business_type_id", val.id);
         },
+      },
+      business_type_id: {
+        type: DataTypes.INTEGER,
+
+      
       },
 
       status: DataTypes.INTEGER,
