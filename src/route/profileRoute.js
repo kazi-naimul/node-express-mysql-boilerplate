@@ -17,10 +17,8 @@ router.use(multer({storage:fileStorage}).any("images"));
 
 router.use(auth());
 const profileController = new ProfileController();
-router.post('/address', profileController.addressCurd);
-router.put('/address', profileController.addressCurd);
-router.get('/address', profileController.addressCurd);
-router.delete('/address',  profileController.addressCurd);
+router.all('/:source/:target', profileController.curdUserAssociated);
+
 
 router.post('/update-for-activation',  profileController.updateDetailsForActivation);
 

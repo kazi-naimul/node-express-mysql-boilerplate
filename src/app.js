@@ -4,7 +4,7 @@ const passport = require("passport");
 const httpStatus = require("http-status");
 const routes = require("./route");
 const bodyParser = require("body-parser");
-
+const path = require('path');
 const { jwtStrategy } = require("./config/passport");
 const { errorConverter, errorHandler } = require("./middlewares/error");
 const ApiError = require("./helper/ApiError");
@@ -22,7 +22,8 @@ app.options("*", cors());
 console.log(process.env.PWD)
 app.use(express.static(`${process.env.PWD}/public`));
 app.use(express.static(`${process.env.PWD}/registration`));
-
+// app.use(express.static(
+//   path.join(__dirname,"../client/build")));
 app.use(bodyParser.json({ limit: "50mb" }));
 
 app.use(bodyParser.urlencoded({ limit: "25mb", extended: true }));

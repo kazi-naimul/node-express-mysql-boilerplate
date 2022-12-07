@@ -3,9 +3,10 @@ const AuthService = require("../service/AuthService");
 const TokenService = require("../service/TokenService");
 const UserService = require("../service/UserService");
 const logger = require("../config/logger");
-const { tokenTypes } = require("../config/tokens");
-const { createNewOTP } = require("../helper/otpHelper");
-const { branchStatus } = require('../config/constant');
+const { branchStatus } = require("../config/constant");
+const pluralize = require("pluralize");
+const {crudOperations} = require("../helper/utilHelper");
+
 
 const responseHandler = require("../helper/responseHandler");
 const { omit } = require("lodash");
@@ -45,14 +46,11 @@ class ProfileController {
   };
 
   updateDetailsForActivation = async (req, res) => {
-
-
-    const images ={}
-    req.files.forEach((file)=>{
-
-     images[file.fieldname]= utilHandler.getAbsolutePath(file.filename);
-   })
-   const details = {...JSON.parse(req.body.details),...images}
+    const images = {};
+    req.files.forEach((file) => {
+      images[file.fieldname] = utilHandler.getAbsolutePath(file.filename);
+    });
+    const details = { ...JSON.parse(req.body.details), ...images };
 
     const { user } = details;
     try {
@@ -72,15 +70,22 @@ class ProfileController {
       const branch = (
         await business.getBranches({ where: { id: result.id } })
       )[0];
-      if(user.isAdmin && req.body.changeActivation){
-        result.status =branchStatus.STATUS_ACTIVE
+      if (user.isAdmin && req.body.changeActivation) {
+        result.status = branchStatus.STATUS_ACTIVE;
       }
       await branch.update(result);
 
-
       // await user.setBusiness(result);
 
-      res.json(responseHandler.returnSuccess(httpStatus.OK, "Success", user,business,branch));
+      res.json(
+        responseHandler.returnSuccess(
+          httpStatus.OK,
+          "Success",
+          user,
+          business,
+          branch
+        )
+      );
     } catch (e) {
       console.error(e);
       res.json(
@@ -92,42 +97,11 @@ class ProfileController {
     }
   };
 
-  addressCurd = async (req, res) => {
-    let data;
-    let record;
+  curdUserAssociated = async (req, res) => {
 
-    switch (req.method) {
-      case "GET":
-        const addresses = await req.user.getAddresses();
-        res.json(
-          responseHandler.returnSuccess(httpStatus.OK, "Success", addresses)
-        );
-        break;
-      case "POST":
-        const address = await req.user.createAddress(req.body);
-        res.json(
-          responseHandler.returnSuccess(httpStatus.OK, "Success", address)
-        );
-        break;
-      case "PUT":
-        record = await this.getAddressRecord(req, res);
-        if (record) {
-          const newAddress = await record[0].update(req.body);
-          res.json(
-            responseHandler.returnSuccess(httpStatus.OK, "Success", newAddress)
-          );
-        }
+    const { source, target } = req.params;
 
-        break;
-
-      case "DELETE":
-        record = await this.getAddressRecord(req, res);
-        if (record) {
-          await record[0].destroy();
-          res.json(responseHandler.returnSuccess(httpStatus.OK, "Success"));
-        }
-        break;
-    }
+     crudOperations({req,res,source,target})
   };
 }
 

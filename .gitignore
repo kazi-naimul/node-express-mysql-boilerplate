@@ -12,7 +12,8 @@
 # testing
 /coverage
 # /images
-
+/client
+client
 # misc
 .DS_Store
 .env.local
@@ -28,3 +29,6 @@ yarn.lock
 
 .idea
 
+client/**
+client/**/*
+client/*
