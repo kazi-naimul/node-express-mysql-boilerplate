@@ -78,6 +78,33 @@ deleteUserTemp = async(req,res)=>{
 
 
 }
+
+
+updateAdminActivation = async(req,res)=>{
+
+
+  const user = await this.userService.userDao.findById(req.query.id);
+  console.log(user)
+  await user.update({isAdmin:true})
+  if(!user){
+
+    res.json(
+      responseHandler.returnError(
+        httpStatus[200],
+        "id not found",
+      )
+    );
+    return;
+  }
+  res.json(
+    responseHandler.returnSuccess(
+      httpStatus[200],
+      "updated successfully",
+    )
+  );
+
+
+}
   
   checkEmail = async (req, res) => {
     try {

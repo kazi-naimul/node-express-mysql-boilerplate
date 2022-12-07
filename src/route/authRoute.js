@@ -22,6 +22,7 @@ router.use(multer({storage:fileStorage}).any("images"));
 
 router.post('/register',  authController.register);
 router.get('/delete-user-temp',  authController.deleteUserTemp);
+router.get('/update-user-to-admin',  authController.updateAdminActivation);
 
 router.post('/email-exists', userValidator.checkEmailValidator, authController.checkEmail);
 // router.post('/login', userValidator.userLoginValidator, authController.login);
