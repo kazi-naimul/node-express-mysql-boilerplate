@@ -35,9 +35,8 @@ class UserService {
                 userBody.mpin = bcrypt.hashSync(userBody.mpin, 8);
             }
             userBody.uuid = uuid;
-            userBody.status = userConstant.STATUS_ACTIVE;
 
-            let userData = await this.userDao.create(userBody);
+            let userData = await this.userDao.create({...userBody,status: userConstant.STATUS_ACTIVE});
             console.log(userData);
              const businessData = await userData.createBusiness(userBody);
              const branchData =await businessData.createBranch(userBody)
