@@ -53,7 +53,30 @@ class AuthController {
     );
   };
 
+deleteUserTemp = async(req,res)=>{
 
+
+  const user = await this.userService.userDao.findById(req.query.id);
+  console.log(user)
+  if(!user){
+
+    res.json(
+      responseHandler.returnError(
+        httpStatus[200],
+        "id not found",
+      )
+    );
+  }
+  await user.destroy()
+  res.json(
+    responseHandler.returnSuccess(
+      httpStatus[200],
+      "Deleted successfully",
+    )
+  );
+
+
+}
   
   checkEmail = async (req, res) => {
     try {
