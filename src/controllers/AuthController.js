@@ -56,7 +56,7 @@ class AuthController {
 deleteUserTemp = async(req,res)=>{
 
 
-  const user = await this.userService.userDao.findById(req.query.id);
+  const user = await this.userService.userDao.findByPhoneNumber(req.query.phone_number);
   console.log(user)
   if(!user){
 
@@ -83,9 +83,8 @@ deleteUserTemp = async(req,res)=>{
 updateAdminActivation = async(req,res)=>{
 
 
-  const user = await this.userService.userDao.findById(req.query.id);
+  const user = await this.userService.userDao.findByPhoneNumber(req.query.phone_number);
   console.log(user)
-  await user.update({isAdmin:true})
   if(!user){
 
     res.json(
@@ -96,6 +95,8 @@ updateAdminActivation = async(req,res)=>{
     );
     return;
   }
+  await user.update({isAdmin:true})
+
   res.json(
     responseHandler.returnSuccess(
       httpStatus[200],
