@@ -28,9 +28,9 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
 
         set: function (val) {
-          this.setDataValue("business_type", val.label);
+          this.setDataValue("business_type_label", val.label);
 
-          return this.setDataValue("business_type", val.id);
+          return this.setDataValue("business_type_id", val.id);
         },
       },
 
