@@ -40,7 +40,6 @@ class UserService {
             console.log(userData);
              const businessData = await userData.createBusiness(userBody);
              const branchData =await businessData.createBranch(userBody)
-console.log({businessData,branchData})
             if (!userData) {
                 message = 'Registration Failed! Please Try again.';
                 return responseHandler.returnError(httpStatus.BAD_REQUEST, message);
