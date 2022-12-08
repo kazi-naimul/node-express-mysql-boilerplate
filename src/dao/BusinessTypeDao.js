@@ -1,15 +1,15 @@
 const SuperDao = require('./SuperDao');
 const models = require('../models');
 
-const BusinessType = models.branch;
+const Businesstype = models.businesstype;
 
-class BusinessTypeDao extends SuperDao {
+class BusinesstypeDao extends SuperDao {
     constructor() {
-        super(BusinessType);
+        super(Businesstype);
     }
 
 
    
 }
 
-module.exports = BusinessTypeDao;
+module.exports = BusinesstypeDao;

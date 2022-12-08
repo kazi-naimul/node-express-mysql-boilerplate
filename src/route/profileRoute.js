@@ -17,6 +17,14 @@ router.all('/user/:target1/:target1Id/:target2', profileController.curdUserAssoc
 
 router.all('/user/:target1/:target1Id/:target2/:target2Id', profileController.curdUserAssociatedTwoTargets);
 
+router.all('/:target', profileController.curdUserAssociated);
+router.all('/:target1/:target1Id', profileController.curdUserAssociatedTwoTargets);
+
+router.all('/:target1/:target1Id/:target2', profileController.curdUserAssociatedTwoTargets);
+
+router.all('/businesstype/:sourceId/:target1/:target1Id/:target2/:target2Id', profileController.curdUserAssociatedTwoTargets);
+router.all('/businesstype/:sourceId/:target1/:target1Id/:target2/', profileController.curdUserAssociatedTwoTargets);
+
 router.post('/update-for-activation',  profileController.updateDetailsForActivation);
 
 

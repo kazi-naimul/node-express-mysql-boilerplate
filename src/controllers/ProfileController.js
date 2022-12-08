@@ -111,7 +111,7 @@ class ProfileController {
   };
 
   curdUserAssociatedTwoTargets = async (req, res) => {
-    const { source, target1,target2,target1Id,target2Id } = req.params;
+    const { source,sourceId, target1,target2,target1Id,target2Id } = req.params;
     const { id } = req.body;
     req.body = omit(req.body, [
       "phone_number",
@@ -123,7 +123,7 @@ class ProfileController {
       "uuid",
       "status",
     ]);
-    crudOperationsTwoTargets({ req, res, source, target1,target2,target1Id,target2Id, id });
+    crudOperationsTwoTargets({ req, res,sourceId, source, target1,target2,target1Id,target2Id, id });
   };
 }
 

@@ -91,10 +91,12 @@ const crudOperationsTwoTargets = async ({
   target1,
   target2,
   target1Id,
+  sourceId,
   target2Id,
   id,
 }) => {
-  console.log({ source, target1, target2, target1Id, target2Id, id });
+  console.log({ source,sourceId, target1, target2, target1Id, target2Id, id }
+  );
   const target1ModelName = capitalize(target1);
   const target1ModelName_plural = pluralize(target1ModelName);
   const getMixin1 = "get" + target1ModelName_plural;
@@ -103,8 +105,16 @@ const crudOperationsTwoTargets = async ({
   const target2ModelName_plural = pluralize(target2ModelName);
   const getMixin2 = "get" + target2ModelName_plural;
 
-  const sourceModelName = source || "user";
-  const sourceModel = req[sourceModelName];
+const sourceModelName =  req.path.split('/')[1] || "user";
+let sourceModel = req[sourceModelName]
+if( sourceModelName !== 'user'){
+  const Dao =  require('./../dao/'+capitalize(sourceModelName)+'Dao')
+  sourceModel = await new Dao().Model.findByPk(sourceId)
+  console.log(sourceModel)
+  // const category = await sourceModel.getBusinesscategories({where:{id:2}});
+  // console.log('test',await (category).createBusinessactivities({label:'hello'}))
+}
+ console.log(sourceModel)
   let targetid1Query = { where: {} };
   if (target1Id) {
     targetid1Query.where = { id: target1Id };
@@ -115,7 +125,6 @@ const crudOperationsTwoTargets = async ({
     targetid2Query.where = { id: target2Id };
   }
   let modelListDatatemp;
-  //  console.log(req.body)
   switch (req.method) {
     case "GET":
       modelListDatatemp = await sourceModel[getMixin1](targetid1Query);
@@ -134,7 +143,9 @@ const crudOperationsTwoTargets = async ({
       let modelAddedData;
       if (target2) {
         modelListDatatemp = await sourceModel[getMixin1](targetid1Query);
-        console.log({ modelListDatatemp });
+        console.log(modelListDatatemp[0],  target2ModelName, modelListDatatemp[0][
+          "create" + target2ModelName
+        ]);
 
         modelAddedData = await modelListDatatemp[0][
           "create" + target2ModelName
