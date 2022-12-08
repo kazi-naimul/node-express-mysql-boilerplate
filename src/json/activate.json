@@ -1,0 +1,435 @@
+[
+  {
+    "title": "Owner Details",
+    "eligility": [
+      "ADMIN"
+    ],
+    "details": [
+      {
+        "title": "Owner Details",
+        "eligility": [
+          "ADMIN"
+        ],
+        "fields": [
+          {
+            "eligility": [
+              "ADMIN"
+            ],
+            "label": "Name",
+            "type": "textbox",
+            "input": "text",
+            "isMandatory": true,
+            "requestKey": "name"
+          },
+          {
+            "eligility": [
+              "ADMIN"
+            ],
+            "label": "Mobile No",
+            "isMandatory": true,
+            "type": "textbox",
+            "input": "number",
+            "requestKey": "phone_number"
+          },
+          {
+            "label": "Email ID",
+            "type": "textbox",
+            "input": "email",
+            "isMandatory": true,
+            "requestKey": "email",
+            "eligility": [
+              "ADMIN"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "eligility": [
+      "ADMIN"
+    ],
+    "title": "Business Details",
+    "details": [
+      {
+        "eligility": [
+          "ADMIN"
+        ],
+        "title": "Business Details",
+        "fields": [
+          {
+            "label": "Business Name",
+            "type": "textbox",
+            "input": "text",
+            "isMandatory": true,
+            "error": "Please enter valid business Name",
+            "requestKey": "business_name",
+            "eligility": [
+              "ADMIN"
+            ]
+          },
+          {
+            "label": "Business No",
+            "type": "textbox",
+            "input": "number",
+            "isMandatory": true,
+            "error": "Please enter valid business number",
+            "requestKey": "business_name",
+            "eligility": [
+              "ADMIN"
+            ]
+          },
+          {
+            "label": "Business Location",
+            "type": "location_picker",
+            "requestKey": "business_location",
+            "isMandatory": true,
+            "eligility": [
+              "ADMIN"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Business",
+        "eligility": [
+          "ADMIN"
+        ],
+        "requestKey": "business_type",
+        "type": "grid",
+        "fields": [
+          {
+            "type": "grid",
+            "eligility": [
+              "ADMIN"
+            ],
+            "requestKey": "business_type",
+            "fields": [
+              {
+                "url": "https://tse3.mm.bing.net/th?id=OIP.F7muhAGNlo-qdlzvhwQFXgHaEy&pid=Api&P=0",
+                "id": 1,
+                "type": "chip",
+                "label": "Food",
+                "requestKey": "business_type",
+                "eligility": [
+                  "ADMIN"
+                ]
+              },
+              {
+                "url": "https://tse4.mm.bing.net/th?id=OIP.3dDOI3E_Z0wbuWuvcnpxEAHaE8&pid=Api&P=0",
+                "id": 2,
+                "type": "chip",
+                "label": "Dry Fruits",
+                "requestKey": "business_type",
+                "eligility": [
+                  "ADMIN"
+                ]
+              },
+              {
+                "url": "https://images.unsplash.com/photo-1602734846297-9299fc2d4703?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dGVkZHl8ZW58MHx8MHx8&w=1000&q=80",
+                "id": 3,
+                "type": "chip",
+                "label": "Gift & Toys",
+                "requestKey": "business_type",
+                "eligility": [
+                  "ADMIN"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Business Category",
+        "eligility": [
+          "ADMIN"
+        ],
+        "fields": [
+          {
+            "label": "Business Type",
+            "type": "option",
+            "input": "select",
+            "requestKey": "business_category",
+            "eligility": [
+              "ADMIN"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Business Activities",
+        "eligility": ["ADMIN"],
+        "requestKey": "business_activities",
+        "type": "grid",
+        "fields": [
+          {
+            "type": "grid",
+            "eligility": ["ADMIN"],
+            "requestKey": "business_activities",
+            "fields": [
+              {
+                "id": 1,
+                "type": "chip",
+                "label": "Cake Shop",
+                "requestKey": "business_activities",
+                "eligility": ["ADMIN"]
+              },
+              {
+                "id": 2,
+                "type": "chip",
+                "label": "Sweet Shop ",
+                "requestKey": "business_activities",
+                "eligility": ["ADMIN"]
+              },
+              {
+                "id": 3,
+                "type": "chip",
+                "label": "Savouries & Snack",
+                "requestKey": "business_activities",
+                "eligility": ["ADMIN"]
+              },
+              {
+                "id": 4,
+                "type": "chip",
+                "label": "Juice Shop",
+                "requestKey": "business_activities",
+                "eligility": ["ADMIN"]
+              },
+              {
+                "id": 5,
+                "type": "chip",
+                "label": "Coffee Shop",
+                "requestKey": "business_activities",
+                "eligility": ["ADMIN"]
+              },
+              {
+                "id": 6,
+                "type": "chip",
+                "label": "Ice Cream Parlour",
+                "requestKey": "business_activities",
+                "eligility": ["ADMIN"]
+              },
+              {
+                "id": 7,
+                "type": "chip",
+                "label": "Savouries & Snack",
+                "requestKey": "business_activities",
+                "eligility": ["ADMIN"]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Food Type",
+        "eligility": [
+          "ADMIN"
+        ],
+        "fields": [
+          {
+            "label": "Food Type",
+            "type": "option",
+            "input": "select",
+            "requestKey": "food_type",
+            "eligility": [
+              "ADMIN"
+            ]
+          }
+        ]
+      },
+      {
+        "fields": [
+          {
+            "label": "Mabliz (Order Type)",
+            "type": "text",
+            "value": "Mabliz",
+            "eligility": [
+              "ADMIN"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Price Type (Service Type)",
+        "eligility": [
+          "ADMIN"
+        ],
+        "fields": [
+          {
+            "label": "Dining",
+            "type": "checkbox",
+            "requestKey": "service_type",
+            "eligility": [
+              "ADMIN"
+            ]
+          },
+          {
+            "label": "A/C Dining",
+            "type": "checkbox",
+            "requestKey": "service_type",
+            "eligility": [
+              "ADMIN"
+            ]
+          },
+          {
+            "label": "Open Dining",
+            "type": "checkbox",
+            "requestKey": "service_type",
+            "eligility": [
+              "ADMIN"
+            ]
+          },
+          {
+            "label": "Rooftop Dining",
+            "type": "checkbox",
+            "requestKey": "service_type",
+            "eligility": [
+              "ADMIN"
+            ]
+          },
+          {
+            "label": "Self Service",
+            "type": "checkbox",
+            "requestKey": "service_type",
+            "eligility": [
+              "ADMIN"
+            ]
+          },
+          {
+            "label": "Take Away",
+            "type": "checkbox",
+            "requestKey": "service_type",
+            "eligility": [
+              "ADMIN"
+            ]
+          },
+          {
+            "label": "Delivery",
+            "type": "checkbox",
+            "requestKey": "service_type",
+            "eligility": [
+              "ADMIN"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Business / Shop Image",
+        "eligility": [
+          "ADMIN"
+        ],
+        "fields": []
+      }
+    ]
+  },
+  {
+    "title": "Licence & Legal",
+    "eligility": [
+      "ADMIN"
+    ],
+    "details": [
+      {
+        "title": "GST",
+        "eligility": [
+          "ADMIN"
+        ],
+        "fields": [
+          {
+            "label": "GST Number",
+            "type": "textbox_image_picker",
+            "input": "number",
+            "requestKey": "gst_number",
+            "imageKey": "gst_image",
+            "eligility": [
+              "ADMIN"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Licence",
+        "eligility": [
+          "ADMIN"
+        ],
+        "fields": [
+          {
+            "label": "Licence Number",
+            "type": "textbox_image_picker",
+            "input": "number",
+            "requestKey": "licence_number",
+            "imageKey": "licence_image",
+            "eligility": [
+              "ADMIN"
+            ]
+          },
+          {
+            "label": "Licence Expiry Date",
+            "type": "textbox",
+            "input": "datepicker",
+            "requestKey": "licence_expiry_date",
+            "eligility": [
+              "ADMIN"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "FSSAI",
+        "eligility": [
+          "ADMIN"
+        ],
+        "fields": [
+          {
+            "label": "FSSAI Number",
+            "type": "textbox_image_picker",
+            "input": "number",
+            "requestKey": "fssai_number",
+            "imageKey": "fssai_image",
+            "eligility": [
+              "ADMIN"
+            ]
+          },
+          {
+            "label": "FSSAI Expiry Date",
+            "type": "textbox",
+            "input": "datepicker",
+            "requestKey": "fssai_expiry_date",
+            "eligility": [
+              "ADMIN"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Timing",
+    "eligility": [
+      "ADMIN"
+    ],
+    "details": [
+      {
+        "title": "Business Timing",
+        "eligility": [
+          "ADMIN"
+        ],
+        "fields": []
+      }
+    ]
+  },
+  {
+    "title": "Plans / Version",
+    "eligility": [
+      "ADMIN"
+    ],
+    "details": [
+      {
+        "title": "Plans/Subscription ",
+        "eligility": [
+          "ADMIN"
+        ],
+        "fields": []
+      }
+    ]
+  }
+]
