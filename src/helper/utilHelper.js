@@ -121,22 +121,35 @@ const crudOperationsTwoTargets = async ({
   if (target2Id) {
     targetid2Query.where = { id: target2Id };
   }
+  let modelListDatatemp
   //  console.log(req.body)
   switch (req.method) {
     case "GET":
-      const modelListDatatemp = await sourceModel[getMixin1](targetid1Query);
+       modelListDatatemp = await sourceModel[getMixin1](targetid1Query);
       console.log(targetid1Query,modelListDatatemp)
-      const modelListData = target2 ? await modelListDatatemp?.[0]?.[getMixin2](
+      let modelListData = target2 ? await modelListDatatemp?.[0]?.[getMixin2](
         targetid2Query,
       ): modelListDatatemp?.[0];
+      if(target2Id){
+        modelListData = modelListData?.[0];
+      }
       res.json(
-        responseHandler.returnSuccess(httpStatus.OK, "Success", modelListData)
+        responseHandler.returnSuccess(httpStatus.OK, "Success",modelListData )
       );
       break;
     case "POST":
-      const createMixin = "create" + targetModelName;
+      let modelAddedData
+      if(target2){
+        modelListDatatemp = await sourceModel[getMixin1](targetid1Query);
+        console.log({modelListDatatemp})
 
-      const modelAddedData = await sourceModel[createMixin](req.body);
+        modelAddedData = await modelListDatatemp[0]['create'+target2ModelName](req.body);
+      }
+      else{      const createMixin = "create" + target1ModelName;
+
+        modelAddedData=  await sourceModel[createMixin](req.body);
+
+      }
       res.json(
         responseHandler.returnSuccess(httpStatus.OK, "Success", modelAddedData)
       );
