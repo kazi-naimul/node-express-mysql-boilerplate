@@ -15,6 +15,9 @@ class AuthController {
   }
 
   register = async (req, res) => {
+    console.log(req.files);
+
+
     try {
       const user = await this.userService.createUser(req.body);
       let tokens = {};
@@ -44,7 +47,59 @@ class AuthController {
     );
   };
 
+deleteUserTemp = async(req,res)=>{
 
+
+  const user = await this.userService.userDao.findByPhoneNumber(req.query.phone_number);
+  console.log(user)
+  if(!user){
+
+    res.json(
+      responseHandler.returnError(
+        httpStatus[200],
+        "id not found",
+      )
+    );
+    return;
+  }
+  await user.destroy()
+  res.json(
+    responseHandler.returnSuccess(
+      httpStatus[200],
+      "Deleted successfully",
+    )
+  );
+
+
+}
+
+
+updateAdminActivation = async(req,res)=>{
+
+
+  const user = await this.userService.userDao.findByPhoneNumber(req.query.phone_number);
+  console.log(user)
+  if(!user){
+
+    res.json(
+      responseHandler.returnError(
+        httpStatus[200],
+        "id not found",
+      )
+    );
+    return;
+  }
+  await user.update({isAdmin:true})
+
+  res.json(
+    responseHandler.returnSuccess(
+      httpStatus[200],
+      "updated successfully",
+    )
+  );
+
+
+}
   
   checkEmail = async (req, res) => {
     try {
@@ -60,7 +115,7 @@ class AuthController {
 
   loginWithOtp = async (req, res) => {
     try {
-      const {  phone_number , otp, hash } = req.body;
+      const {  phone_number , otp, hash,mode } = req.body;
       const user = await this.authService.loginWithOtp(
         phone_number , hash,otp
       );
@@ -70,6 +125,9 @@ class AuthController {
       const code = user.statusCode;
       let tokens = {};
       if (user.response.status) {
+        // if(!user.mode.includes(mode)){
+        //   console.log({user});
+        // }
         tokens = await this.tokenService.generateAuthTokens(data);
       }
       res.status(user.statusCode).send({ status, code, message, data, tokens });

@@ -17,10 +17,10 @@ class UserValidator {
             business_phone_number:  Joi.string(),
             address:  Joi.string(),
             phone_number:  Joi.string(),
-            business_type:  Joi.number(),
+            business_type_id:  Joi.object(),
             gst_number:  Joi.string(),
             gst_image:  Joi.string(),
-            address1:  Joi.string(),
+            locality:  Joi.string(),
             city:  Joi.string(),
             zipcode:  Joi.string(),
             latitude: Joi.number(),
@@ -51,7 +51,6 @@ class UserValidator {
             next(new ApiError(httpStatus.BAD_REQUEST, errorMessage));
         } else {
             // on success replace req.body with validated value and trigger next middleware function
-            req.body = value;
             return next();
         }
     }

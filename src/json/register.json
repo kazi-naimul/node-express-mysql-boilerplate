@@ -1,15 +1,15 @@
 [
   {
-    "title": "Owner Details",
-    "eligility": ["PARTNER"],
+    "title": "Personal Details",
+    "eligility": ["PARTNER","CUSTOMER"],
     "details": [
       {
         "title": "Register Mobile No",
-        "eligility": ["PARTNER"],
+        "eligility": ["PARTNER","CUSTOMER"],
 
         "fields": [
           {
-            "eligility": ["PARTNER"],
+            "eligility": ["PARTNER","CUSTOMER"],
             "label": "Mobile No",
             "isMandatory": true,
             "type": "textbox",
@@ -79,7 +79,7 @@
             "type":"textbox",
             "input":"number",
             "error": "Please enter valid Business Number",
-            "requestKey":"business_phone_number",
+            "requestKey":"branch_phone_number",
             "eligility":["PARTNER"]
           }
         ]
@@ -87,10 +87,14 @@
       {
         "title": "Business",
         "eligility": ["PARTNER"],
+        "requestKey": "business_type",
+
         "type": "grid",
         "fields": [
           {
             "type": "grid",
+            "eligility": ["PARTNER"],
+            "requestKey": "business_type",
             "fields": [
               {
                 "url": "https://cdn2.assets-servd.host/pebble-mag/production/images/_1200x630_crop_center-center_82_none/What%E2%80%99s-Wrong-With-Fast-Fashion_-header.jpg?mtime=1583424325",
@@ -152,30 +156,31 @@
   },
   {
     "title": "Legal Terms",
-    "eligility": ["PARTNER"],
+    "eligility": ["PARTNER","CUSTOMER"],
     "details": [
       {
         "title": "Referral Code ",
-        "eligility": ["PARTNER"],
+        "eligility": ["PARTNER","CUSTOMER"],
         "fields": [
           {
             "label": "Referral Code",
             "type": "textbox",
             "input": "text",
             "requestKey":"referral_code",
-            "eligility":["PARTNER"]
+            "eligility":["PARTNER","CUSTOMER"]
           },
           {
             "type": "checkbox",
             "label": "I want to receive communications from mabliz on Whatsapp",
             "requestKey": "whatsapp_communication",
-            "eligility": ["PARTNER"]
+            "eligility": ["PARTNER","CUSTOMER"]
           },
           {
             "type": "checkbox",
+            "isHTML":true,
             "label": "<p>I agree to mabliz <a href='https://www.google.co.in/'>Terms & condition</a></p>",
             "validValue": true,
-            "eligility": ["PARTNER"]
+            "eligility": ["PARTNER","CUSTOMER"]
           }
         ]
       }

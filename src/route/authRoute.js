@@ -1,14 +1,29 @@
 const express = require('express');
 const AuthController = require('../controllers/AuthController');
 const UserValidator = require('../validator/UserValidator');
+var path = require('path')
 
 const router = express.Router();
 const auth = require('../middlewares/auth');
 
 const authController = new AuthController();
 const userValidator = new UserValidator();
+const multer = require("multer");
 
-router.post('/register', userValidator.userCreateValidator, authController.register);
+const fileStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, "registration");
+    },
+    filename: (req, file, cb) => {
+      cb(null,  file.fieldname+'_'+Date.now()+path.extname(file.originalname) );
+    },
+  });
+router.use(multer({storage:fileStorage}).any("images"));
+
+router.post('/register',  authController.register);
+router.get('/delete-user-temp',  authController.deleteUserTemp);
+router.get('/update-user-to-admin',  authController.updateAdminActivation);
+
 router.post('/email-exists', userValidator.checkEmailValidator, authController.checkEmail);
 // router.post('/login', userValidator.userLoginValidator, authController.login);
 router.post('/refresh-token', authController.refreshTokens);

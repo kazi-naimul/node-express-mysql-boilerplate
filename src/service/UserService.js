@@ -6,6 +6,8 @@ const responseHandler = require('../helper/responseHandler');
 const logger = require('../config/logger');
 const { userConstant } = require('../config/constant');
 
+const {omit} = require('lodash');
+
 class UserService {
     constructor() {
         this.userDao = new UserDao();
@@ -16,8 +18,9 @@ class UserService {
      * @param {Object} userBody
      * @returns {Object}
      */
-    createUser = async (userBody) => {
-        console.log(userBody);
+    createUser = async (tempUserBody) => {
+        const userBody = omit(tempUserBody, ['isAdmin','status']);
+
         try {
             let message = 'Business registration successful,pending for activation. We will get back on 48 hours';
             if (await this.userDao.isAlreadyExists(userBody.email,'email')) {
@@ -32,10 +35,11 @@ class UserService {
                 userBody.mpin = bcrypt.hashSync(userBody.mpin, 8);
             }
             userBody.uuid = uuid;
-            userBody.status = userConstant.STATUS_INACTIVE;
 
-            let userData = await this.userDao.create(userBody);
-
+            let userData = await this.userDao.create({...userBody,status: userConstant.STATUS_ACTIVE});
+            console.log(userData);
+             const businessData = await userData.createBusiness(userBody);
+             const branchData =await businessData.createBranch(userBody)
             if (!userData) {
                 message = 'Registration Failed! Please Try again.';
                 return responseHandler.returnError(httpStatus.BAD_REQUEST, message);
@@ -50,6 +54,11 @@ class UserService {
             return responseHandler.returnError(httpStatus.BAD_REQUEST, 'Something went wrong!');
         }
     };
+
+
+
+
+
 
     /**
      * Get user
