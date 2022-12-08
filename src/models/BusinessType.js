@@ -11,7 +11,9 @@ module.exports = (sequelize, DataTypes) => {
 
    Businesstype.init(
     {
-      uuid: DataTypes.UUID,
+      image_url: DataTypes.STRING,
+      label:DataTypes.STRING
+
      
     },
 
