@@ -126,7 +126,7 @@ const crudOperationsTwoTargets = async ({
     case "GET":
       const modelListDatatemp = await sourceModel[getMixin1](targetid1Query);
       console.log(targetid1Query,modelListDatatemp)
-      const modelListData = target2Id ? await modelListDatatemp?.[0][getMixin2](
+      const modelListData = target2 ? await modelListDatatemp?.[0]?.[getMixin2](
         targetid2Query,
       ): modelListDatatemp?.[0];
       res.json(
