@@ -35,13 +35,17 @@ class BranchService {
       return omit(temp, ["business", "user"]);
     });
 
-    const groups = groupBy(flattenBranches,'business_type_label');
-    console.log(groups);
+    const temp = groupBy(flattenBranches,'business_type_label');
+    const groups = Object.keys(temp).map((type) => ({
+      type,
+      businesses: temp[type],
+    }));
+
     // console.log(branches[0].business.whatsapp_communication)
     return responseHandler.returnSuccess(
       httpStatus.OK,
       "Successfully fetched all branches pending for activation",
-      groups
+      {groups}
     );
   };
 }

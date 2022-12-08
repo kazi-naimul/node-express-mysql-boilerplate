@@ -82,7 +82,71 @@ const crudOperations = async ({ req, res, source, target,id }) => {
   }
 };
 
+
+const crudOperationsTwoTargets = async ({ req, res, source, target1,target2,target1Id,target2Id, id }) => {
+  const target1ModelName = capitalize(target1);
+  const target1ModelName_plural = pluralize(target1ModelName);
+  const getMixin1 = "get" + target1ModelName_plural;
+
+
+
+  const target2ModelName = capitalize(target1);
+  const target2ModelName_plural = pluralize(target2ModelName);
+  const getMixin2 = "get" + target2ModelName_plural;
+
+
+
+  const sourceModelName = source || "user";
+  const sourceModel = req[sourceModelName];
+
+//  console.log(req.body)
+  switch (req.method) {
+    case "GET":
+      const modelListDatatemp = await sourceModel[getMixin1]({
+        where: {
+          id: target1Id,
+        },
+      })
+      const modelListData = await modelListDatatemp[getMixin2]({where:{id:target2Id}});
+      res.json(
+        responseHandler.returnSuccess(httpStatus.OK, "Success", modelListData)
+      );
+      break;
+    case "POST":
+      const createMixin = "create" + targetModelName;
+
+      const modelAddedData = await sourceModel[createMixin](req.body);
+      res.json(
+        responseHandler.returnSuccess(httpStatus.OK, "Success", modelAddedData)
+      );
+      break;
+    case "PUT":
+      record = await getRecord({ id, sourceModel, getMixin,res });
+      if (record) {
+         
+        const modelUpdateData = await record[0].update(req.body);
+        res.json(
+          responseHandler.returnSuccess(httpStatus.OK, "Success", modelUpdateData)
+        );
+      }
+
+      break;
+
+    case "DELETE":
+      record = await getRecord({ id, sourceModel, getMixin,res });
+      if (record) {
+        await record[0].destroy();
+        res.json(responseHandler.returnSuccess(httpStatus.OK, "Success"));
+      }
+      break;
+  }
+};
+
+
+
+
 module.exports = {
   getAbsolutePath,
   crudOperations,
+  crudOperationsTwoTargets
 };
