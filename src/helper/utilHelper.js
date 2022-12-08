@@ -94,11 +94,19 @@ const crudOperationsTwoTargets = async ({
   target2Id,
   id,
 }) => {
+
+  console.log({source,
+    target1,
+    target2,
+    target1Id,
+    target2Id,
+    id})
   const target1ModelName = capitalize(target1);
   const target1ModelName_plural = pluralize(target1ModelName);
   const getMixin1 = "get" + target1ModelName_plural;
 
-  const target2ModelName = capitalize(target2);
+ 
+  const target2ModelName = capitalize(target2 || '');
   const target2ModelName_plural = pluralize(target2ModelName);
   const getMixin2 = "get" + target2ModelName_plural;
 
@@ -116,13 +124,11 @@ const crudOperationsTwoTargets = async ({
   //  console.log(req.body)
   switch (req.method) {
     case "GET":
-      const modelListDatatemp = await sourceModel[getMixin1]({
-        targetid1Query,
-      });
-      console.log(getMixin2)
-      const modelListData = await modelListDatatemp[0][getMixin2]({
+      const modelListDatatemp = await sourceModel[getMixin1](targetid1Query);
+      console.log(targetid1Query,modelListDatatemp)
+      const modelListData = target2Id ? await modelListDatatemp?.[0][getMixin2](
         targetid2Query,
-      });
+      ): modelListDatatemp?.[0];
       res.json(
         responseHandler.returnSuccess(httpStatus.OK, "Success", modelListData)
       );
