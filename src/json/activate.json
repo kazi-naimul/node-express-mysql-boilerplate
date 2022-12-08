@@ -1,27 +1,15 @@
 [
   {
     "title": "Owner Details",
-    "eligility": ["PARTNER"],
+    "eligility": ["ADMIN"],
     "details": [
       {
-        "title": "Register Mobile No",
-        "eligility": ["PARTNER"],
+        "title": "Owner Details",
+        "eligility": ["ADMIN"],
 
         "fields": [
           {
-            "eligility": ["PARTNER"],
-            "label": "Mobile No",
-            "isMandatory": true,
-            "requestKey":"phone_number"
-          }
-        ]
-      },
-      {
-        "title": "Owner Information",
-        "eligility": ["PARTNER", "CUSTOMER"],
-        "fields": [
-          {
-            "eligility":["PARTNER","CUSTOMER"],
+            "eligility":["ADMIN"],
             "label": "Name",
             "type": "textbox",
             "input": "text",
@@ -29,150 +17,282 @@
             "requestKey": "name"
           },
           {
+            "eligility": ["ADMIN"],
+            "label": "Mobile No",
+            "isMandatory": true,
+            "type": "textbox",
+            "input": "number",
+            "requestKey":"phone_number"
+          },
+        
+          {
             "label": "Email ID",
             "type":"textbox",
+            "input":"email",
             "isMandatory": true,
             "requestKey": "email",
-            "eligility": ["PARTNER", "CUSTOMER"]
-          }
-        ]
-      },
-      {
-        "eligility": ["PARTNER"],
-        "title": "Generate MPIN ",
-        "fields": [
-          {
-            "label": "Enter MPIN",
-            "type": "confirm_pin",
-            "input": "number",
-            "requestKey": "mpin",
-            "eligility": [
-              "PARTNER"
-            ]
+            "eligility": ["ADMIN"]
           }
         ]
       }
     ]
   },
   {
-    "eligility": ["PARTNER"],
+    "eligility": ["ADMIN"],
     "title": "Business Details",
     "details": [
       {
-        "eligility": ["PARTNER"],
-        "title": "Business Information",
+        "eligility": ["ADMIN"],
+        "title": "Business Details",
         "fields": [
           {
             "label": "Business Name",
             "type":"textbox",
+            "input":"text",
             "isMandatory": true,
             "error": "Please enter valid business Name",
             "requestKey": "business_name",
-            "eligility": ["PARTNER"]
+            "eligility": ["ADMIN"]
           },
           {
-            "label": "Business Number",
+            "label": "Business No",
             "type":"textbox",
-            "error": "Please enter valid Business Number",
-            "requestKey":"business_phone_number",
-            "eligility":["PARTNER"]
+            "input":"number",
+            "isMandatory": true,
+            "error": "Please enter valid business number",
+            "requestKey": "business_name",
+            "eligility": ["ADMIN"]
+          },
+          {
+            "label": "Business Location",
+            "type": "location_picker",
+            "requestKey": "business_location",
+            "isMandatory": true,
+            "eligility": ["ADMIN"]
           }
         ]
       },
       {
         "title": "Business",
-        "eligility": ["PARTNER"],
+        "eligility": ["ADMIN"],
+        "requestKey": "business_type",
         "type": "grid",
         "fields": [
           {
             "type": "grid",
+            "eligility": ["ADMIN"],
+            "requestKey": "business_type",
             "fields": [
               {
-                "url": "https://cdn2.assets-servd.host/pebble-mag/production/images/_1200x630_crop_center-center_82_none/What%E2%80%99s-Wrong-With-Fast-Fashion_-header.jpg?mtime=1583424325",
+                "url": "https://tse3.mm.bing.net/th?id=OIP.F7muhAGNlo-qdlzvhwQFXgHaEy&pid=Api&P=0",
                 "id": 1,
                 "type": "option",
-                "label": "Fashion",
+                "label": "Food",
                 "requestKey": "business_type",
-                "eligility": ["PARTNER"]
+                "eligility": ["ADMIN"]
               },
               {
-                "url": "https://img.freepik.com/premium-psd/hygiene-beauty-concept-mock-up_23-2148688773.jpg?w=2000",
+                "url": "https://tse4.mm.bing.net/th?id=OIP.3dDOI3E_Z0wbuWuvcnpxEAHaE8&pid=Api&P=0",
                 "id": 2,
                 "type": "option",
-                "label": "Beauty",
+                "label": "Dry Fruits",
                 "requestKey": "business_type",
-                "eligility": ["PARTNER"]
+                "eligility": ["ADMIN"]
               },
               {
                 "url": "https://images.unsplash.com/photo-1602734846297-9299fc2d4703?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dGVkZHl8ZW58MHx8MHx8&w=1000&q=80",
                 "id": 3,
                 "type": "option",
-                "label": "Gift & Toys",
+                "label": "Gift & Toys", 
                 "requestKey": "business_type",
-                "eligility": ["PARTNER"]
+                "eligility": ["ADMIN"]
               }
             ]
           }
         ]
       },
       {
-        "title": "GST",
-        "eligility": ["PARTNER"],
+        "title": "Business Category",
+        "eligility": ["ADMIN"],
         "fields": [
           {
-            "label": "GST Number",
-            "type":"number",
-            "requestKey":"gst_number",
-            "eligility":["PARTNER"]
-          },{
-            "label": "GST Image",
-            "type":"image_picker",
-            "requestKey":"gst_image",
-            "eligility":["PARTNER"]
+            "label": "Business Type",
+            "type": "option",
+            "input": "select",
+            "requestKey": "business_category",
+            "eligility": ["ADMIN"]
           }
         ]
       },
       {
-        "title": "Business Location",
-        "eligility": ["PARTNER"],
+        "title": "Business Activities",
+        "eligility": ["ADMIN"],
         "fields": [
           {
-            "label": "Business Location",
-            "type": "location_picker",
-            "requestKey": "business_location",
-            "eligility": ["PARTNER"]
+            "label": "Business Activities",
+            "type": "chip",
+            "input": "select",
+            "requestKey": "business_activities",
+            "eligility": ["ADMIN" ]
+          }
+        ]
+      },
+      {
+        "title": "Food Type",
+        "eligility": ["ADMIN"],
+        "fields": [
+          {
+            "label": "Food Type",
+            "type": "option",
+            "input": "select",
+            "requestKey": "food_type",
+            "eligility": ["ADMIN" ]
+          }
+        ]
+      },
+      { 
+        "fields": [
+          {
+            "label": "Mabliz (Order Type)",
+            "type": "text",
+            "value": "Mabliz",
+            "eligility": ["ADMIN" ]
+          }
+        ]
+      },
+      {
+        "title": "Price Type (Service Type)",
+        "eligility": ["ADMIN"],
+        "fields": [
+          {
+            "label": "Dining",
+            "type": "checkbox",
+            "requestKey": "service_type",
+            "eligility": ["ADMIN" ]
+          },
+          {
+            "label": "A/C Dining",
+            "type": "checkbox",
+            "requestKey": "service_type",
+            "eligility": ["ADMIN" ]
+          },
+          {
+            "label": "Open Dining",
+            "type": "checkbox",
+            "requestKey": "service_type",
+            "eligility": ["ADMIN" ]
+          },
+          {
+            "label": "Rooftop Dining",
+            "type": "checkbox",
+            "requestKey": "service_type",
+            "eligility": ["ADMIN" ]
+          },
+          {
+            "label": "Self Service",
+            "type": "checkbox",
+            "requestKey": "service_type",
+            "eligility": ["ADMIN" ]
+          },
+          {
+            "label": "Take Away",
+            "type": "checkbox",
+            "requestKey": "service_type",
+            "eligility": ["ADMIN" ]
+          }, {
+            "label": "Delivery",
+            "type": "checkbox",
+            "requestKey": "service_type",
+            "eligility": ["ADMIN" ]
+          }
+        ]
+      },
+      {
+        "title": "Business / Shop Image",
+        "eligility": ["ADMIN"],
+        "fields": [ ]
+      }]
+  },
+  {
+    "title": "Licence & Legal",
+    "eligility": ["ADMIN"],
+    "details": [
+      {
+        "title": "GST",
+        "eligility": ["ADMIN"],
+        "fields": [
+          {
+            "label": "GST Number",
+            "type": "textbox_image_picker",
+            "input": "number",
+            "requestKey": "gst_number",
+            "imageKey": "gst_image",
+            "eligility": ["ADMIN"]
+          }
+        ]
+      },
+      {
+        "title": "Licence",
+        "eligility": ["ADMIN"],
+        "fields": [
+          {
+            "label": "Licence Number",
+            "type": "textbox_image_picker",
+            "input": "number",
+            "requestKey": "licence_number",
+            "imageKey": "licence_image",
+            "eligility": [ "ADMIN"]
+          },
+          {
+            "label": "Licence Expiry Date",
+            "type": "textbox",
+            "input": "datepicker",
+            "requestKey": "licence_expiry_date",
+            "eligility": [ "ADMIN"]
+          }
+        ]
+      },
+      {
+        "title": "FSSAI",
+        "eligility": ["ADMIN"],
+        "fields": [
+          {
+            "label": "FSSAI Number",
+            "type": "textbox_image_picker",
+            "input": "number",
+            "requestKey": "fssai_number",
+            "imageKey": "fssai_image",
+            "eligility": [ "ADMIN"]
+          },
+          {
+            "label": "FSSAI Expiry Date",
+            "type": "textbox",
+            "input": "datepicker",
+            "requestKey": "fssai_expiry_date",
+            "eligility": [ "ADMIN"]
           }
         ]
       }
     ]
   },
   {
-    "title": "Legal Terms",
-    "eligility": ["PARTNER"],
+    "title": "Timing",
+    "eligility": ["ADMIN"],
     "details": [
       {
-        "title": "Referral Code ",
-        "eligility": ["PARTNER"],
-        "fields": [
-          {
-            "label": "Referral Code",
-            "type": "textbox",
-            "requestKey":"referral_code",
-            "eligility":["PARTNER"]
-          },
-          {
-            "type": "checkbox",
-            "label": "I want to receive communications from mabliz on Whatsapp",
-            "requestKey": "whatsapp_communication",
-            "eligility": ["PARTNER"]
-          },
-          {
-            "type": "checkbox",
-            "label": "<p>I agree to mabliz <a href='https://www.google.co.in/'>Terms & condition</a></p>",
-            "validValue": true,
-            "eligility": ["PARTNER"]
-          }
-        ]
+        "title": "Business Timing",
+        "eligility": ["ADMIN"],
+        "fields": []
+      }]
+  },
+  {
+    "title": "Plans / Version",
+    "eligility": ["ADMIN"],
+    "details": [
+      {
+        "title": "Plans/Subscription ",
+        "eligility": ["ADMIN"],
+        "fields": []
       }
     ]
   }
