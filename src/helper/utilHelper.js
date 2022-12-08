@@ -84,20 +84,20 @@ const crudOperations = async ({ req, res, source, target, id }) => {
   }
 };
 
-const crudOperationsTwoTargets = async ({
-  req,
-  res,
-  source,
-  target1,
-  target2,
-  target1Id,
-  sourceId,
-  target2Id,
-  id,
-}) => {
-  console.log({ source,sourceId, target1, target2, target1Id, target2Id, id }
-  );
-  const target1ModelName = capitalize(target1);
+const crudOperationsTwoTargets = async (object) => {
+  const {
+    req,
+    res,
+    source,
+    target1,
+    target2,
+    target1Id,
+    sourceId,
+    target2Id,
+    id,
+  } = object;
+  console.log({ source, sourceId, target1, target2, target1Id, target2Id, id });
+  const target1ModelName = capitalize(target1 || "");
   const target1ModelName_plural = pluralize(target1ModelName);
   const getMixin1 = "get" + target1ModelName_plural;
 
@@ -105,16 +105,22 @@ const crudOperationsTwoTargets = async ({
   const target2ModelName_plural = pluralize(target2ModelName);
   const getMixin2 = "get" + target2ModelName_plural;
 
-const sourceModelName =  req.path.split('/')[1] || "user";
-let sourceModel = req[sourceModelName]
-if( sourceModelName !== 'user'){
-  const Dao =  require('./../dao/'+capitalize(sourceModelName)+'Dao')
-  sourceModel = await new Dao().Model.findByPk(sourceId)
-  console.log(sourceModel)
-  // const category = await sourceModel.getBusinesscategories({where:{id:2}});
-  // console.log('test',await (category).createBusinessactivities({label:'hello'}))
-}
- console.log(sourceModel)
+  const sourceModelName = req.path.split("/")[1] || "user";
+  let sourceModel = req[sourceModelName];
+  const isEmpty = Object.values(omit(object, ["req", "res"])).every(
+    (x) => x === undefined || x === ""
+  );
+  console.log({ isEmpty });
+  if (sourceModelName !== "user") {
+    const Dao = require("./../dao/" + capitalize(sourceModelName) + "Dao");
+    sourceModel = sourceId
+      ? await new Dao().Model.findByPk(sourceId)
+      : await new Dao().Model;
+
+    console.log({ sourceId, sourceModel });
+    // const category = await sourceModel.getBusinesscategories({where:{id:2}});
+    // console.log('test',await (category).createBusinessactivities({label:'hello'}))
+  }
   let targetid1Query = { where: {} };
   if (target1Id) {
     targetid1Query.where = { id: target1Id };
@@ -127,14 +133,18 @@ if( sourceModelName !== 'user'){
   let modelListDatatemp;
   switch (req.method) {
     case "GET":
-      modelListDatatemp = await sourceModel[getMixin1](targetid1Query);
-      console.log(targetid1Query, modelListDatatemp);
+      modelListDatatemp = isEmpty
+        ? await sourceModel.findAll()
+        : await sourceModel[getMixin1](targetid1Query);
+      console.log( {modelListDatatemp});
       let modelListData = target2
         ? await modelListDatatemp?.[0]?.[getMixin2](targetid2Query)
-        : modelListDatatemp?.[0];
+        : 
+  modelListDatatemp;
       if (target2Id) {
         modelListData = modelListData?.[0];
       }
+      console.log({modelListData})
       res.json(
         responseHandler.returnSuccess(httpStatus.OK, "Success", modelListData)
       );
@@ -143,9 +153,11 @@ if( sourceModelName !== 'user'){
       let modelAddedData;
       if (target2) {
         modelListDatatemp = await sourceModel[getMixin1](targetid1Query);
-        console.log(modelListDatatemp[0],  target2ModelName, modelListDatatemp[0][
-          "create" + target2ModelName
-        ]);
+        console.log(
+          modelListDatatemp[0],
+          target2ModelName,
+          modelListDatatemp[0]["create" + target2ModelName]
+        );
 
         modelAddedData = await modelListDatatemp[0][
           "create" + target2ModelName
@@ -160,8 +172,9 @@ if( sourceModelName !== 'user'){
       );
       break;
     case "PUT":
-      try {let result;
-        console.log('body',req.body)
+      try {
+        let result;
+        console.log("body", req.body);
         modelListDatatemp = await sourceModel[getMixin1](targetid1Query);
         if (target2) {
           const temp = await modelListDatatemp?.[0]?.[getMixin2](
@@ -170,9 +183,11 @@ if( sourceModelName !== 'user'){
           console.log(temp);
           result = await temp[0].update(req.body);
         } else {
-          result =  await modelListDatatemp[0].update(req.body)
+          result = await modelListDatatemp[0].update(req.body);
         }
-        res.json(responseHandler.returnSuccess(httpStatus.OK, "Success",result));
+        res.json(
+          responseHandler.returnSuccess(httpStatus.OK, "Success", result)
+        );
       } catch (error) {
         console.error(error);
         res.json(responseHandler.returnError(httpStatus.BAD_REQUEST, "Error"));
