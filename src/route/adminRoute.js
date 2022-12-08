@@ -5,7 +5,7 @@ const router = express.Router();
 
 const adminController = new AdminController();
 const auth = require('../middlewares/auth');
-// router.use(auth(true));
+router.use(auth(true));
 
 
 
