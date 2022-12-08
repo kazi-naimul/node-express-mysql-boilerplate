@@ -94,19 +94,12 @@ const crudOperationsTwoTargets = async ({
   target2Id,
   id,
 }) => {
-
-  console.log({source,
-    target1,
-    target2,
-    target1Id,
-    target2Id,
-    id})
+  console.log({ source, target1, target2, target1Id, target2Id, id });
   const target1ModelName = capitalize(target1);
   const target1ModelName_plural = pluralize(target1ModelName);
   const getMixin1 = "get" + target1ModelName_plural;
 
- 
-  const target2ModelName = capitalize(target2 || '');
+  const target2ModelName = capitalize(target2 || "");
   const target2ModelName_plural = pluralize(target2ModelName);
   const getMixin2 = "get" + target2ModelName_plural;
 
@@ -121,60 +114,78 @@ const crudOperationsTwoTargets = async ({
   if (target2Id) {
     targetid2Query.where = { id: target2Id };
   }
-  let modelListDatatemp
+  let modelListDatatemp;
   //  console.log(req.body)
   switch (req.method) {
     case "GET":
-       modelListDatatemp = await sourceModel[getMixin1](targetid1Query);
-      console.log(targetid1Query,modelListDatatemp)
-      let modelListData = target2 ? await modelListDatatemp?.[0]?.[getMixin2](
-        targetid2Query,
-      ): modelListDatatemp?.[0];
-      if(target2Id){
+      modelListDatatemp = await sourceModel[getMixin1](targetid1Query);
+      console.log(targetid1Query, modelListDatatemp);
+      let modelListData = target2
+        ? await modelListDatatemp?.[0]?.[getMixin2](targetid2Query)
+        : modelListDatatemp?.[0];
+      if (target2Id) {
         modelListData = modelListData?.[0];
       }
       res.json(
-        responseHandler.returnSuccess(httpStatus.OK, "Success",modelListData )
+        responseHandler.returnSuccess(httpStatus.OK, "Success", modelListData)
       );
       break;
     case "POST":
-      let modelAddedData
-      if(target2){
+      let modelAddedData;
+      if (target2) {
         modelListDatatemp = await sourceModel[getMixin1](targetid1Query);
-        console.log({modelListDatatemp})
+        console.log({ modelListDatatemp });
 
-        modelAddedData = await modelListDatatemp[0]['create'+target2ModelName](req.body);
-      }
-      else{      const createMixin = "create" + target1ModelName;
+        modelAddedData = await modelListDatatemp[0][
+          "create" + target2ModelName
+        ](req.body);
+      } else {
+        const createMixin = "create" + target1ModelName;
 
-        modelAddedData=  await sourceModel[createMixin](req.body);
-
+        modelAddedData = await sourceModel[createMixin](req.body);
       }
       res.json(
         responseHandler.returnSuccess(httpStatus.OK, "Success", modelAddedData)
       );
       break;
     case "PUT":
-      record = await getRecord({ id, sourceModel, getMixin, res });
-      if (record) {
-        const modelUpdateData = await record[0].update(req.body);
-        res.json(
-          responseHandler.returnSuccess(
-            httpStatus.OK,
-            "Success",
-            modelUpdateData
-          )
-        );
+      try {let result;
+        console.log('body',req.body)
+        modelListDatatemp = await sourceModel[getMixin1](targetid1Query);
+        if (target2) {
+          const temp = await modelListDatatemp?.[0]?.[getMixin2](
+            targetid2Query
+          );
+          console.log(temp);
+          result = await temp[0].update(req.body);
+        } else {
+          result =  await modelListDatatemp[0].update(req.body)
+        }
+        res.json(responseHandler.returnSuccess(httpStatus.OK, "Success",result));
+      } catch (error) {
+        console.error(error);
+        res.json(responseHandler.returnError(httpStatus.BAD_REQUEST, "Error"));
       }
-
       break;
 
     case "DELETE":
-      record = await getRecord({ id, sourceModel, getMixin, res });
-      if (record) {
-        await record[0].destroy();
+      try {
+        modelListDatatemp = await sourceModel[getMixin1](targetid1Query);
+        if (target2) {
+          const temp = await modelListDatatemp?.[0]?.[getMixin2](
+            targetid2Query
+          );
+          console.log(temp);
+          await temp[0].destroy();
+        } else {
+          await modelListDatatemp[0].destroy();
+        }
         res.json(responseHandler.returnSuccess(httpStatus.OK, "Success"));
+      } catch (error) {
+        console.error(error);
+        res.json(responseHandler.returnError(httpStatus.BAD_REQUEST, "Error"));
       }
+
       break;
   }
 };

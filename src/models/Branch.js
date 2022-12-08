@@ -1,7 +1,7 @@
 const { Model } = require("sequelize");
 
 const { branchStatus } = require("./../config/constant");
-const {differenceInMinutes} = require('date-fns')
+const { differenceInMinutes } = require("date-fns");
 module.exports = (sequelize, DataTypes) => {
   class Branch extends Model {
     /**
@@ -22,8 +22,8 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         set(val) {
           val
-            ? val
-            : this.setDataValue(this.getDataValue("locality") + " branch");
+            ? this.setDataValue('branch_name',val)
+            : this.setDataValue('branch_name',this.getDataValue("locality") + " branch");
         },
       },
       // lastName: DataTypes.STRING,
@@ -33,7 +33,6 @@ module.exports = (sequelize, DataTypes) => {
       branch_sub_type: DataTypes.STRING,
       open_timing: DataTypes.DATE,
       close_timing: DataTypes.DATE,
-
 
       business_category: DataTypes.STRING,
 
@@ -65,12 +64,11 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
 
-
       business_timings: {
         type: DataTypes.TEXT,
         get: function () {
           console.log(this.getDataValue("business_timings"));
-          return JSON.parse(this.getDataValue("business_timings") || '{}');
+          return JSON.parse(this.getDataValue("business_timings") || "{}");
         },
         set: function (value) {
           // this.setDataValue('open_timing',value[0].time[0].start_time);
@@ -83,12 +81,11 @@ module.exports = (sequelize, DataTypes) => {
       is_closed: DataTypes.BOOLEAN,
       time_distance_from_activation: {
         type: DataTypes.VIRTUAL,
-        get () {
-            console.log(this.getDataValue("createdAt"))
+        get() {
+          console.log(this.getDataValue("createdAt"));
           return differenceInMinutes(
-           
             new Date(),
-            this.getDataValue("createdAt"),
+            this.getDataValue("createdAt")
           );
         },
       },
@@ -102,7 +99,7 @@ module.exports = (sequelize, DataTypes) => {
 
       license_no: DataTypes.STRING,
       license_expiry: DataTypes.DATE,
-      license_image:DataTypes.STRING,
+      license_image: DataTypes.STRING,
 
       address: DataTypes.STRING,
       locality: DataTypes.STRING,
@@ -111,15 +108,13 @@ module.exports = (sequelize, DataTypes) => {
       latitude: DataTypes.FLOAT,
       longitude: DataTypes.FLOAT,
       head_office: { defaultValue: true, type: DataTypes.BOOLEAN },
-      
 
       fssai_no: DataTypes.STRING,
       fssai_expiry: DataTypes.DATE,
-      fssai_image:  DataTypes.STRING,
-      branch_photo:  DataTypes.STRING,
-      business_card_image:  DataTypes.STRING,
-      sign_board_image:  DataTypes.STRING,
-      
+      fssai_image: DataTypes.STRING,
+      branch_photo: DataTypes.STRING,
+      business_card_image: DataTypes.STRING,
+      sign_board_image: DataTypes.STRING,
     },
     {
       sequelize,
