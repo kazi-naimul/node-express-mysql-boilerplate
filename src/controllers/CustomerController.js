@@ -22,7 +22,7 @@ class CustomerController {
     this.businesscategoryService = new BusinesscategoryService();
   }
 
-  someFunction = (myArray) => {
+  getCategoryAds = (myArray) => {
     const promises = myArray.map(async (tt) => {
       const items =
       await this.businesscategoryService.businesscategoryDao.findByWhere({
@@ -42,7 +42,7 @@ class CustomerController {
         title: "Category",
         items: types,
       },
-      ...(await this.someFunction(types))
+      ...(await this.getCategoryAds(types))
 
 
      
