@@ -1,0 +1,140 @@
+[
+  {
+    "title": "User Management",
+    "eligility": ["PARTNER"],
+    "details": [
+      {
+        "title": "Role",
+        "eligility": ["PARTNER"],
+        "fields": [
+          {
+            "eligility": ["PARTNER"],
+            "label": "Role",
+            "type": "textbox",
+            "input": "select",
+            "isMandatory": true,
+            "requestKey": "role",
+            "option":["Partner","GM","Manager","Accounts","Sales Man"]
+          }         
+        ]
+      },
+      {
+        "eligility": ["PARTNER"],
+        "title": "Employee / Personal Details",
+        "fields": [
+          {
+            "label": "First Name",
+            "type": "textbox",
+            "input": "text",
+            "isMandatory": true,
+            "requestKey": "first_name",
+            "eligility": ["PARTNER"]
+          },
+          {
+            
+            "label": "Middle Name",
+            "type": "textbox",
+            "input": "text",
+            "requestKey": "middle_name",
+            "eligility": ["PARTNER"]
+          },
+          {
+            
+            "label": "Last Name",
+            "type": "textbox",
+            "input": "text",
+            "requestKey": "last_name",
+            "eligility": ["PARTNER"]
+          },
+          {
+            
+            "label": "Date of Birth",
+            "type": "date_picker",
+            "isMandatory": true,
+            "input": "tel",
+            "requestKey": "dob",
+            "eligility": ["PARTNER"]
+          },
+          {
+            
+            "label": "Mobile No",
+            "type": "textbox",
+            "input": "tel",
+            "isMandatory": true,
+            "requestKey": "phone_number",
+            "eligility": ["PARTNER"]
+          },
+          {
+            "label": "Email ID",
+            "type": "textbox",
+            "input": "email",
+            "isMandatory": true,
+            "requestKey": "email",
+            "eligility": ["PARTNER"]
+          }
+        ]
+      },
+      {
+        "title": "Address & ID Proof",
+        "eligility": ["PARTNER"],
+        "fields": [
+          {
+            "label": "ID Proof",
+            "type": "textbox_image_picker",
+            "input": "select",
+            "requestKey": "id_proof",
+            "isMandatory": true,
+            "imageKey": "id_proof_image",
+            "option":["None","Pan Card","Ration Card"],
+            "eligility": ["PARTNER"]
+          },
+          {
+            "label": "Address Proof",
+            "type": "textbox_image_picker",
+            "input": "select",
+            "requestKey": "address_proof",
+            "isMandatory": true,
+            "imageKey": "address_proof_image",
+            "option":["None","Aadhar Card","Voter ID"],
+            "eligility": ["PARTNER"]
+          }    
+        ]
+      },
+      {
+        "title": "Salary",
+        "eligility": ["PARTNER"],
+        "fields": [
+          {
+            "label": "Salary",
+            "type": "textbox",
+            "input": "number",
+            "requestKey": "salary",
+            "eligility": ["PARTNER"]
+          },
+          {
+            "label": "Pay",
+            "type": "textbox",
+            "input": "select",
+            "requestKey": "pay_besed",
+            "isMandatory": true,
+            "option":["Daily","Weekly","Monthly"],
+            "eligility": ["PARTNER"]
+          }    
+        ]
+      },
+      {
+        "title": "Photo",
+        "eligility": ["PARTNER"],
+        "fields": [
+          {
+            "label": "Photo",
+            "type": "textbox_image_picker",
+            "requestKey": "photo",
+            "eligility": ["PARTNER"]
+          }
+          
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,68 @@
+[
+  {
+    "title": "Role & Permission Management",
+    "eligility": ["PARTNER"],
+    "details": [
+      {
+        "title": "Role",
+        "eligility": ["PARTNER"],
+        "fields": [
+          {
+            "label": "Role Name",
+            "type": "textbox",
+            "input": "text",
+            "isMandatory": true,
+            "requestKey": "role",
+            "eligility": ["PARTNER"]
+          }         
+        ]
+      },
+      {
+        "eligility": ["PARTNER"],
+        "title": "Permission Details",
+        "type":"accordion",
+        "fields": [
+          {
+            "title":"Admin & Security Management",
+            "type": "accordion",
+            "fields":[
+              {
+              "title":"User Management",
+              "eligility": ["PARTNER"],
+              "fields":[
+                {
+                "label":"View / Read",
+                "type": "checkbox",
+                "requestKey":"user_management",
+                "eligility": ["PARTNER"]
+              },
+              {
+                "label":"Create / Add",
+                "type": "checkbox",
+                "requestKey":"user_management",
+                "eligility": ["PARTNER"]
+              },
+              {
+                "label":"Update / Edit",
+                "type": "checkbox",
+                "requestKey":"user_management",
+                "eligility": ["PARTNER"]
+              },
+              {
+                "label":"Delete",
+                "type": "checkbox",
+                "requestKey":"user_management",
+                "eligility": ["PARTNER"]
+              }
+            
+            ]
+            }
+            ]
+          }
+          
+        ]
+      }
+      
+    ]
+  }
+]
