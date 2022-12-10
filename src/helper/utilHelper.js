@@ -84,34 +84,43 @@ const crudOperations = async ({ req, res, source, target, id }) => {
   }
 };
 
-const crudOperationsTwoTargets = async ({
-  req,
-  res,
-  source,
-  target1,
-  target2,
-  target1Id,
-  target2Id,
-  id,
-}) => {
-
-  console.log({source,
+const crudOperationsTwoTargets = async (object) => {
+  const {
+    req,
+    res,
+    source,
     target1,
     target2,
     target1Id,
+    sourceId,
     target2Id,
-    id})
-  const target1ModelName = capitalize(target1);
+    id,
+  } = object;
+  console.log({ source, sourceId, target1, target2, target1Id, target2Id, id });
+  const target1ModelName = capitalize(target1 || "");
   const target1ModelName_plural = pluralize(target1ModelName);
   const getMixin1 = "get" + target1ModelName_plural;
 
- 
-  const target2ModelName = capitalize(target2 || '');
+  const target2ModelName = capitalize(target2 || "");
   const target2ModelName_plural = pluralize(target2ModelName);
   const getMixin2 = "get" + target2ModelName_plural;
 
-  const sourceModelName = source || "user";
-  const sourceModel = req[sourceModelName];
+  const sourceModelName = req.path.split("/")[1] || "user";
+  let sourceModel = req[sourceModelName];
+  const isEmpty = Object.values(omit(object, ["req", "res"])).every(
+    (x) => x === undefined || x === ""
+  );
+  console.log({ isEmpty });
+  if (sourceModelName !== "user") {
+    const Dao = require("./../dao/" + capitalize(sourceModelName) + "Dao");
+    sourceModel = sourceId
+      ? await new Dao().Model.findByPk(sourceId)
+      : await new Dao().Model;
+
+    console.log({ sourceId, sourceModel });
+    // const category = await sourceModel.getBusinesscategories({where:{id:2}});
+    // console.log('test',await (category).createBusinessactivities({label:'hello'}))
+  }
   let targetid1Query = { where: {} };
   if (target1Id) {
     targetid1Query.where = { id: target1Id };
@@ -121,47 +130,88 @@ const crudOperationsTwoTargets = async ({
   if (target2Id) {
     targetid2Query.where = { id: target2Id };
   }
-  //  console.log(req.body)
+  let modelListDatatemp;
   switch (req.method) {
     case "GET":
-      const modelListDatatemp = await sourceModel[getMixin1](targetid1Query);
-      console.log(targetid1Query,modelListDatatemp)
-      const modelListData = target2Id ? await modelListDatatemp?.[0][getMixin2](
-        targetid2Query,
-      ): modelListDatatemp?.[0];
+      modelListDatatemp = isEmpty
+        ? await sourceModel.findAll()
+        : await sourceModel[getMixin1](targetid1Query);
+      console.log( {modelListDatatemp});
+      let modelListData = target2
+        ? await modelListDatatemp?.[0]?.[getMixin2](targetid2Query)
+        : 
+  modelListDatatemp;
+      if (target2Id) {
+        modelListData = modelListData?.[0];
+      }
+      console.log({modelListData})
       res.json(
         responseHandler.returnSuccess(httpStatus.OK, "Success", modelListData)
       );
       break;
     case "POST":
-      const createMixin = "create" + targetModelName;
+      let modelAddedData;
+      if (target2) {
+        modelListDatatemp = await sourceModel[getMixin1](targetid1Query);
+        console.log(
+          modelListDatatemp[0],
+          target2ModelName,
+          modelListDatatemp[0]["create" + target2ModelName]
+        );
 
-      const modelAddedData = await sourceModel[createMixin](req.body);
+        modelAddedData = await modelListDatatemp[0][
+          "create" + target2ModelName
+        ](req.body);
+      } else {
+        const createMixin = "create" + target1ModelName;
+
+        modelAddedData = await sourceModel[createMixin](req.body);
+      }
       res.json(
         responseHandler.returnSuccess(httpStatus.OK, "Success", modelAddedData)
       );
       break;
     case "PUT":
-      record = await getRecord({ id, sourceModel, getMixin, res });
-      if (record) {
-        const modelUpdateData = await record[0].update(req.body);
+      try {
+        let result;
+        console.log("body", req.body);
+        modelListDatatemp = await sourceModel[getMixin1](targetid1Query);
+        if (target2) {
+          const temp = await modelListDatatemp?.[0]?.[getMixin2](
+            targetid2Query
+          );
+          console.log(temp);
+          result = await temp[0].update(req.body);
+        } else {
+          result = await modelListDatatemp[0].update(req.body);
+        }
         res.json(
-          responseHandler.returnSuccess(
-            httpStatus.OK,
-            "Success",
-            modelUpdateData
-          )
+          responseHandler.returnSuccess(httpStatus.OK, "Success", result)
         );
+      } catch (error) {
+        console.error(error);
+        res.json(responseHandler.returnError(httpStatus.BAD_REQUEST, "Error"));
       }
-
       break;
 
     case "DELETE":
-      record = await getRecord({ id, sourceModel, getMixin, res });
-      if (record) {
-        await record[0].destroy();
+      try {
+        modelListDatatemp = await sourceModel[getMixin1](targetid1Query);
+        if (target2) {
+          const temp = await modelListDatatemp?.[0]?.[getMixin2](
+            targetid2Query
+          );
+          console.log(temp);
+          await temp[0].destroy();
+        } else {
+          await modelListDatatemp[0].destroy();
+        }
         res.json(responseHandler.returnSuccess(httpStatus.OK, "Success"));
+      } catch (error) {
+        console.error(error);
+        res.json(responseHandler.returnError(httpStatus.BAD_REQUEST, "Error"));
       }
+
       break;
   }
 };

@@ -84,6 +84,10 @@ const User = models.user;
 const Business = models.business;
 const Branch = models.branch;
 const BusinessTypes = models.businesstype;
+const BusinessCategory= models.businesscategory;
+const BusinessActivity= models.businessactivity;
+
+
 console.log(models.businessType)
 console.log(Business, User, Branch);
 User.hasMany(Business);
@@ -92,9 +96,13 @@ BusinessTypes.belongsTo(User);
 User.hasMany(BusinessTypes)
 Business.hasMany(Branch);
 Branch.belongsTo(Business);
+BusinessCategory.belongsTo(BusinessTypes)
+BusinessTypes.hasMany(BusinessCategory)
 
+BusinessActivity.belongsTo(BusinessCategory);
+BusinessCategory.hasMany(BusinessActivity)
 // db.sequelize.sync({force:true});
-// db.sequelize.sync({alter:true});
+// db.sequelize.sync({alter:true}); 
 
 db.sequelize.sync();
 module.exports = app;

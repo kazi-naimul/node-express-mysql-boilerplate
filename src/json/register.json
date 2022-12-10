@@ -97,7 +97,6 @@
             "requestKey": "business_type",
             "fields": [
               {
-                "url": "https://cdn2.assets-servd.host/pebble-mag/production/images/_1200x630_crop_center-center_82_none/What%E2%80%99s-Wrong-With-Fast-Fashion_-header.jpg?mtime=1583424325",
                 "id": 1,
                 "type": "option",
                 "label": "Fashion",
@@ -105,7 +104,6 @@
                 "eligility": ["PARTNER"]
               },
               {
-                "url": "https://img.freepik.com/premium-psd/hygiene-beauty-concept-mock-up_23-2148688773.jpg?w=2000",
                 "id": 2,
                 "type": "option",
                 "label": "Beauty",
@@ -113,7 +111,6 @@
                 "eligility": ["PARTNER"]
               },
               {
-                "url": "https://images.unsplash.com/photo-1602734846297-9299fc2d4703?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dGVkZHl8ZW58MHx8MHx8&w=1000&q=80",
                 "id": 3,
                 "type": "option",
                 "label": "Gift & Toys",

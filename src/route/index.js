@@ -4,6 +4,7 @@ const adminRoute = require('./adminRoute');
 
 const optionRoute = require('./optionRoute');
 const profileRoute = require('./profileRoute');
+const customerRoute = require('./customerRoute');
 
 const router = express.Router();
 
@@ -25,6 +26,9 @@ const defaultRoutes = [
     {
         path: '/option',
         route: optionRoute,
+    },  {
+        path: '/customer',
+        route: customerRoute,
     },
 ];
 

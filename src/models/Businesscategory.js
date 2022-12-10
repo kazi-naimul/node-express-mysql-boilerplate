@@ -1,28 +1,23 @@
 const { Model } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
-  class  Businesstype extends Model {
-  
+  class Businesscategory extends Model {
     static associate(models) {
       // define association here
       //  User.belongsTo(models.agency, { foreignKey: 'agency_id', targetKey: 'id' });
     }
   }
 
-   Businesstype.init(
+  Businesscategory.init(
     {
-      image_url: DataTypes.STRING,
-      label:DataTypes.STRING
-
-     
+      label: DataTypes.STRING,
     },
 
     {
       sequelize,
-      modelName: "businesstype",
+      modelName: "businesscategory",
       underscored: true,
     }
   );
-  return  Businesstype;
+  return Businesscategory;
 };
-

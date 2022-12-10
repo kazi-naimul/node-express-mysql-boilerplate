@@ -1,7 +1,7 @@
 const { Model } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
-  class  Businesstype extends Model {
+  class  Businessactivity extends Model {
   
     static associate(models) {
       // define association here
@@ -9,20 +9,18 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
 
-   Businesstype.init(
+   Businessactivity.init(
     {
-      image_url: DataTypes.STRING,
-      label:DataTypes.STRING
-
+      label: DataTypes.STRING,
      
     },
 
     {
       sequelize,
-      modelName: "businesstype",
+      modelName: "businessactivity",
       underscored: true,
     }
   );
-  return  Businesstype;
+  return  Businessactivity;
 };
 

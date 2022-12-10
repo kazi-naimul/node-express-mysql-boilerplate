@@ -1,12 +1,12 @@
 const httpStatus = require('http-status');
 const { v4: uuidv4 } = require('uuid');
-const BusinessTypeDao = require('../dao/BusinessTypeDao');
+const BusinessactivitiyDao = require('../dao/BusinessactivitiesDao');
 const responseHandler = require('../helper/responseHandler');
 const logger = require('../config/logger');
 
-class BusinessTypeService {
+class BusinessactivitiyService {
     constructor() {
-        this.businessTypeDao = new BusinessTypeDao();
+        this.businessactivitiyDao = new BusinessactivitiyDao();
     }
 
 
@@ -14,4 +14,4 @@ class BusinessTypeService {
    
 }
 
-module.exports = BusinessTypeService;
+module.exports = BusinessactivitiyService;
