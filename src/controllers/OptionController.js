@@ -46,6 +46,7 @@ class OptionController {
           raw: true,
         });
 
+       
         jsonFile[1].details[1].fields[0].fields = data.map((dd) => {
           return {
             ...jsonFile[1].details[1].fields[0].fields[0],
@@ -63,14 +64,28 @@ class OptionController {
           };
         });
 
+
+      
         jsonFile[1].details[3].fields[0].fields = businessactivity.map((dd) => {
+          return {
+            ...jsonFile[1].details[3].fields[0].fields[0],
+
+            ...omit(dd,['createdAt','updatedAt','userId'])
+            
+          };
+        });
+
+
+        // console.log('test',  jsonFile[1].details[3].fields[0].fields )
+        console.log('test',  businessactivity)
+        businessactivity.map((dd) => {
           return {
             ...jsonFile[1].details[3].fields[0].fields,
 
             ...omit(dd,['createdAt','updatedAt','userId'])
             
           };
-        });
+        })
 
       }
 
