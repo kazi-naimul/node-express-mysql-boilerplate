@@ -74,6 +74,7 @@
         "title": "Business",
         "eligility": ["ADMIN"],
         "requestKey": "business_type",
+        "subType": "option",
         "type": "grid",
         "fields": [
           {
@@ -109,6 +110,7 @@
       {
         "title": "Business Category",
         "eligility": ["ADMIN"],
+        "type": "drop_down",
         "fields": [
           {
             "label": "Business Type",
@@ -120,7 +122,7 @@
         ]
       },
       {
-        "title": "Business Activities",
+        "title": "Business Activities","subType": "option",
         "eligility": ["ADMIN"],
         "requestKey": "business_activities",
         "type": "grid",
@@ -128,6 +130,8 @@
           {
             "type": "grid",
             "eligility": ["ADMIN"],
+            "subType": "chip",
+
             "requestKey": "business_activities",
             "fields": [
               {

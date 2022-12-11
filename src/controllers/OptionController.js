@@ -54,7 +54,7 @@ class OptionController {
         });
 
 
-        jsonFile[1].details[2].fields[0] = businesscategory.map((dd) => {
+        jsonFile[1].details[2].fields = businesscategory.map((dd) => {
           return {
             ...jsonFile[1].details[2].fields[0],
 
