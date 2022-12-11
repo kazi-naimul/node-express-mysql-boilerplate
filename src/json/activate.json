@@ -79,6 +79,7 @@
         "fields": [
           {
             "type": "grid",
+            "subType": "option",
             "eligility": ["ADMIN"],
             "requestKey": "business_type",
             "fields": [
