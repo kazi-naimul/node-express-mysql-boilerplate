@@ -86,6 +86,8 @@ const Branch = models.branch;
 const BusinessTypes = models.businesstype;
 const BusinessCategory= models.businesscategory;
 const BusinessActivity= models.businessactivity;
+const Plan= models.plan;
+const PlanValidity= models.planvalidity;
 
 
 console.log(models.businessType)
@@ -100,7 +102,15 @@ BusinessCategory.belongsTo(BusinessTypes)
 BusinessTypes.hasMany(BusinessCategory)
 
 BusinessActivity.belongsTo(BusinessCategory);
-BusinessCategory.hasMany(BusinessActivity)
+BusinessCategory.hasMany(BusinessActivity);
+
+Plan.hasMany(PlanValidity);
+PlanValidity.belongsTo(Plan);
+
+BusinessTypes.hasMany(Plan);
+Plan.belongsTo(BusinessTypes);
+
+
 // db.sequelize.sync({force:true});
 // db.sequelize.sync({alter:true}); 
 
