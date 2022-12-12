@@ -1,0 +1,269 @@
+[
+  {
+    "title": "Subscription",
+    "eligility": [
+      "ADMIN"
+    ],
+    "details": [
+      {
+        "title": "Free",
+        "eligility": [
+          "ADMIN"
+        ],
+        "type": "tab",
+        "details": [
+          {
+            "title": "Plans & Tax",
+            "type": "tab",
+            "eligility": [
+              "ADMIN"
+            ],
+            "fields": [
+              {
+                "title": "Plans",
+                "fields": [
+                  {
+                    "label": "Plans / Version",
+                    "type": "textbox",
+                    "input": "text",
+                    "isMandatory": true,
+                    "requstKey": "plans_version"
+                  },
+                  {
+                    "label": "Users",
+                    "type": "textbox_option",
+                    "input": "select",
+                    "isMandatory": true,
+                    "requstKey": "users",
+                    "option": [
+                      1,
+                      2,
+                      5,
+                      8,
+                      10,
+                      20
+                    ]
+                  }
+                ]
+              },
+              {
+                "title": "Tax",
+                "fields": [
+                  {
+                    "label": "Sales Tax",
+                    "type": "option",
+                    "input": "select",
+                    "isMandatory": true,
+                    "requstKey": "sales_tax",
+                    "option": [
+                      "No Tax",
+                      "5%",
+                      "12%",
+                      "18%",
+                      "28%"
+                    ]
+                  },
+                  {
+                    "label": "Sales Tax Method",
+                    "type": "textbox_option",
+                    "input": "select",
+                    "isMandatory": true,
+                    "requstKey": "tax_method",
+                    "option": [
+                      "Inclusive",
+                      "Exclusive"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "title": "Validity & Pricing",
+            "eligility": [
+              "ADMIN"
+            ],
+            "type": "add_button",
+            "details": [
+              {
+                "label": "Validity",
+                "type": "option",
+                "input": "select",
+                "isMandatory": true,
+                "requstKey": "validity",
+                "option": [
+                  "15 Days",
+                  "30 Days",
+                  "45 Days",
+                  "60 Days"
+                ]
+              },
+              {
+                "label": "Payment",
+                "type": "textbox",
+                "input": "tel",
+                "isMandatory": true,
+                "requstKey": "payment"
+              }
+            ]
+          },
+          {
+            "title": "Access",
+            "eligility": [
+              "ADMIN"
+            ],
+            "type": "add_button",
+            "details": [
+              {
+                "title": "Admin & Security Management",
+                "type": "accordion",
+                "eligility": [
+                  "ADMIN"
+                ],
+                "requstKey": "security_management",
+                "fields": [
+                  {
+                    "label": "Role Management",
+                    "type": "checkbox"
+                  },
+                  {
+                    "label": "User Management",
+                    "type": "checkbox"
+                  }
+                ]
+              },
+              {
+                "title": "Item Management",
+                "type": "accordion",
+                "eligility": [
+                  "ADMIN"
+                ],
+                "requstKey": "item_management",
+                "fields": [
+                  {
+                    "label": "Item-Add, Edit & Delete",
+                    "type": "checkbox"
+                  },
+                  {
+                    "label": "Item-Purchase",
+                    "type": "checkbox"
+                  },
+                  {
+                    "label": "Item-Price Update",
+                    "type": "checkbox"
+                  },
+                  {
+                    "label": "Item-Inventory",
+                    "type": "checkbox"
+                  }
+                ]
+              },
+              {
+                "title": "Order Management",
+                "type": "accordion",
+                "eligility": [
+                  "ADMIN"
+                ],
+                "requstKey": "order_management",
+                "fields": [
+                  {
+                    "label": "Billing",
+                    "type": "checkbox"
+                  },
+                  {
+                    "label": "Customer Orders",
+                    "type": "checkbox"
+                  }
+                ]
+              },
+              {
+                "title": "Printer Management",
+                "type": "accordion",
+                "eligility": [
+                  "ADMIN"
+                ],
+                "requstKey": "printer_management",
+                "fields": [
+                  {
+                    "label": "Printer - Add, Edit & Delete",
+                    "type": "checkbox"
+                  },
+                  {
+                    "label": "Assign Printer",
+                    "type": "checkbox"
+                  }
+                ]
+              },
+              {
+                "title": "Report",
+                "type": "accordion",
+                "eligility": [
+                  "ADMIN"
+                ],
+                "requstKey": "report",
+                "fields": [
+                  {
+                    "label": "Sales Report",
+                    "type": "checkbox"
+                  },
+                  {
+                    "label": "Tax Report",
+                    "type": "checkbox"
+                  },
+                  {
+                    "label": "Fast Selling Product Report",
+                    "type": "checkbox"
+                  },
+                  {
+                    "label": "Purchase Report",
+                    "type": "checkbox"
+                  },
+                  {
+                    "label": "Shortage Report",
+                    "type": "checkbox"
+                  },
+                  {
+                    "label": "Damage / Wastage Report",
+                    "type": "checkbox"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Basic (Free)",
+        "eligility": [
+          "ADMIN"
+        ],
+        "type": "tab",
+        "details": []
+      },
+      {
+        "title": "Business",
+        "eligility": [
+          "ADMIN"
+        ],
+        "type": "tab",
+        "details": []
+      },
+      {
+        "title": "Premium",
+        "eligility": [
+          "ADMIN"
+        ],
+        "type": "tab",
+        "details": []
+      },
+      {
+        "title": "Add-Ons",
+        "eligility": [
+          "ADMIN"
+        ],
+        "type": "tab",
+        "details": []
+      }
+    ]
+  }
+]
