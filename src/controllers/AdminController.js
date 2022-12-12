@@ -10,7 +10,7 @@ const logger = require("../config/logger");
 const { tokenTypes } = require("../config/tokens");
 const { createNewOTP } = require("../helper/otpHelper");
 const responseHandler = require("../helper/responseHandler");
-
+const {omit} =require('lodash')
 class AdminController {
   constructor() {
     this.userService = new UserService();
@@ -74,6 +74,7 @@ class AdminController {
     const updatedPlan = await plan.update(req.body);
     const promises = req.body.planvalidities.map(async (tt) => {
       console.log({ tt });
+      tt =omit(tt,['plan_id'])
       return await this.planvalidityService.planvalidityDao.updateOrCreate(
         { ...tt, plan_id: updatedPlan.id },
         { id: tt.id }
