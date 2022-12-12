@@ -44,7 +44,7 @@ class AdminController {
     );
     const plan = await business.createPlan(req.body);
 
-    const promises = req.body.validity.map(async (tt) => {
+    const promises = req.body.planvalidities.map(async (tt) => {
       return await plan.createPlanvalidity(tt);
     });
     await Promise.all(promises);
