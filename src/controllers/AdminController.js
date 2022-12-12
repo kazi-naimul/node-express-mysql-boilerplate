@@ -86,10 +86,10 @@ class AdminController {
   };
 
   deletePlans = async (req, res) => {
-    const plan = (await this.getPlans(req.query?.businesstype_id,{id:req.body.id}))[0];
+    const plan = (await this.getPlans(req.query?.businesstype_id,{id:req.query.id}))[0];
     await plan.destroy();
 
-    const promises = req.body.planvalidities.map(async (tt) => {
+    const promises = plan.planvalidities.map(async (tt) => {
       return await this.planvalidityService.planvalidityDao.deleteByWhere(
         { ...tt, plan_id: plan.id },
         { id: tt.id }
