@@ -16,6 +16,8 @@ router.post('/plans', adminController.addPlan);
 router.get('/plans', adminController.getPlansByBusinessId);
 
 router.put('/plans', adminController.updatePlans);
+router.delete('/plans', adminController.deletePlans);
+router.delete('/planvalidity', adminController.deleteValidity);
 
 
 module.exports = router;

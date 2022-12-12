@@ -30,12 +30,14 @@ class AdminController {
     res.json(response);
   };
 
-
-
-  getPlans = async (id) => {
-    const businessType = await this.businesstypeService.businessTypeDao.findById(id)
-    console.log(businessType)
-    return await businessType.getPlans({include:this.planvalidityService.planvalidityDao.Model});
+  getPlans = async (id,condition={}) => {
+  
+    const businessType =
+      await this.businesstypeService.businessTypeDao.findById(id,condition);
+    console.log(businessType);
+    return await businessType.getPlans({
+      include: this.planvalidityService.planvalidityDao.Model,
+    });
   };
 
   addPlan = async (req, res) => {
@@ -59,8 +61,7 @@ class AdminController {
   };
 
   getPlansByBusinessId = async (req, res) => {
-    const plans = await this.getPlans( req.query?.businesstype_id,
-    );
+    const plans = await this.getPlans(req.query?.businesstype_id);
 
     res.json(
       responseHandler.returnSuccess(httpStatus["200"], "Success", plans)
@@ -68,13 +69,11 @@ class AdminController {
   };
 
   updatePlans = async (req, res) => {
-    const plan = (await this.getPlans(
-    req.query?.businesstype_id,
-    ))[0];
+    const plan = (await this.getPlans(req.query?.businesstype_id))[0];
 
     const updatedPlan = await plan.update(req.body);
     const promises = req.body.planvalidities.map(async (tt) => {
-      console.log({tt})
+      console.log({ tt });
       return await this.planvalidityService.planvalidityDao.updateOrCreate(
         { ...tt, plan_id: updatedPlan.id },
         { id: tt.id }
@@ -85,5 +84,38 @@ class AdminController {
       responseHandler.returnSuccess(httpStatus["200"], "Success", updatedPlan)
     );
   };
+
+  deletePlans = async (req, res) => {
+    const plan = (await this.getPlans(req.query?.businesstype_id,{id:req.body.id}))[0];
+    await plan.destroy();
+
+    const promises = req.body.planvalidities.map(async (tt) => {
+      return await this.planvalidityService.planvalidityDao.deleteByWhere(
+        { ...tt, plan_id: plan.id },
+        { id: tt.id }
+      );
+    });
+    await Promise.all(promises);
+    res.json(
+      responseHandler.returnSuccess(httpStatus["200"], "Success")
+    );
+  };
+
+  deleteValidity = async(req,res)=>{
+console.log(req.query)
+    const planValidity =  await this.planvalidityService.planvalidityDao.findOneByWhere({id:req.query.id, plan_id:req.query.plan_id })
+try {
+  await  planValidity.destroy();
+  res.json(
+    responseHandler.returnSuccess(httpStatus["200"], "Success")
+  );
+} catch (error) {
+  logger.error(error);
+  res.json(
+    responseHandler.returnError(httpStatus.BAD_REQUEST,error)
+  );
+}
+ 
+  }
 }
 module.exports = AdminController;
