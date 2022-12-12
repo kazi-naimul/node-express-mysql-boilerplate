@@ -69,7 +69,7 @@ class AdminController {
   };
 
   updatePlans = async (req, res) => {
-    const plan = (await this.getPlans(req.query?.businesstype_id))[0];
+    const plan = (await this.getPlans(req.query?.businesstype_id,{id:req.query.id}))[0];
 
     const updatedPlan = await plan.update(req.body);
     const promises = req.body.planvalidities.map(async (tt) => {
