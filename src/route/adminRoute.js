@@ -15,6 +15,7 @@ router.get('/get-pending-activation-group', adminController.getActivationGroup);
 router.post('/plans', adminController.addPlan);
 router.get('/plans', adminController.getPlansByBusinessId);
 
+router.put('/plans', adminController.updatePlans);
 
 
 module.exports = router;

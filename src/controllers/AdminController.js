@@ -21,9 +21,7 @@ class AdminController {
     this.planvalidityService = new PlanvalidityService();
   }
 
-  getAwait = (myArray, callback,instance) => {
-  
-  };
+  getAwait = (myArray, callback, instance) => {};
 
   getActivationGroup = async (req, res) => {
     console.log(this);
@@ -32,15 +30,13 @@ class AdminController {
     res.json(response);
   };
 
-  getPlan = async (query)=>{
-    return await this.planService.planDao.findOneByWhere(query);
 
-  }
 
-  getPlans = async (query)=>{
-    return await this.planService.planDao.findAll(query);
-
-  }
+  getPlans = async (id) => {
+    const businessType = await this.businesstypeService.businessTypeDao.findById(id)
+    console.log(businessType)
+    return await businessType.getPlans({include:this.planvalidityService.planvalidityDao.Model});
+  };
 
   addPlan = async (req, res) => {
     const business = await this.businesstypeService.businessTypeDao.findById(
@@ -48,12 +44,10 @@ class AdminController {
     );
     const plan = await business.createPlan(req.body);
 
-
-    const promises = myArray.map(async (tt) => {
-      return await  plan.createPlanvalidity(req.body.validity)
+    const promises = req.body.validity.map(async (tt) => {
+      return await plan.createPlanvalidity(tt);
     });
     await Promise.all(promises);
-
 
     // const value = await this.planvalidityService.planvalidityDao.bulkCreate(
     //   req.body.validity.map((val) => {
@@ -65,25 +59,30 @@ class AdminController {
   };
 
   getPlansByBusinessId = async (req, res) => {
-  
-
-    const plans = await this.getPlans({businesstype_id:req.query?.businesstype_id});
+    const plans = await this.getPlans( req.query?.businesstype_id,
+    );
 
     res.json(
       responseHandler.returnSuccess(httpStatus["200"], "Success", plans)
     );
   };
 
-
-
-
   updatePlans = async (req, res) => {
-  
+    const plan = (await this.getPlans(
+    req.query?.businesstype_id,
+    ))[0];
 
-    const plans = await this.getPlans({businesstype_id:req.query?.businesstype_id});
-
+    const updatedPlan = await plan.update(req.body);
+    const promises = req.body.planvalidities.map(async (tt) => {
+      console.log({tt})
+      return await this.planvalidityService.planvalidityDao.updateOrCreate(
+        { ...tt, plan_id: updatedPlan.id },
+        { id: tt.id }
+      );
+    });
+    await Promise.all(promises);
     res.json(
-      responseHandler.returnSuccess(httpStatus["200"], "Success", plans)
+      responseHandler.returnSuccess(httpStatus["200"], "Success", updatedPlan)
     );
   };
 }
