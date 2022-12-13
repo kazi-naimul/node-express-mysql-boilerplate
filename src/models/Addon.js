@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       name: DataTypes.STRING,
       module: DataTypes.STRING,
+      charges_type: DataTypes.STRING,
       price: DataTypes.FLOAT,
       tax: DataTypes.FLOAT,
       tax_inclusive: DataTypes.BOOLEAN,
