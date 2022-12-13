@@ -1,24 +1,23 @@
 const { Model } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
-  class  Addon extends Model {
-  
+  class Addon extends Model {
     static associate(models) {
       // define association here
       //  User.belongsTo(models.agency, { foreignKey: 'agency_id', targetKey: 'id' });
     }
   }
 
-   Addon.init(
+  Addon.init(
     {
-      name:DataTypes.STRING,
-      module:DataTypes.STRING,
-      charges:DataTypes.STRING,
-      price:DataTypes.FLOAT,
-      tax:DataTypes.FLOAT,
+      name: DataTypes.STRING,
+      module: DataTypes.STRING,
+      price: DataTypes.FLOAT,
+      tax: DataTypes.FLOAT,
       tax_inclusive: DataTypes.BOOLEAN,
-status:DataTypes.STRING,
-     
+      status: {type:DataTypes.STRING,
+    defaultValue:'disabled'
+    },
     },
 
     {
@@ -27,6 +26,5 @@ status:DataTypes.STRING,
       underscored: true,
     }
   );
-  return  Addon;
+  return Addon;
 };
-

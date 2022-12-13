@@ -5,6 +5,7 @@ const BusinesstypeService = require("../service/BusinesstypeService");
 const UserService = require("../service/UserService");
 const PlanService = require("../service/PlanService");
 const PlanvalidityService = require("../service/PlanvalidityService");
+const { basicCrudOperations } = require("../helper/utilHelper");
 
 const logger = require("../config/logger");
 const { tokenTypes } = require("../config/tokens");
@@ -85,6 +86,11 @@ class AdminController {
       responseHandler.returnSuccess(httpStatus["200"], "Success", updatedPlan)
     );
   };
+
+  crudOperations = async(req,res)=>{
+
+    basicCrudOperations(req,res);
+  }
 
   deletePlans = async (req, res) => {
     const plan = (await this.getPlans(req.query?.businesstype_id,{id:req.query.id}))[0];

@@ -84,6 +84,39 @@ const crudOperations = async ({ req, res, source, target, id }) => {
   }
 };
 
+const basicCrudOperations = async (req, res) => {
+  const modelName = req.path.split("/")[1];
+  const Dao = require("./../dao/" + capitalize(modelName) + "Dao");
+  const model = new Dao();
+  //  console.log(req.body)
+  switch (req.method) {
+    case "GET":
+      const modelListData = await model.findAll();
+      res.json(
+        responseHandler.returnSuccess(httpStatus.OK, "Success", modelListData)
+      );
+      break;
+    case "POST":
+      const data = await model.create(req.body);
+      res.json(responseHandler.returnSuccess(httpStatus.OK, "Success", data));
+      break;
+    case "PUT":
+     await model.updateWhere(req.body,{id:req.body.id})
+     
+     res.json(responseHandler.returnSuccess(httpStatus.OK, "Success"));
+
+      break;
+
+    case "DELETE":
+      record = await getRecord({ id, sourceModel, getMixin, res });
+      if (record) {
+        await record[0].destroy();
+        res.json(responseHandler.returnSuccess(httpStatus.OK, "Success"));
+      }
+      break;
+  }
+};
+
 const crudOperationsTwoTargets = async (object) => {
   const {
     req,
@@ -136,15 +169,14 @@ const crudOperationsTwoTargets = async (object) => {
       modelListDatatemp = isEmpty
         ? await sourceModel.findAll()
         : await sourceModel[getMixin1](targetid1Query);
-      console.log( {modelListDatatemp});
+      console.log({ modelListDatatemp });
       let modelListData = target2
         ? await modelListDatatemp?.[0]?.[getMixin2](targetid2Query)
-        : 
-  modelListDatatemp;
+        : modelListDatatemp;
       if (target2Id) {
         modelListData = modelListData?.[0];
       }
-      console.log({modelListData})
+      console.log({ modelListData });
       res.json(
         responseHandler.returnSuccess(httpStatus.OK, "Success", modelListData)
       );
@@ -220,4 +252,5 @@ module.exports = {
   getAbsolutePath,
   crudOperations,
   crudOperationsTwoTargets,
+  basicCrudOperations,
 };
