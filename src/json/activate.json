@@ -356,7 +356,7 @@
           {
             "label": "Licence Expiry Date",
             "type": "textbox",
-            "input": "datepicker",
+            "input": "date_picker",
             "requestKey": "licence_expiry_date",
             "eligility": [
               "ADMIN"
@@ -383,7 +383,7 @@
           {
             "label": "FSSAI Expiry Date",
             "type": "textbox",
-            "input": "datepicker",
+            "input": "date_picker",
             "requestKey": "fssai_expiry_date",
             "eligility": [
               "ADMIN"

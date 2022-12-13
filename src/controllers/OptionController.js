@@ -1,12 +1,7 @@
 const httpStatus = require("http-status");
-const AuthService = require("../service/AuthService");
-const TokenService = require("../service/TokenService");
 const BusinessTypeService = require("../service/BusinesstypeService");
 const BusinesscategoryService = require("../service/BusinesscategoryService");
 const BusinessactivityService = require("../service/BusinessactivitiyService");
-const logger = require("../config/logger");
-const { tokenTypes } = require("../config/tokens");
-const { createNewOTP } = require("../helper/otpHelper");
 const responseHandler = require("../helper/responseHandler");
 const {omit} = require('lodash');
 class OptionController {
@@ -65,7 +60,6 @@ class OptionController {
         });
 
 
-      console.log(jsonFile[1].details[3]);
         jsonFile[1].details[3].fields[0].fields = businessactivity.map((dd) => {
           return {
             ...jsonFile[1].details[3].fields[0].fields[0],
