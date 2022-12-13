@@ -65,7 +65,7 @@ class OptionController {
         });
 
 
-      
+      console.log(jsonFile[1].details[3]);
         jsonFile[1].details[3].fields[0].fields = businessactivity.map((dd) => {
           return {
             ...jsonFile[1].details[3].fields[0].fields[0],
