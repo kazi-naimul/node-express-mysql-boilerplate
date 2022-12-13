@@ -108,11 +108,9 @@ const basicCrudOperations = async (req, res) => {
       break;
 
     case "DELETE":
-      record = await getRecord({ id, sourceModel, getMixin, res });
-      if (record) {
-        await record[0].destroy();
+    await model.deleteByWhere({id:req.body.id})
         res.json(responseHandler.returnSuccess(httpStatus.OK, "Success"));
-      }
+      
       break;
   }
 };
