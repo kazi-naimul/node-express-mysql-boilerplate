@@ -132,7 +132,7 @@
       {
         "title": "Business Category",
         "eligility": ["ADMIN"],
-        "details":[
+        "fields":[
           {
         "title": "Business type",
         "eligility": ["ADMIN"],
@@ -180,7 +180,7 @@
       {
         "title": "Business Activities",
         "eligility": ["ADMIN"],
-        "details": [
+        "fields": [
           {
             "type": "grid",
             "eligility": ["ADMIN"],
