@@ -314,6 +314,16 @@
     ]
   },
   {
+
+"title": "Timing",
+"eligility": ["ADMIN"],
+"details": [{
+	"title": "Business Timing",
+	"eligility": ["ADMIN"],
+	"fields": []
+}]
+  }
+  {
     "title": "Licence & Legal",
     "eligility": [
       "ADMIN"
