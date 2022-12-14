@@ -45,25 +45,25 @@ class ProfileController {
   };
 
   updateDetailsForActivation = async (req, res) => {
- console.log(req.body)
 const user = req.user;
-console.log(user);
     try {
       let result = omit(req.body, [
+        "id",
         "phone_number",
         "mpin",
         "isAdmin",
         "uuid",
         "status",
       ]);
-      console.log(result);
+      console.log(result.branchId,result.businessId );
+
       await user.update(result);
       const business = (
         await user.getBusinesses({ where: { id: result.businessId } })
       )[0];
       await business.update(result);
       const branch = (
-        await business.getBranches({ where: { id: result.id } })
+        await business.getBranches({ where: { id: result.branchId } })
       )[0];
       if (user.isAdmin && req.body.changeActivation) {
         result.status = branchStatus.STATUS_ACTIVE;
