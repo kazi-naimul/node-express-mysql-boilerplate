@@ -16,8 +16,9 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true,
             autoIncrement: true
           },
-    start_date:DataTypes.DATE,
-    end_date:DataTypes.DATE
+          price:DataTypes.FLOAT,
+    start_date:DataTypes.DATEONLY,
+    end_date:DataTypes.DATEONLY
      
     },
 

@@ -6,6 +6,7 @@ const UserService = require("../service/UserService");
 const PlanService = require("../service/PlanService");
 const PlanvalidityService = require("../service/PlanvalidityService");
 const { basicCrudOperations } = require("../helper/utilHelper");
+const addDays = require('date-fns/addDays')
 
 const logger = require("../config/logger");
 const { tokenTypes } = require("../config/tokens");
@@ -24,12 +25,14 @@ class AdminController {
 
   subscribeToPlan = async (req,res)=>{
     const {planId,branchId} = req.params;
-    const {validity,addons} = req.body;
+    const {plan_validity:{id:plan_validity_id},addons} = req.body;
 
     const  branch = await this.branchService.branchDao.findById(branchId);
     const plan = await this.planService.planDao.findById(planId);
+const planValidity = (await plan.getPlanvalidities({where:{id:plan_validity_id}}))[0];
+const expiryDate = addDays(new Date(), planValidity.validity)
 
-   const value = await branch.addPlans(plan,{ through: { start_date: new Date(), end_date:new Date() } })
+   const value = await branch.addPlans(plan,{ through: { start_date: new Date(), end_date:expiryDate ,price:planValidity.price } })
 console.log(value);
     res.json(responseHandler.returnSuccess(httpStatus.OK,'Success',plan))
 
