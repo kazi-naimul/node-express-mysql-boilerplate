@@ -1,25 +1,23 @@
 const { Model } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
-  class  Planbranch extends Model {
-  
+  class Planbranch extends Model {
     static associate(models) {
       // define association here
       //  User.belongsTo(models.agency, { foreignKey: 'agency_id', targetKey: 'id' });
     }
   }
 
-   Planbranch.init(
+  Planbranch.init(
     {
-        id: {
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true
-          },
-          price:DataTypes.FLOAT,
-    start_date:DataTypes.DATEONLY,
-    end_date:DataTypes.DATEONLY
-     
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      price: DataTypes.FLOAT,
+      start_date: DataTypes.DATEONLY,
+      end_date: DataTypes.DATEONLY,
     },
 
     {
@@ -28,6 +26,5 @@ module.exports = (sequelize, DataTypes) => {
       underscored: true,
     }
   );
-  return  Planbranch;
+  return Planbranch;
 };
-

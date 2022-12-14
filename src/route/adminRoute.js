@@ -19,7 +19,8 @@ router.put('/plans', adminController.updatePlans);
 router.delete('/plans', adminController.deletePlans);
 router.delete('/planvalidity', adminController.deleteValidity);
 
-router.post('/branch/:branchId/plan/:planId',adminController.subscribeToPlan)
+router.post('/subscribe-to-plan',adminController.subscribeToPlan)
+router.get('/get-subscribed-plans',adminController.getSubscribedPlans)
 
 
 module.exports = router;

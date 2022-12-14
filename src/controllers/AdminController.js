@@ -4,9 +4,13 @@ const BusinessService = require("../service/BusinessService");
 const BusinesstypeService = require("../service/BusinesstypeService");
 const UserService = require("../service/UserService");
 const PlanService = require("../service/PlanService");
+const AddonService = require("../service/AddonService");
+
+const PlanbranchService = require("../service/PlanbranchService");
+
 const PlanvalidityService = require("../service/PlanvalidityService");
 const { basicCrudOperations } = require("../helper/utilHelper");
-const addDays = require('date-fns/addDays')
+const addDays = require("date-fns/addDays");
 
 const logger = require("../config/logger");
 const { tokenTypes } = require("../config/tokens");
@@ -21,23 +25,73 @@ class AdminController {
     this.planService = new PlanService();
     this.businesstypeService = new BusinesstypeService();
     this.planvalidityService = new PlanvalidityService();
+    this.planbranchService = new PlanbranchService();
+    this.addonService = new AddonService();
   }
 
-  subscribeToPlan = async (req,res)=>{
-    const {planId,branchId} = req.params;
-    const {plan_validity:{id:plan_validity_id},addons} = req.body;
+  subscribeToPlan = async (req, res) => {
+    const {      plan_id, branch_id
+    } = req.query;
+    const {
+      plan_validity: { id: plan_validity_id },
+      addons
+    } = req.body;
 
-    const  branch = await this.branchService.branchDao.findById(branchId);
-    const plan = await this.planService.planDao.findById(planId);
-const planValidity = (await plan.getPlanvalidities({where:{id:plan_validity_id}}))[0];
-const expiryDate = addDays(new Date(), planValidity.validity)
+    const branch = await this.branchService.branchDao.findById(branch_id);
+    const plan = await this.planService.planDao.findById(plan_id);
+    const planValidity = (
+      await plan.getPlanvalidities({ where: { id: plan_validity_id } })
+    )[0];
+    const expiryDate = addDays(new Date(), planValidity.validity);
+    console.log({ plan });
+    const branchPlanId = await branch.addPlan(plan, {
+      through: {
+        start_date: new Date(),
+        end_date: expiryDate,
+        price: planValidity.price,
+      },
+    });
 
-   const value = await branch.addPlans(plan,{ through: { start_date: new Date(), end_date:expiryDate ,price:planValidity.price } })
-console.log(value);
-    res.json(responseHandler.returnSuccess(httpStatus.OK,'Success',plan))
+    const branchPlan = await this.planbranchService.planbranchDao.findById(
+      branchPlanId[0]
+    );
 
+    const promises = addons.map(async (tt) => {
+      const addon = await this.addonService.addonDao.findById(tt.id);
+      return await branchPlan.addAddon(addon, { through: { value: tt.value } });
+    });
+    await Promise.all(promises);
+
+    console.log(branchPlan);
+    res.json(
+      responseHandler.returnSuccess(httpStatus.OK, "Success", branchPlan)
+    );
+  };
+
+   getAllFuncs(toCheck) {
+    const props = [];
+    let obj = toCheck;
+    do {
+        props.push(...Object.getOwnPropertyNames(obj));
+    } while (obj = Object.getPrototypeOf(obj));
+    
+    return props.sort().filter((e, i, arr) => { 
+       if (e!=arr[i+1] && typeof toCheck[e] == 'function') return true;
+    });
+}
+
+  getSubscribedPlans = async(req,res)=>{
+    const {branch_id} = req.query;
+   
+    const branch = await this.branchService.branchDao.findById(branch_id);
+    let planbranch = await this.planbranchService.planbranchDao.findByWhere({branch_id:branch.id});
+    
+    const addons = await planbranch[0].getAddons()
+console.log(addons);
+
+planbranch[0]['addons'] = addons;
+    res.json(responseHandler.returnSuccess(httpStatus.OK,'Success',{...planbranch[0].dataValues, addons}))
   }
-
 
   getActivationGroup = async (req, res) => {
     console.log(this);
@@ -140,3 +194,27 @@ console.log(value);
   };
 }
 module.exports = AdminController;
+
+
+// setTimeout(()=>{
+//   const models = require('./../models');
+//   for (let model of Object.keys(models)) {
+//     if(models[model].name === 'Sequelize')
+//        continue;
+//     if(!models[model].name)
+//       continue;
+  
+//     console.log("\n\n----------------------------------\n", 
+//     models[model].name, 
+//     "\n----------------------------------");
+  
+    
+//     console.log("\nAssociations");
+//     for (let assoc of Object.keys(models[model].associations)) {
+//       for (let accessor of Object.keys(models[model].associations[assoc].accessors)) {
+//         console.log(models[model].name + '.' + models[model].associations[assoc].accessors[accessor]+'()');
+//       }
+//     }
+//   }
+// },10000)
+
