@@ -115,10 +115,10 @@ PlanValidity.belongsTo(Plan);
 BusinessTypes.hasMany(Plan);
 Plan.belongsTo(BusinessTypes);
 
-Branch.hasMany(Plan);
+Branch.belongsToMany(Plan, { through: Planbranch });
 Plan.belongsToMany(Branch, { through: Planbranch });
 
-Planbranch.hasMany(Addon);
+Planbranch.belongsToMany(Addon, { through: Planbranchaddon });
 Addon.belongsToMany(Planbranch, { through: Planbranchaddon });
 
 // db.sequelize.sync({force:true});

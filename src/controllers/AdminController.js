@@ -27,8 +27,11 @@ class AdminController {
     const {validity,addons} = req.body;
 
     const  branch = await this.branchService.branchDao.findById(branchId);
+    const plan = await this.planService.planDao.findById(planId);
 
-    res.json(responseHandler.returnSuccess(httpStatus.OK,'Success',branch))
+   const value = await branch.addPlans(plan,{ through: { start_date: new Date(), end_date:new Date() } })
+console.log(value);
+    res.json(responseHandler.returnSuccess(httpStatus.OK,'Success',plan))
 
   }
 

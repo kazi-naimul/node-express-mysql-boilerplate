@@ -42,7 +42,7 @@ module.exports = (sequelize, DataTypes) => {
           return this.getDataValue("business_activities")?.split(";");
         },
         set(val) {
-          this.setDataValue("business_activities", val.join(";"));
+          this.setDataValue("business_activities", val?.join(";"));
         },
       },
       order_type: {
