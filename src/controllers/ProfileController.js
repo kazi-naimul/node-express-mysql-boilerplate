@@ -45,15 +45,11 @@ class ProfileController {
   };
 
   updateDetailsForActivation = async (req, res) => {
-    const images = {};
-    req.files.forEach((file) => {
-      images[file.fieldname] = utilHandler.getAbsolutePath(file.filename);
-    });
-    const details = { ...JSON.parse(req.body.details), ...images };
-
-    const { user } = details;
+ console.log(req.body)
+const user = req.user;
+console.log(user);
     try {
-      let result = omit(details, [
+      let result = omit(req.body, [
         "phone_number",
         "mpin",
         "isAdmin",

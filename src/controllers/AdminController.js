@@ -11,7 +11,7 @@ const logger = require("../config/logger");
 const { tokenTypes } = require("../config/tokens");
 const { createNewOTP } = require("../helper/otpHelper");
 const responseHandler = require("../helper/responseHandler");
-const {omit} =require('lodash')
+const { omit } = require("lodash");
 class AdminController {
   constructor() {
     this.userService = new UserService();
@@ -22,7 +22,16 @@ class AdminController {
     this.planvalidityService = new PlanvalidityService();
   }
 
-  getAwait = (myArray, callback, instance) => {};
+  subscribeToPlan = async (req,res)=>{
+    const {planId,branchId} = req.params;
+    const {validity,addons} = req.body;
+
+    const  branch = await this.branchService.branchDao.findById(branchId);
+
+    res.json(responseHandler.returnSuccess(httpStatus.OK,'Success',branch))
+
+  }
+
 
   getActivationGroup = async (req, res) => {
     console.log(this);
@@ -31,10 +40,9 @@ class AdminController {
     res.json(response);
   };
 
-  getPlans = async (id,condition={}) => {
-  
+  getPlans = async (id, condition = {}) => {
     const businessType =
-      await this.businesstypeService.businessTypeDao.findById(id,condition);
+      await this.businesstypeService.businessTypeDao.findById(id, condition);
     console.log(businessType);
     return await businessType.getPlans({
       include: this.planvalidityService.planvalidityDao.Model,
@@ -70,12 +78,14 @@ class AdminController {
   };
 
   updatePlans = async (req, res) => {
-    const plan = (await this.getPlans(req.query?.businesstype_id,{id:req.query.id}))[0];
+    const plan = (
+      await this.getPlans(req.query?.businesstype_id, { id: req.query.id })
+    )[0];
 
     const updatedPlan = await plan.update(req.body);
     const promises = req.body.planvalidities.map(async (tt) => {
       console.log({ tt });
-      tt =omit(tt,['plan_id'])
+      tt = omit(tt, ["plan_id"]);
       return await this.planvalidityService.planvalidityDao.updateOrCreate(
         { ...tt, plan_id: updatedPlan.id },
         { id: tt.id }
@@ -87,13 +97,14 @@ class AdminController {
     );
   };
 
-  crudOperations = async(req,res)=>{
-
-    basicCrudOperations(req,res);
-  }
+  crudOperations = async (req, res) => {
+    basicCrudOperations(req, res);
+  };
 
   deletePlans = async (req, res) => {
-    const plan = (await this.getPlans(req.query?.businesstype_id,{id:req.query.id}))[0];
+    const plan = (
+      await this.getPlans(req.query?.businesstype_id, { id: req.query.id })
+    )[0];
     await plan.destroy();
 
     const promises = plan.planvalidities.map(async (tt) => {
@@ -103,26 +114,23 @@ class AdminController {
       );
     });
     await Promise.all(promises);
-    res.json(
-      responseHandler.returnSuccess(httpStatus["200"], "Success")
-    );
+    res.json(responseHandler.returnSuccess(httpStatus["200"], "Success"));
   };
 
-  deleteValidity = async(req,res)=>{
-console.log(req.query)
-    const planValidity =  await this.planvalidityService.planvalidityDao.findOneByWhere({id:req.query.id, plan_id:req.query.plan_id })
-try {
-  await  planValidity.destroy();
-  res.json(
-    responseHandler.returnSuccess(httpStatus["200"], "Success")
-  );
-} catch (error) {
-  logger.error(error);
-  res.json(
-    responseHandler.returnError(httpStatus.BAD_REQUEST,error)
-  );
-}
- 
-  }
+  deleteValidity = async (req, res) => {
+    console.log(req.query);
+    const planValidity =
+      await this.planvalidityService.planvalidityDao.findOneByWhere({
+        id: req.query.id,
+        plan_id: req.query.plan_id,
+      });
+    try {
+      await planValidity.destroy();
+      res.json(responseHandler.returnSuccess(httpStatus["200"], "Success"));
+    } catch (error) {
+      logger.error(error);
+      res.json(responseHandler.returnError(httpStatus.BAD_REQUEST, error));
+    }
+  };
 }
 module.exports = AdminController;
