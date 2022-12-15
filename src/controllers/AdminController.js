@@ -37,7 +37,6 @@ class AdminController {
       plan_validity: { id: plan_validity_id },
       addons,
     } = req.body;
-console.log({plan_validity_id,branch_id,plan_id});
     const branch = await this.branchService.branchDao.findById(branch_id);
     const plan = await this.planService.planDao.findById(plan_id);
     const planValidity = (
@@ -60,12 +59,15 @@ console.log({plan_validity_id,branch_id,plan_id});
       },
     });
 
-    const branchPlan = await this.planbranchService.planbranchDao.findById(
-      branchPlanId[0]
-    );
+    const branchPlan = (await this.planbranchService.planbranchDao.findByWhere(
+    {plan_id,branch_id}
+    ))[0];
+
+    console.log({branchPlanId});
 
     const promises = addons.map(async (tt) => {
       const addon = await this.addonService.addonDao.findById(tt.id);
+      console.log(addons);
       return await branchPlan.addAddon(addon, { through: { value: tt.value,price:addon.price, tax:addon.tax,
         total_addon_charges: plan.tax_inclusive ? addon.price * tt.value *(100/(addon.tax + 100)) : (addon.price * tt.value) + ((addon.price * tt.value) * (addon.tax/100))
 
