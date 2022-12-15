@@ -5,6 +5,7 @@ const BusinesstypeService = require("../service/BusinesstypeService");
 const UserService = require("../service/UserService");
 const PlanService = require("../service/PlanService");
 const AddonService = require("../service/AddonService");
+const parse = require('date-fns/parse')
 
 const PlanbranchService = require("../service/PlanbranchService");
 
@@ -30,23 +31,26 @@ class AdminController {
   }
 
   subscribeToPlan = async (req, res) => {
-    const {      plan_id, branch_id
-    } = req.query;
+    const { plan_id, branch_id } = req.query;
     const {
+      start_date,
       plan_validity: { id: plan_validity_id },
-      addons
+      addons,
     } = req.body;
-
+console.log({plan_validity_id,branch_id,plan_id});
     const branch = await this.branchService.branchDao.findById(branch_id);
     const plan = await this.planService.planDao.findById(plan_id);
     const planValidity = (
       await plan.getPlanvalidities({ where: { id: plan_validity_id } })
     )[0];
-    const expiryDate = addDays(new Date(), planValidity.validity);
+
+    const start_date_formatted = parse(start_date,'dd/MM/yyyy',new Date())
+
+    const expiryDate = addDays(start_date_formatted, planValidity.validity);
     console.log({ plan });
     const branchPlanId = await branch.addPlan(plan, {
       through: {
-        start_date: new Date(),
+        start_date: start_date_formatted,
         end_date: expiryDate,
         price: planValidity.price,
       },
@@ -68,30 +72,37 @@ class AdminController {
     );
   };
 
-   getAllFuncs(toCheck) {
+  getAllFuncs(toCheck) {
     const props = [];
     let obj = toCheck;
     do {
-        props.push(...Object.getOwnPropertyNames(obj));
-    } while (obj = Object.getPrototypeOf(obj));
-    
-    return props.sort().filter((e, i, arr) => { 
-       if (e!=arr[i+1] && typeof toCheck[e] == 'function') return true;
+      props.push(...Object.getOwnPropertyNames(obj));
+    } while ((obj = Object.getPrototypeOf(obj)));
+
+    return props.sort().filter((e, i, arr) => {
+      if (e != arr[i + 1] && typeof toCheck[e] == "function") return true;
     });
-}
-
-  getSubscribedPlans = async(req,res)=>{
-    const {branch_id} = req.query;
-   
-    const branch = await this.branchService.branchDao.findById(branch_id);
-    let planbranch = await this.planbranchService.planbranchDao.findByWhere({branch_id:branch.id});
-    
-    const addons = await planbranch[0].getAddons()
-console.log(addons);
-
-planbranch[0]['addons'] = addons;
-    res.json(responseHandler.returnSuccess(httpStatus.OK,'Success',{...planbranch[0].dataValues, addons}))
   }
+
+  getSubscribedPlans = async (req, res) => {
+    const { branch_id } = req.query;
+
+    const branch = await this.branchService.branchDao.findById(branch_id);
+    let planbranch = await this.planbranchService.planbranchDao.findByWhere({
+      branch_id: branch.id,
+    });
+
+    const addons = await planbranch[0].getAddons();
+    console.log(addons);
+
+    planbranch[0]["addons"] = addons;
+    res.json(
+      responseHandler.returnSuccess(httpStatus.OK, "Success", {
+        ...planbranch[0].dataValues,
+        addons,
+      })
+    );
+  };
 
   getActivationGroup = async (req, res) => {
     console.log(this);
@@ -195,7 +206,6 @@ planbranch[0]['addons'] = addons;
 }
 module.exports = AdminController;
 
-
 // setTimeout(()=>{
 //   const models = require('./../models');
 //   for (let model of Object.keys(models)) {
@@ -203,12 +213,11 @@ module.exports = AdminController;
 //        continue;
 //     if(!models[model].name)
 //       continue;
-  
-//     console.log("\n\n----------------------------------\n", 
-//     models[model].name, 
+
+//     console.log("\n\n----------------------------------\n",
+//     models[model].name,
 //     "\n----------------------------------");
-  
-    
+
 //     console.log("\nAssociations");
 //     for (let assoc of Object.keys(models[model].associations)) {
 //       for (let accessor of Object.keys(models[model].associations[assoc].accessors)) {
@@ -217,4 +226,3 @@ module.exports = AdminController;
 //     }
 //   }
 // },10000)
-
