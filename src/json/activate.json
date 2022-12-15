@@ -34,6 +34,7 @@
                               "isMandatory": true,
                               "requestKey": "name"
                           },
+                          
                           {
                               "eligility":
                               [
@@ -488,26 +489,8 @@
                       ]
                   }
               ]
-          },
-          {
-              "title": "Plans / Version",
-              "eligility":
-              [
-                  "ADMIN"
-              ],
-              "details":
-              [
-                  {
-                      "title": "Plans/Subscription ",
-                      "eligility":
-                      [
-                          "ADMIN"
-                      ],
-                      "fields":
-                      []
-                  }
-              ]
           }
+          
       ]
   }
 }
