@@ -5,7 +5,8 @@ const BusinesstypeService = require("../service/BusinesstypeService");
 const UserService = require("../service/UserService");
 const PlanService = require("../service/PlanService");
 const AddonService = require("../service/AddonService");
-const parse = require('date-fns/parse')
+const parse = require("date-fns/parse");
+const differenceInCalendarDays = require("date-fns/differenceInCalendarDays");
 
 const PlanbranchService = require("../service/PlanbranchService");
 
@@ -43,7 +44,7 @@ class AdminController {
       await plan.getPlanvalidities({ where: { id: plan_validity_id } })
     )[0];
 
-    const start_date_formatted = parse(start_date,'dd/MM/yyyy',new Date())
+    const start_date_formatted = parse(start_date, "dd/MM/yyyy", new Date());
 
     const expiryDate = addDays(start_date_formatted, planValidity.validity);
     console.log({ plan });
@@ -52,26 +53,38 @@ class AdminController {
         start_date: start_date_formatted,
         end_date: expiryDate,
         price: planValidity.price,
-        tax:plan.tax,
+        tax: plan.tax,
         plan_validity_id,
         validity: planValidity.validity,
-        total_plan_charges: plan.tax_inclusive ? planValidity.price * (100/(plan.tax + 100)) : planValidity.price + (planValidity.price * (plan.tax/100))
+        total_plan_charges: plan.tax_inclusive
+          ? planValidity.price * (100 / (plan.tax + 100))
+          : planValidity.price + planValidity.price * (plan.tax / 100),
       },
     });
 
-    const branchPlan = (await this.planbranchService.planbranchDao.findByWhere(
-    {plan_id,branch_id}
-    ))[0];
+    const branchPlan = (
+      await this.planbranchService.planbranchDao.findByWhere({
+        plan_id,
+        branch_id,
+      })
+    )[0];
 
-    console.log({branchPlanId});
+    console.log({ branchPlanId });
 
     const promises = addons.map(async (tt) => {
       const addon = await this.addonService.addonDao.findById(tt.id);
       console.log(addons);
-      return await branchPlan.addAddon(addon, { through: { value: tt.value,price:addon.price, tax:addon.tax,
-        total_addon_charges: plan.tax_inclusive ? addon.price * tt.value *(100/(addon.tax + 100)) : (addon.price * tt.value) + ((addon.price * tt.value) * (addon.tax/100))
-
-      } });
+      return await branchPlan.addAddon(addon, {
+        through: {
+          value: tt.value,
+          price: addon.price,
+          tax: addon.tax,
+          total_addon_charges: plan.tax_inclusive
+            ? addon.price * tt.value * (100 / (addon.tax + 100))
+            : addon.price * tt.value +
+              addon.price * tt.value * (addon.tax / 100),
+        },
+      });
     });
     await Promise.all(promises);
 
@@ -101,16 +114,38 @@ class AdminController {
       branch_id: branch.id,
     });
 
+    const promises = planbranch.map(async (tt) => {
+      const addons = await tt.getAddons();
+      let details = tt.dataValues;
+      console.log(details["end_date"]);
+      const start_date_formatted = parse(
+        details["end_date"],
+        "yyyy-MM-dd",
+        new Date()
+      );
+      console.log(start_date_formatted);
+      const dateDiff = differenceInCalendarDays(
+        start_date_formatted,
+        new Date()
+      );
+      if (dateDiff > details.validity) {
+        details["status"] = "NOT_ACTIVATED";
+      } else {
+        details["status"] = "ACTIVATED";
+const planPerDay = (details['price'] / details['validity']);
+        const balance ={
 
+          plan:planPerDay*dateDiff,
+          plan:(details['price'] / details['validity'])*dateDiff
 
- const promises =  planbranch.map(async (tt) => {
-   const addons = await tt.getAddons();
-   let details =tt.dataValues
-   details['addons'] = addons;
+        }
+      }
+      console.log({dateDiff});
+      details["addons"] = addons;
       return details;
     });
-   const plandetails =  await Promise.all(promises);
- 
+    const plandetails = await Promise.all(promises);
+
     res.json(
       responseHandler.returnSuccess(httpStatus.OK, "Success", plandetails)
     );
