@@ -99,15 +99,18 @@ console.log({plan_validity_id,branch_id,plan_id});
       branch_id: branch.id,
     });
 
-    const addons = await planbranch[0].getAddons();
-    console.log(addons);
 
-    planbranch[0]["addons"] = addons;
+
+ const promises =  planbranch.map(async (tt) => {
+   const addons = await tt.getAddons();
+   let details =tt.dataValues
+   details['addons'] = addons;
+      return details;
+    });
+   const plandetails =  await Promise.all(promises);
+ 
     res.json(
-      responseHandler.returnSuccess(httpStatus.OK, "Success", {
-        ...planbranch[0].dataValues,
-        addons,
-      })
+      responseHandler.returnSuccess(httpStatus.OK, "Success", plandetails)
     );
   };
 
