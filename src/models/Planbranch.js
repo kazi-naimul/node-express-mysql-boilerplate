@@ -19,7 +19,9 @@ module.exports = (sequelize, DataTypes) => {
       start_date: DataTypes.DATEONLY,
       end_date: DataTypes.DATEONLY,
       tax:DataTypes.FLOAT,
-      total_plan_charges:DataTypes.FLOAT
+      total_plan_charges:DataTypes.FLOAT,
+      plan_validity_id:DataTypes.STRING,
+      validity:DataTypes.INTEGER
     },
 
     {
