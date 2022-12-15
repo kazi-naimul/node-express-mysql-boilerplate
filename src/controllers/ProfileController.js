@@ -5,7 +5,10 @@ const UserService = require("../service/UserService");
 const logger = require("../config/logger");
 const { branchStatus } = require("../config/constant");
 const pluralize = require("pluralize");
-const { crudOperations,crudOperationsTwoTargets } = require("../helper/utilHelper");
+const {
+  crudOperations,
+  crudOperationsTwoTargets,
+} = require("../helper/utilHelper");
 
 const responseHandler = require("../helper/responseHandler");
 const { omit } = require("lodash");
@@ -45,7 +48,10 @@ class ProfileController {
   };
 
   updateDetailsForActivation = async (req, res) => {
-const user = req.user;
+    const user = req.user;
+    const userDetails = user.isAdmin
+      ? await this.userService.userDao.findById(req.body.userId)
+      : user;
     try {
       let result = omit(req.body, [
         "id",
@@ -55,9 +61,9 @@ const user = req.user;
         "uuid",
         "status",
       ]);
-      console.log(result.branchId,result.businessId );
+      console.log(result.branchId, result.businessId,userDetails);
 
-      await user.update(result);
+      await userDetails.update(result);
       const business = (
         await user.getBusinesses({ where: { id: result.businessId } })
       )[0];
@@ -107,7 +113,8 @@ const user = req.user;
   };
 
   curdUserAssociatedTwoTargets = async (req, res) => {
-    const { source,sourceId, target1,target2,target1Id,target2Id } = req.params;
+    const { source, sourceId, target1, target2, target1Id, target2Id } =
+      req.params;
     const { id } = req.body;
     req.body = omit(req.body, [
       "phone_number",
@@ -119,7 +126,17 @@ const user = req.user;
       "uuid",
       "status",
     ]);
-    crudOperationsTwoTargets({ req, res,sourceId, source, target1,target2,target1Id,target2Id, id });
+    crudOperationsTwoTargets({
+      req,
+      res,
+      sourceId,
+      source,
+      target1,
+      target2,
+      target1Id,
+      target2Id,
+      id,
+    });
   };
 }
 

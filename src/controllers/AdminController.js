@@ -53,6 +53,8 @@ console.log({plan_validity_id,branch_id,plan_id});
         start_date: start_date_formatted,
         end_date: expiryDate,
         price: planValidity.price,
+        tax:plan.tax,
+        total_plan_charges: plan.tax_inclusive ? planValidity.price * (100/(plan.tax + 100)) : planValidity.price + (planValidity.price * (plan.tax/100))
       },
     });
 

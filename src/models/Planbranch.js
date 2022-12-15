@@ -18,6 +18,8 @@ module.exports = (sequelize, DataTypes) => {
       price: DataTypes.FLOAT,
       start_date: DataTypes.DATEONLY,
       end_date: DataTypes.DATEONLY,
+      tax:DataTypes.FLOAT,
+      total_plan_charges:DataTypes.FLOAT
     },
 
     {
