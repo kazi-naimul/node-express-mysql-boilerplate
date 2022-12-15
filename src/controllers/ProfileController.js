@@ -5,7 +5,10 @@ const UserService = require("../service/UserService");
 const logger = require("../config/logger");
 const { branchStatus } = require("../config/constant");
 const pluralize = require("pluralize");
-const { crudOperations,crudOperationsTwoTargets } = require("../helper/utilHelper");
+const {
+  crudOperations,
+  crudOperationsTwoTargets,
+} = require("../helper/utilHelper");
 
 const responseHandler = require("../helper/responseHandler");
 const { omit } = require("lodash");
@@ -45,29 +48,28 @@ class ProfileController {
   };
 
   updateDetailsForActivation = async (req, res) => {
-    const images = {};
-    req.files.forEach((file) => {
-      images[file.fieldname] = utilHandler.getAbsolutePath(file.filename);
-    });
-    const details = { ...JSON.parse(req.body.details), ...images };
-
-    const { user } = details;
+    const user = req.user;
+    const userDetails = user.isAdmin
+      ? await this.userService.userDao.findById(req.body.userId)
+      : user;
     try {
-      let result = omit(details, [
+      let result = omit(req.body, [
+        "id",
         "phone_number",
         "mpin",
         "isAdmin",
         "uuid",
         "status",
       ]);
-      console.log(result);
-      await user.update(result);
+      console.log(result.branchId, result.businessId,userDetails);
+
+      await userDetails.update(result);
       const business = (
         await user.getBusinesses({ where: { id: result.businessId } })
       )[0];
       await business.update(result);
       const branch = (
-        await business.getBranches({ where: { id: result.id } })
+        await business.getBranches({ where: { id: result.branchId } })
       )[0];
       if (user.isAdmin && req.body.changeActivation) {
         result.status = branchStatus.STATUS_ACTIVE;
@@ -111,7 +113,8 @@ class ProfileController {
   };
 
   curdUserAssociatedTwoTargets = async (req, res) => {
-    const { source,sourceId, target1,target2,target1Id,target2Id } = req.params;
+    const { source, sourceId, target1, target2, target1Id, target2Id } =
+      req.params;
     const { id } = req.body;
     req.body = omit(req.body, [
       "phone_number",
@@ -123,7 +126,17 @@ class ProfileController {
       "uuid",
       "status",
     ]);
-    crudOperationsTwoTargets({ req, res,sourceId, source, target1,target2,target1Id,target2Id, id });
+    crudOperationsTwoTargets({
+      req,
+      res,
+      sourceId,
+      source,
+      target1,
+      target2,
+      target1Id,
+      target2Id,
+      id,
+    });
   };
 }
 

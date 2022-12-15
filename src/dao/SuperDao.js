@@ -90,6 +90,7 @@ class SuperDao {
 
     async create(data) {
         try {
+            console.log(this.Model)
             const newData = new this.Model(data);
             return newData
                 .save()
