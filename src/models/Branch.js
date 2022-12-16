@@ -51,6 +51,9 @@ module.exports = (sequelize, DataTypes) => {
       },
 
       price_type_label: DataTypes.STRING,
+      reject_legal_image: DataTypes.BOOLEAN,
+      reject_legal_document: DataTypes.BOOLEAN,
+
       price_type_id: {
         type: DataTypes.INTEGER,
       },

@@ -7,7 +7,9 @@ const userConstant = {
 
 const branchStatus={
     STATUS_INACTIVE :0,
-    STATUS_ACTIVE:1
+    STATUS_VERFIED :1,
+STATUS_REJECT:2,
+    STATUS_ACTIVE:3
 }
 
 const businessStatus={

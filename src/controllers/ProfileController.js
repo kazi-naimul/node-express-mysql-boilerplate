@@ -74,6 +74,9 @@ class ProfileController {
       if (user.isAdmin && req.body.changeActivation) {
         result.status = branchStatus.STATUS_ACTIVE;
       }
+      if (user.isAdmin && req.body.reject) {
+        result.status = branchStatus.STATUS_REJECT;
+      }
       await branch.update(result);
 
       // await user.setBusiness(result);
