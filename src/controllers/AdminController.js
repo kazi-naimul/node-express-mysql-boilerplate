@@ -133,28 +133,55 @@ class AdminController {
       } else {
         details["status"] = "ACTIVATED";
 
-        const {price,validity,tax} = details;
-        const planPerDay = price /validity;
-        const balance_left = (price / validity) * dateDiff
-        const balance_with_tax =balance_left + (balance_left*(tax/100));
-        const balance_plan_cost_per_day = ((price*100) / balance_with_tax)/validity;
-        const balance_tax_cost_per_day = planPerDay - balance_plan_cost_per_day;
-        const total_balance_cost_per_day = balance_plan_cost_per_day+ balance_tax_cost_per_day
+        const { price, validity, tax, tax_inclusive } = details;
+        const planPerDay = price / validity;
+        const balance_left = (price / validity) * dateDiff;
+        let balance = {
+          days_left: dateDiff,
+          balance_left,
+        };
+        let balance_plan_cost_per_day = 0;
+        if (tax_inclusive) {
+          const balance_with_tax = balance_left + balance_left * (tax / 100);
+          balance_plan_cost_per_day =
+            (price * 100) / balance_with_tax / validity;
+          const balance_tax_cost_per_day =
+            planPerDay - balance_plan_cost_per_day;
+
+          balance = {
+            ...balance,
+            balance_with_tax,
+            balance_plan_cost_per_day,
+            balance_tax_cost_per_day,
+          };
+        } else {
+          const balance_with_tax = balance_left + balance_left * (tax / 100);
+          balance_plan_cost_per_day = planPerDay;
+          const balance_tax_cost_per_day = planPerDay * (tax / 100);
+
+          balance = {
+            ...balance,
+
+            balance_with_tax,
+            balance_plan_cost_per_day,
+            balance_tax_cost_per_day,
+          };
+        }
+
+        const total_balance_cost_per_day =
+          balance_plan_cost_per_day + balance_tax_cost_per_day;
         const total_balance_plan_cost = balance_plan_cost_per_day * dateDiff;
         const total_balance_tax_cost = balance_tax_cost_per_day * dateDiff;
-        const total_balance = total_balance_plan_cost+total_balance_tax_cost
-        const balance = {
-          days_left:dateDiff,
-          balance_left,
-          balance_with_tax,
-          balance_plan_cost_per_day,
-          balance_tax_cost_per_day,
+        const total_balance = total_balance_plan_cost + total_balance_tax_cost;
+        balance = {
+          ...balance,
+
           total_balance_cost_per_day,
           total_balance_plan_cost,
           total_balance_tax_cost,
-          total_balance
+          total_balance,
         };
-        details['balance'] = balance;
+        details["balance"] = balance;
       }
       console.log({ dateDiff });
       details["addons"] = addons;

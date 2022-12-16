@@ -24,6 +24,9 @@ module.exports = (sequelize, DataTypes) => {
       'state':DataTypes.STRING,
       'country':DataTypes.STRING,
       'contact_name':DataTypes.STRING,
+      'lat':DataTypes.FLOAT,
+      'lng':DataTypes.FLOAT,
+
       'contact_phone_number':DataTypes.STRING,
       'name':DataTypes.STRING
 
