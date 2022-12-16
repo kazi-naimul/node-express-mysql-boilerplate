@@ -132,15 +132,31 @@ class AdminController {
         details["status"] = "NOT_ACTIVATED";
       } else {
         details["status"] = "ACTIVATED";
-const planPerDay = (details['price'] / details['validity']);
-        const balance ={
 
-          plan:planPerDay*dateDiff,
-          plan:(details['price'] / details['validity'])*dateDiff
-
-        }
+        const {price,validity,tax} = details;
+        const planPerDay = price /validity;
+        const balance_left = (price / validity) * dateDiff
+        const balance_with_tax =balance_left + (balance_left*(tax/100));
+        const balance_plan_cost_per_day = ((price*100) / balance_with_tax)/validity;
+        const balance_tax_cost_per_day = planPerDay - balance_plan_cost_per_day;
+        const total_balance_cost_per_day = balance_plan_cost_per_day+ balance_tax_cost_per_day
+        const total_balance_plan_cost = balance_plan_cost_per_day * dateDiff;
+        const total_balance_tax_cost = balance_tax_cost_per_day * dateDiff;
+        const total_balance = total_balance_plan_cost+total_balance_tax_cost
+        const balance = {
+          days_left:dateDiff,
+          balance_left,
+          balance_with_tax,
+          balance_plan_cost_per_day,
+          balance_tax_cost_per_day,
+          total_balance_cost_per_day,
+          total_balance_plan_cost,
+          total_balance_tax_cost,
+          total_balance
+        };
+        details['balance'] = balance;
       }
-      console.log({dateDiff});
+      console.log({ dateDiff });
       details["addons"] = addons;
       return details;
     });
