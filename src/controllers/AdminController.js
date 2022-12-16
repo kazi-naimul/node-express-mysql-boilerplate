@@ -141,11 +141,12 @@ class AdminController {
           balance_left,
         };
         let balance_plan_cost_per_day = 0;
+        let balance_tax_cost_per_day = 0;
         if (tax_inclusive) {
           const balance_with_tax = balance_left + balance_left * (tax / 100);
           balance_plan_cost_per_day =
             (price * 100) / balance_with_tax / validity;
-          const balance_tax_cost_per_day =
+           balance_tax_cost_per_day =
             planPerDay - balance_plan_cost_per_day;
 
           balance = {
@@ -157,7 +158,7 @@ class AdminController {
         } else {
           const balance_with_tax = balance_left + balance_left * (tax / 100);
           balance_plan_cost_per_day = planPerDay;
-          const balance_tax_cost_per_day = planPerDay * (tax / 100);
+          balance_tax_cost_per_day = planPerDay * (tax / 100);
 
           balance = {
             ...balance,
