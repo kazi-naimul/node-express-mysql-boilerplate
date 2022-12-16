@@ -48,6 +48,23 @@ class AdminController {
 
     const expiryDate = addDays(start_date_formatted, planValidity.validity);
     console.log({ plan });
+    let plan_charges_per_day =0;
+    let plan_tax_per_day =0;
+let total_plan_charges=0;
+    if(plan.tax_inclusive){
+      plan_tax_per_day =  (planValidity.price - ( planValidity.price * (100 / (100 + plan.tax ) ) )) / planValidity.validity
+      plan_charges_per_day = (planValidity.price /planValidity.validity) - plan_tax_per_day
+
+
+    }
+    else{
+
+      plan_charges_per_day = planValidity.price /planValidity.validity;
+      plan_tax_per_day = (planValidity.price*(plan.tax/100)) /planValidity.validity;
+
+    }
+    total_plan_charges = plan_charges_per_day * planValidity.validity + plan_tax_per_day*planValidity.validity
+
     const branchPlanId = await branch.addPlan(plan, {
       through: {
         start_date: start_date_formatted,
@@ -56,9 +73,8 @@ class AdminController {
         tax: plan.tax,
         plan_validity_id,
         validity: planValidity.validity,
-        total_plan_charges: plan.tax_inclusive
-          ? planValidity.price * (100 / (plan.tax + 100))
-          : planValidity.price + planValidity.price * (plan.tax / 100),
+        plan_tax_per_day,
+        plan_charges_per_day
       },
     });
 
@@ -74,15 +90,18 @@ class AdminController {
     const promises = addons.map(async (tt) => {
       const addon = await this.addonService.addonDao.findById(tt.id);
       console.log(addons);
+      const totalValue = addon.price * tt.value *planValidity.validity
+      const           total_addon_charges = plan.tax_inclusive
+      ? totalValue *  (100 / (addon.tax + 100))
+      :totalValue +
+      totalValue * (addon.tax / 100)
       return await branchPlan.addAddon(addon, {
         through: {
           value: tt.value,
           price: addon.price,
+          validity: planValidity.validity,
           tax: addon.tax,
-          total_addon_charges: plan.tax_inclusive
-            ? addon.price * tt.value * (100 / (addon.tax + 100))
-            : addon.price * tt.value +
-              addon.price * tt.value * (addon.tax / 100),
+          total_addon_charges
         },
       });
     });
@@ -116,6 +135,15 @@ class AdminController {
 
     const promises = planbranch.map(async (tt) => {
       const addons = await tt.getAddons();
+
+      let total_addons_value =0;
+      let total_addons_tax =0;
+
+      // addons.forEach((addon)=>{
+      //   const {planbranchaddon} = addon;
+      //   const {total_addon_charges,tax} = planbranchaddon
+      //   total_addon_charges = (total_addon_charges * tax/100)
+      // })
       let details = tt.dataValues;
       console.log(details["end_date"]);
       const start_date_formatted = parse(
@@ -132,56 +160,21 @@ class AdminController {
         details["status"] = "NOT_ACTIVATED";
       } else {
         details["status"] = "ACTIVATED";
-
-        const { price, validity, tax, tax_inclusive } = details;
-        const planPerDay = price / validity;
-        const balance_left = (price / validity) * dateDiff;
+      
+        const { price, validity, tax, tax_inclusive,plan_tax_per_day, plan_charges_per_day} = details;
+       const  total_balance_plan_charges=plan_charges_per_day*dateDiff;
+       const total_balance_tax_cost=plan_tax_per_day*dateDiff
         let balance = {
           days_left: dateDiff,
-          balance_left,
-        };
-        let balance_plan_cost_per_day = 0;
-        let balance_tax_cost_per_day = 0;
-        if (tax_inclusive) {
-          const balance_with_tax = balance_left + balance_left * (tax / 100);
-          balance_plan_cost_per_day =
-            (price * 100) / balance_with_tax / validity;
-           balance_tax_cost_per_day =
-            planPerDay - balance_plan_cost_per_day;
-
-          balance = {
-            ...balance,
-            balance_with_tax,
-            balance_plan_cost_per_day,
-            balance_tax_cost_per_day,
-          };
-        } else {
-          const balance_with_tax = balance_left + balance_left * (tax / 100);
-          balance_plan_cost_per_day = planPerDay;
-          balance_tax_cost_per_day = planPerDay * (tax / 100);
-
-          balance = {
-            ...balance,
-
-            balance_with_tax,
-            balance_plan_cost_per_day,
-            balance_tax_cost_per_day,
-          };
+          plan_tax_per_day,
+          plan_charges_per_day,
+          total_balance_plan_charges,
+          total_balance_tax_cost,
+          total_balance:total_balance_plan_charges+total_balance_tax_cost
         }
 
-        const total_balance_cost_per_day =
-          balance_plan_cost_per_day + balance_tax_cost_per_day;
-        const total_balance_plan_cost = balance_plan_cost_per_day * dateDiff;
-        const total_balance_tax_cost = balance_tax_cost_per_day * dateDiff;
-        const total_balance = total_balance_plan_cost + total_balance_tax_cost;
-        balance = {
-          ...balance,
-
-          total_balance_cost_per_day,
-          total_balance_plan_cost,
-          total_balance_tax_cost,
-          total_balance,
-        };
+   
+     
         details["balance"] = balance;
       }
       console.log({ dateDiff });
