@@ -39,7 +39,7 @@ class AdminController {
       addons,
       screenshot,
       transaction_id,
-      received_amount
+      received_amount,
     } = req.body;
     const branch = await this.branchService.branchDao.findById(branch_id);
     const plan = await this.planService.planDao.findById(plan_id);
@@ -182,11 +182,7 @@ class AdminController {
       } else {
         details["status"] = "ACTIVATED";
 
-        const {
-  
-          plan_tax_per_day,
-          plan_charges_per_day,
-        } = details;
+        const { plan_tax_per_day, plan_charges_per_day } = details;
         const total_balance_plan_charges = plan_charges_per_day * dateDiff;
         const total_balance_tax_cost = plan_tax_per_day * dateDiff;
         let balance = {
