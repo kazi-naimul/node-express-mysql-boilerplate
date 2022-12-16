@@ -158,13 +158,13 @@ class AdminController {
         let total_balance_addon_charges = 0;
         let total_balance_addon_tax = 0;
 
-        if (plan.tax_inclusive) {
-          total_balance_addon_charges =
-            planValidity.price - planValidity.price * (100 / (100 + plan.tax));
-          total_balance_addon_tax = planValidity.price - plan_tax_per_day;
+        if (addon.tax_inclusive) {
+          total_balance_addon_tax =
+          addon.price - addon.price * (100 / (100 + tax));
+          total_balance_addon_charges = addon.price - total_balance_addon_tax;
         } else {
           total_balance_addon_charges = totalValue;
-          total_balance_addon_tax = totalValue * (addon.tax / 100);
+          total_balance_addon_tax = totalValue * (tax / 100);
         }
 
         total_addons_charges += total_balance_addon_charges;
@@ -188,6 +188,8 @@ class AdminController {
         const total_balance_tax_cost = plan_tax_per_day * dateDiff;
         let balance = {
           days_left: dateDiff,
+          total_addons_charges,
+          total_addons_tax,
           plan_tax_per_day,
           plan_charges_per_day,
           total_balance_plan_charges,
