@@ -23,7 +23,10 @@ module.exports = (sequelize, DataTypes) => {
       plan_tax_per_day:DataTypes.FLOAT,
       total_plan_charges:DataTypes.FLOAT,
       plan_validity_id:DataTypes.STRING,
-      validity:DataTypes.INTEGER
+      validity:DataTypes.INTEGER,
+      screenshot:DataTypes.STRING,
+      transaction_id:DataTypes.STRING,
+      received_amount:DataTypes.FLOAT
     },
 
     {

@@ -37,6 +37,9 @@ class AdminController {
       start_date,
       plan_validity: { id: plan_validity_id },
       addons,
+      screenshot,
+      transaction_id,
+      received_amount
     } = req.body;
     const branch = await this.branchService.branchDao.findById(branch_id);
     const plan = await this.planService.planDao.findById(plan_id);
@@ -74,6 +77,9 @@ class AdminController {
         tax: plan.tax,
         plan_validity_id,
         validity: planValidity.validity,
+        screenshot,
+        transaction_id,
+        received_amount,
         plan_tax_per_day,
         plan_charges_per_day,
       },
@@ -160,7 +166,7 @@ class AdminController {
 
         if (addon.tax_inclusive) {
           total_balance_addon_tax =
-          addon.price - addon.price * (100 / (100 + tax));
+            addon.price - addon.price * (100 / (100 + tax));
           total_balance_addon_charges = addon.price - total_balance_addon_tax;
         } else {
           total_balance_addon_charges = totalValue;
@@ -177,10 +183,7 @@ class AdminController {
         details["status"] = "ACTIVATED";
 
         const {
-          price,
-          validity,
-          tax,
-          tax_inclusive,
+  
           plan_tax_per_day,
           plan_charges_per_day,
         } = details;
