@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       price: DataTypes.FLOAT,
       tax: DataTypes.FLOAT,
       total_addon_charges: DataTypes.FLOAT,
+      validity:DataTypes.INTEGER
     },
 
     {
