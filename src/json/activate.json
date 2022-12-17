@@ -1,11 +1,4 @@
-{
-  "statusCode": 200,
-  "response":
-  {
-      "status": true,
-      "code": 200,
-      "message": "Success",
-      "data":
+
       [
           {
               "title": "Owner Details",
@@ -492,5 +485,3 @@
           }
           
       ]
-  }
-}
