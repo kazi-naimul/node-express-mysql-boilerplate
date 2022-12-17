@@ -31,18 +31,31 @@
                   },
                   {
                     "label": "Users",
-                    "type": "textbox_option",
-                    "input": "select",
+                    "type": "drop_down",
+                    "input": "option",
                     "isMandatory": true,
                     "requstKey": "users",
-                    "option": [
-                      1,
-                      2,
-                      5,
-                      8,
-                      10,
-                      20
-                    ]
+                    "fields": [{
+                      "label":"No Tax",
+                      "id":1
+                    },
+                    {
+                      "label":" 1",
+                      "id":2
+                    },{
+                      "label":"5",
+                      "id":3
+                    },{
+                      "label": "8",
+                      "id":4
+                    },{
+                      "label":"10",
+                      "id":5
+                    },{
+                      "label":"20",
+                      "id":6
+                    } ]
+                    
                   }
                 ]
               },
@@ -51,27 +64,46 @@
                 "fields": [
                   {
                     "label": "Sales Tax",
-                    "type": "option",
-                    "input": "select",
+                    "type": "drop_down",
+                    "input": "option",
                     "isMandatory": true,
                     "requstKey": "sales_tax",
-                    "option": [
-                      "No Tax",
-                      "5%",
-                      "12%",
-                      "18%",
-                      "28%"
-                    ]
+                    "fields": [{
+                      "label":"No Tax",
+                      "id":1
+                    },
+                    {
+                      "label":"No Tax",
+                      "id":2
+                    },{
+                      "label":"5%",
+                      "id":3
+                    },{
+                      "label": "12%",
+                      "id":4
+                    },{
+                      "label":"18%",
+                      "id":5
+                    },{
+                      "label":"28%",
+                      "id":6
+                    } ]
                   },
                   {
                     "label": "Sales Tax Method",
-                    "type": "textbox_option",
-                    "input": "select",
+                    "type": "drop_down",
+                    "input": "option",
                     "isMandatory": true,
                     "requstKey": "tax_method",
-                    "option": [
-                      "Inclusive",
-                      "Exclusive"
+                    "fields": [
+                      {
+                        "label":"Inclusive",
+                        "id":1
+                      },
+                      {
+                        "label":"Exclusive",
+                        "id":2
+                      }
                     ]
                   }
                 ]
@@ -87,15 +119,25 @@
             "details": [
               {
                 "label": "Validity",
-                "type": "option",
-                "input": "select",
+                "type": "drop_down",
+                "input": "option",
                 "isMandatory": true,
                 "requstKey": "validity",
-                "option": [
-                  "15 Days",
-                  "30 Days",
-                  "45 Days",
-                  "60 Days"
+                "fields": [
+                  {
+                    "label":"15 Days",
+                    "id":1
+                  },
+                  {
+                    "label": "30 Days",
+                    "id":2
+                  },{
+                    "label":"45 Days",
+                    "id":3
+                  },{
+                    "label": "60 Days",
+                    "id":4
+                  }
                 ]
               },
               {

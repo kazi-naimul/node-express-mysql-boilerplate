@@ -1,25 +1,54 @@
 [
   {
     "title": "User Management",
-    "eligility": ["PARTNER"],
+    "eligility": [
+      "PARTNER"
+    ],
     "details": [
       {
         "title": "Role",
-        "eligility": ["PARTNER"],
+        "eligility": [
+          "PARTNER"
+        ],
         "fields": [
           {
-            "eligility": ["PARTNER"],
+            "eligility": [
+              "PARTNER"
+            ],
             "label": "Role",
-            "type": "textbox",
-            "input": "select",
+            "type": "drop_down_image_picker",
+            "input": "option",
             "isMandatory": true,
             "requestKey": "role",
-            "option":["Partner","GM","Manager","Accounts","Sales Man"]
-          }         
+            "fields": [
+              {
+                "label": "Partner",
+                "id": 1
+              },
+              {
+                "label": "GM",
+                "id": 2
+              },
+              {
+                "label": "Manager",
+                "id": 3
+              },
+              {
+                "label": "Accounts",
+                "id": 4
+              },
+              {
+                "label": "Sales Man",
+                "id": 5
+              }
+            ]
+          }
         ]
       },
       {
-        "eligility": ["PARTNER"],
+        "eligility": [
+          "PARTNER"
+        ],
         "title": "Employee / Personal Details",
         "fields": [
           {
@@ -28,41 +57,47 @@
             "input": "text",
             "isMandatory": true,
             "requestKey": "first_name",
-            "eligility": ["PARTNER"]
+            "eligility": [
+              "PARTNER"
+            ]
           },
           {
-            
             "label": "Middle Name",
             "type": "textbox",
             "input": "text",
             "requestKey": "middle_name",
-            "eligility": ["PARTNER"]
+            "eligility": [
+              "PARTNER"
+            ]
           },
           {
-            
             "label": "Last Name",
             "type": "textbox",
             "input": "text",
             "requestKey": "last_name",
-            "eligility": ["PARTNER"]
+            "eligility": [
+              "PARTNER"
+            ]
           },
           {
-            
             "label": "Date of Birth",
             "type": "date_picker",
             "isMandatory": true,
             "input": "tel",
             "requestKey": "dob",
-            "eligility": ["PARTNER"]
+            "eligility": [
+              "PARTNER"
+            ]
           },
           {
-            
             "label": "Mobile No",
             "type": "textbox",
             "input": "tel",
             "isMandatory": true,
             "requestKey": "phone_number",
-            "eligility": ["PARTNER"]
+            "eligility": [
+              "PARTNER"
+            ]
           },
           {
             "label": "Email ID",
@@ -70,69 +105,125 @@
             "input": "email",
             "isMandatory": true,
             "requestKey": "email",
-            "eligility": ["PARTNER"]
+            "eligility": [
+              "PARTNER"
+            ]
           }
         ]
       },
       {
         "title": "Address & ID Proof",
-        "eligility": ["PARTNER"],
+        "eligility": [
+          "PARTNER"
+        ],
         "fields": [
           {
             "label": "ID Proof",
             "type": "textbox_image_picker",
-            "input": "select",
+            "input": "option",
             "requestKey": "id_proof",
             "isMandatory": true,
             "imageKey": "id_proof_image",
-            "option":["None","Pan Card","Ration Card"],
-            "eligility": ["PARTNER"]
+            "fields": [
+              {
+                "label": "None",
+                "id": 1
+              },
+              {
+                "label": "Pan Card",
+                "id": 2
+              },
+              {
+                "label": "Ration ID",
+                "id": 3
+              }
+            ],
+            "eligility": [
+              "PARTNER"
+            ]
           },
           {
             "label": "Address Proof",
             "type": "textbox_image_picker",
-            "input": "select",
+            "input": "option",
             "requestKey": "address_proof",
             "isMandatory": true,
             "imageKey": "address_proof_image",
-            "option":["None","Aadhar Card","Voter ID"],
-            "eligility": ["PARTNER"]
-          }    
+            "fields": [
+              {
+                "label": "None",
+                "id": 1
+              },
+              {
+                "label": "Aadhar Card",
+                "id": 2
+              },
+              {
+                "label": "Voter ID",
+                "id": 3
+              }
+            ],
+            "eligility": [
+              "PARTNER"
+            ]
+          }
         ]
       },
       {
         "title": "Salary",
-        "eligility": ["PARTNER"],
+        "eligility": [
+          "PARTNER"
+        ],
         "fields": [
           {
             "label": "Salary",
             "type": "textbox",
             "input": "number",
             "requestKey": "salary",
-            "eligility": ["PARTNER"]
+            "eligility": [
+              "PARTNER"
+            ]
           },
           {
             "label": "Pay",
-            "type": "textbox",
-            "input": "select",
+            "type": "drop_down",
+            "input": "option",
             "requestKey": "pay_besed",
             "isMandatory": true,
-            "option":["Daily","Weekly","Monthly"],
-            "eligility": ["PARTNER"]
-          }    
+            "fields": [
+              {
+                "label": "Daily",
+                "id": 1
+              },
+              {
+                "label": "Weekly",
+                "id": 2
+              },
+              {
+                "label": "Monthly",
+                "id": 3
+              }
+            ],
+            "eligility": [
+              "PARTNER"
+            ]
+          }
         ]
       },
       {
         "title": "Photo",
-        "eligility": ["PARTNER"],
+        "eligility": [
+          "PARTNER"
+        ],
         "fields": [
           {
             "label": "Photo",
             "type": "textbox_image_picker",
             "requestKey": "photo",
-            "eligility": ["PARTNER"]
+            "eligility": [
+              "PARTNER"
+            ]
           }
-          
         ]
       }
     ]

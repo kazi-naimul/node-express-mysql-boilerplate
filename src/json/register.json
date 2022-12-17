@@ -87,29 +87,25 @@
       {
         "title": "Business",
         "eligility": ["PARTNER"],
-
-        "type": "grid",
         "fields": [
           {
             "type": "grid",
+            "subtype":"option",
             "eligility": ["PARTNER"],
             "requestKey": "business_type",
             "fields": [
               {
                 "id": 1,
-                "type": "option",
                 "label": "Fashion",
                 "eligility": ["PARTNER"]
               },
               {
                 "id": 2,
-                "type": "option",
                 "label": "Food",
                 "eligility": ["PARTNER"]
               },
               {
                 "id": 3,
-                "type": "option",
                 "label": "Gift & Toys",
                 "eligility": ["PARTNER"]
               }
