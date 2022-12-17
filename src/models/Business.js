@@ -36,18 +36,17 @@ module.exports = (sequelize, DataTypes) => {
       
       },
 
-      status: DataTypes.INTEGER,
-
+      business_status:  {
+        defaultValue: businessStatus.STATUS_INACTIVE,
+        type: DataTypes.INTEGER,
+      },
       gst_number: DataTypes.STRING,
       gst_image: DataTypes.STRING,
 
       license_no: DataTypes.STRING,
       license_expiry: DataTypes.DATE,
       license_image: DataTypes.STRING,
-      status: {
-        defaultValue: businessStatus.STATUS_INACTIVE,
-        type: DataTypes.INTEGER,
-      },
+     
 
       fssai_no: DataTypes.STRING,
       fssai_expiry: DataTypes.DATE,

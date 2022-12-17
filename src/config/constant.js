@@ -13,7 +13,10 @@ STATUS_REJECT:2,
 }
 
 const businessStatus={
-    STATUS_INACTIVE :0
+    STATUS_INACTIVE :0,
+    STATUS_VERFIED :1,
+STATUS_REJECT:2,
+    STATUS_ACTIVE:3
 }
 
 const verificationCodeConstant = {

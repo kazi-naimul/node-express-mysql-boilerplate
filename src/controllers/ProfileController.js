@@ -67,16 +67,23 @@ class ProfileController {
       const business = (
         await user.getBusinesses({ where: { id: result.businessId } })
       )[0];
-      await business.update(result);
       const branch = (
         await business.getBranches({ where: { id: result.branchId } })
       )[0];
-      if (user.isAdmin && req.body.changeActivation) {
-        result.status = branchStatus.STATUS_ACTIVE;
+      if (user.isAdmin && req.body.action  === 'activate') {
+        result.branch_status = branchStatus.STATUS_ACTIVE;
+        result.business_status = branchStatus.STATUS_ACTIVE;
       }
-      if (user.isAdmin && req.body.reject) {
-        result.status = branchStatus.STATUS_REJECT;
+      else if (user.isAdmin&& req.body.action  === 'reject') {
+        result.branch_status = branchStatus.STATUS_REJECT;
+        result.business_status = branchStatus.STATUS_REJECT;
+
       }
+      else if(user.isAdmin&& req.body.action  === 'verify'){
+        result.branch_status = branchStatus.STATUS_VERFIED;
+        result.business_status = branchStatus.STATUS_VERFIED;
+      }
+      await business.update(result);
       await branch.update(result);
 
       // await user.setBusiness(result);

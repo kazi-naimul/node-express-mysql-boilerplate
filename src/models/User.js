@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
             email: DataTypes.STRING,
             mpin:DataTypes.STRING,
            
-            status: DataTypes.INTEGER,
+            user_status: DataTypes.INTEGER,
             phone_number: DataTypes.STRING,
             isAdmin:{
                 defaultValue:false,

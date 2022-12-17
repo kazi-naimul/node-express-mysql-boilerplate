@@ -37,18 +37,25 @@ class UserService {
             userBody.uuid = uuid;
 
             let userData = await this.userDao.create({...userBody,status: userConstant.STATUS_ACTIVE});
-            console.log(userData);
-             const businessData = await userData.createBusiness(userBody);
-             const branchData =await businessData.createBranch(userBody)
+           
+
             if (!userData) {
                 message = 'Registration Failed! Please Try again.';
                 return responseHandler.returnError(httpStatus.BAD_REQUEST, message);
             }
           
+            if(userBody.mode.includes('PARTNER')){
+                const businessData = await userData.createBusiness(userBody);
+                const branchData =await businessData.createBranch(userBody)
+      
+           
+                
+            }
             userData = userData.toJSON();
             delete userData.password;
+            return responseHandler.returnSuccess(httpStatus.CREATED,userBody.mode.includes('PARTNER') ? message: 'User is successfully created', userData);
 
-            return responseHandler.returnSuccess(httpStatus.CREATED, message, userData);
+         
         } catch (e) {
             logger.error(e);
             return responseHandler.returnError(httpStatus.BAD_REQUEST, 'Something went wrong!');

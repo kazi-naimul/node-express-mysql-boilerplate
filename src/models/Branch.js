@@ -92,7 +92,7 @@ module.exports = (sequelize, DataTypes) => {
           );
         },
       },
-      status: {
+      branch_status: {
         defaultValue: branchStatus.STATUS_INACTIVE,
         type: DataTypes.INTEGER,
       },

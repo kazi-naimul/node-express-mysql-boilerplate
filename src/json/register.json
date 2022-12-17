@@ -87,7 +87,6 @@
       {
         "title": "Business",
         "eligility": ["PARTNER"],
-        "requestKey": "business_type",
 
         "type": "grid",
         "fields": [
@@ -100,21 +99,18 @@
                 "id": 1,
                 "type": "option",
                 "label": "Fashion",
-                "requestKey": "business_type",
                 "eligility": ["PARTNER"]
               },
               {
                 "id": 2,
                 "type": "option",
-                "label": "Beauty",
-                "requestKey": "business_type",
+                "label": "Food",
                 "eligility": ["PARTNER"]
               },
               {
                 "id": 3,
                 "type": "option",
                 "label": "Gift & Toys",
-                "requestKey": "business_type",
                 "eligility": ["PARTNER"]
               }
             ]
