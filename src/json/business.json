@@ -36,10 +36,16 @@
                         "input": "select",
                         "isMandatory": true,
                         "requestKey": "branch_type",
-                        "option": [
-                            "Head Office",
-                            "Branch"
-                        ],
+                        "fields": [
+                            {
+                              "label": "Head Office",
+                              "id": 1
+                            },
+                            {
+                              "label": "Branch",
+                              "id": 2
+                            }
+                          ],
                         "eligility": [
                             "PARTNER"
                         ]
@@ -103,7 +109,7 @@
                     {
                         "label": "Food Type",
                         "type": "drop_down",
-                        "input": "select",
+                        "input": "option",
                         "requestKey": "food_type",
                         "eligility": [
                             "PARTNER"
