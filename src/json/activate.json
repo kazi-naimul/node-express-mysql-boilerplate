@@ -458,33 +458,25 @@
         "eligility": [
             "ADMIN"
         ],
-        "details": [
+        "details":   [
             {
                 "title": "Business Timing",
-                "eligility": [
-                    "ADMIN"
-                ],
-                "fields": []
-            }
-        ]
-    },
-    {
-        "title": "Plans / Version",
-        "eligility":
-        [
-            "ADMIN"
-        ],
-        "details":
-        [
-            {
-                "title": "Plans/Subscription ",
                 "eligility":
                 [
-                    "ADMIN"
+                    "ADMIN", "PARTNER"
                 ],
                 "fields":
-                []
+                [
+                    {
+                        "eligility":
+                        [
+                            "ADMIN", "PARTNER"
+                        ],
+                        "type": "timing"
+                    }
+                ]
             }
         ]
     }
+   
 ]
