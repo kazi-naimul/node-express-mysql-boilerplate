@@ -1,4 +1,5 @@
 const { Model } = require("sequelize");
+const { Op } = require("sequelize");
 
 const { branchStatus } = require("./../config/constant");
 const { differenceInMinutes } = require("date-fns");
@@ -142,6 +143,16 @@ module.exports = (sequelize, DataTypes) => {
 
   Branch.addHook("afterCreate", (model, options) => {
     console.log({ model, options });
+    const values = model.dataValues;
+    if(values.id){
+      Branch.update({branch_type:
+        {
+          "label": "Branch",
+          "id": 2
+        }
+      }, {where:{id : {[Op.notIn]: [model.dataValues.id]}  }})
+
+    }
   });
   return Branch;
 };
