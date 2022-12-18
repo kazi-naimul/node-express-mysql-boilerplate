@@ -40,13 +40,14 @@ class BranchService {
     // const groupBasedonStatus = gro
     const groupByStatus = groupBy(flattenBranches, "branch_status");
     const groups = Object.keys(groupByStatus).map((statusGroup) => {
+
       const temp = groupBy(groupByStatus[statusGroup], "business_type_label");
       const typegroups = Object.keys(temp).map((type) => ({
         type,
         businesses: temp[type],
       }));
 
-      return {status:statusGroup, typegroups}
+      return {status:statusGroup,count:groupByStatus[statusGroup]?.length, typegroups}
     });
 
     // console.log(branches[0].business.whatsapp_communication)

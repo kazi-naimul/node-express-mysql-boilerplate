@@ -472,7 +472,8 @@
                         [
                             "ADMIN", "PARTNER"
                         ],
-                        "type": "timing"
+                        "type": "timing",
+                        "requestKey":"business_timings"
                     }
                 ]
             }
