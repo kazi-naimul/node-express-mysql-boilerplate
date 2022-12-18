@@ -61,13 +61,60 @@
       "PARTNER"
     ],
     "details": [
-      {
+       {
         "title": "Business Category",
         "eligility": [
-          "PARTNER"
+            "ADMIN"
         ],
-        "fields": []
-      },
+        "fields": [
+            {
+                "label": "Business Type",
+                "type": "drop_down",
+                "input": "select",
+                "requestKey": "business_category",
+                "eligility": [
+                    "ADMIN"
+                ],
+                "fields": [
+                    {
+                        "label": "Bakery & Confectioneries",
+                        "id": 1,
+                        "businesstypeId": 1
+                    },
+                    {
+                        "label": "Bars & Breweries",
+                        "id": 8,
+                        "businesstypeId": 2
+                    },
+                    {
+                        "label": "Delivery / Take Away",
+                        "id": 9,
+                        "businesstypeId": 3
+                    },
+                    {
+                        "label": "Fine Dine",
+                        "id": 10,
+                        "businesstypeId": 4
+                    },
+                    {
+                        "label": "Quick Service Restaurant",
+                        "id": 11,
+                        "businesstypeId": 5
+                    },
+                    {
+                        "label": "Restaurant",
+                        "id": 12,
+                        "businesstypeId": 6
+                    },
+                    {
+                        "label": "Multi-Chain Operations",
+                        "id": 13,
+                        "businesstypeId": 7
+                    }
+                ]
+            }
+        ]
+    },
       {
         "title": "Business Activities",
         "eligility": [
