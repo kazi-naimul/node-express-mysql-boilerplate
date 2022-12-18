@@ -44,7 +44,7 @@ class OptionController {
        
         jsonFile[1].details[1].fields[0].fields = data.map((dd) => {
           return {
-            ...jsonFile[1].details[1].fields[0].fields[0],
+            ...jsonFile[1]?.details?.[1].fields?.[0]?.fields[0],
             ...omit(dd,['createdAt','updatedAt','userId'])
           };
         });
