@@ -33,9 +33,9 @@ class BranchService {
     console.log({ branches });
 
     const flattenBranches = branches.map((branch) => {
-      const temp = { ...branch, ...branch.business, ...branch.business.user };
+      const temp = { ...branch, ...branch.business, ...branch.business.user,branch_id:branch.id };
 
-      return omit(temp, ["business", "user"]);
+      return omit(temp, ["business", "user","id"]);
     });
     // const groupBasedonStatus = gro
     const groupByStatus = groupBy(flattenBranches, "branch_status");
