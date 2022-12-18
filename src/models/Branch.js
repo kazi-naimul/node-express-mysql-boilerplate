@@ -141,7 +141,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  Branch.addHook("afterCreate", (model, options) => {
+  Branch.addHook("afterCreate", async (model, options) => {
     console.log({ model, options });
     const {branch_type_id,id,businessId} = model.dataValues;
     if(branch_type_id === 1){
@@ -153,6 +153,9 @@ module.exports = (sequelize, DataTypes) => {
       }, {where:{id : {[Op.notIn]: [id]}, businessId  }})
 
     }
+    const business = await model.getBusiness();
+    await business.update(model.dataValues);
+
   });
   return Branch;
 };
