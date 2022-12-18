@@ -143,14 +143,14 @@ module.exports = (sequelize, DataTypes) => {
 
   Branch.addHook("afterCreate", (model, options) => {
     console.log({ model, options });
-    const values = model.dataValues;
-    if(values.id){
+    const {id,businessId} = model.dataValues;
+    if(id){
       Branch.update({branch_type:
         {
           "label": "Branch",
           "id": 2
         }
-      }, {where:{id : {[Op.notIn]: [model.dataValues.id]}  }})
+      }, {where:{id : {[Op.notIn]: [id]}, businessId  }})
 
     }
   });
