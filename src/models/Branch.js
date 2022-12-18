@@ -22,13 +22,27 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         set(val) {
           val
-            ? this.setDataValue('branch_name',val)
-            : this.setDataValue('branch_name',this.getDataValue("locality") + " branch");
+            ? this.setDataValue("branch_name", val)
+            : this.setDataValue(
+                "branch_name",
+                this.getDataValue("locality") + " branch"
+              );
         },
       },
       // lastName: DataTypes.STRING,
       // middleName: DataTypes.STRING,
-      branch_type: DataTypes.STRING,
+      branch_type_label: DataTypes.STRING,
+      branch_type: {
+        type: DataTypes.JSON,
+        set: function (val) {
+          this.setDataValue("branch_type_label", val.label);
+
+          return this.setDataValue("branch_type_id", val.id);
+        },
+      },
+      branch_type_id: {
+        type: DataTypes.INTEGER,
+      },
       branch_phone_number: DataTypes.STRING,
       branch_sub_type: DataTypes.STRING,
       open_timing: DataTypes.DATE,
@@ -125,5 +139,9 @@ module.exports = (sequelize, DataTypes) => {
       underscored: true,
     }
   );
+
+  Branch.addHook("afterCreate", (model, options) => {
+    console.log({ model, options });
+  });
   return Branch;
 };
