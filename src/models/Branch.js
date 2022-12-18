@@ -143,8 +143,8 @@ module.exports = (sequelize, DataTypes) => {
 
   Branch.addHook("afterCreate", (model, options) => {
     console.log({ model, options });
-    const {id,businessId} = model.dataValues;
-    if(id){
+    const {branch_type_id,id,businessId} = model.dataValues;
+    if(branch_type_id === 1){
       Branch.update({branch_type:
         {
           "label": "Branch",
