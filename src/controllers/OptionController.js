@@ -41,7 +41,8 @@ class OptionController {
           raw: true,
         });
 
-       
+    
+
         jsonFile[1].details[1].fields[0].fields = data.map((dd) => {
           return {
             ...jsonFile[1]?.details?.[1].fields?.[0]?.fields[0],
@@ -80,6 +81,50 @@ class OptionController {
             
           };
         })
+
+      }
+      else if(type==="business"){
+        const data = await new BusinessTypeService().businessTypeDao.findAll({
+          raw: true,
+        });
+
+        jsonFile[0].details[0].fields[1].fields = data.map((dd) => {
+          return {
+            ...jsonFile[0]?.details?.[0].fields?.[1]?.fields[0],
+            ...omit(dd,['createdAt','updatedAt','userId'])
+          };
+        });
+
+      }
+
+      else if(type==="branch"){
+
+        const businesscategory = await new BusinesscategoryService().businesscategoryDao.findAll({
+          raw: true,
+        });
+
+        const businessactivity = await new BusinessactivityService().businessactivitiyDao.findAll({
+          raw: true,
+        });
+
+        jsonFile[1].details[0].fields[0].fields = businesscategory.map((dd) => {
+          return {
+            ...jsonFile[1].details[0].fields[0].fields[0],
+
+            ...omit(dd,['createdAt','updatedAt','userId'])
+            
+          };
+        });
+
+
+        jsonFile[1].details[1].fields[0].fields = businessactivity.map((dd) => {
+          return {
+            ...jsonFile[1].details[1].fields[0].fields[0],
+
+            ...omit(dd,['createdAt','updatedAt','userId'])
+            
+          };
+        });
 
       }
 
