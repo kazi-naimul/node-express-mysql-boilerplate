@@ -54,16 +54,21 @@ class AdminController {
     let plan_charges_per_day = 0;
     let plan_tax_per_day = 0;
     let total_plan_charges = 0;
+    const discountDifference = differenceInCalendarDays(
+      parse(planValidity.discount, "dd/MM/yyyy", new Date()),
+      new Date()
+    );
+    const price= planValidity.price - discountDifference > 0 ? planValidity.discount : 0;
     if (plan.tax_inclusive) {
       plan_tax_per_day =
-        (planValidity.price - planValidity.price * (100 / (100 + plan.tax))) /
+        (price - price * (100 / (100 + plan.tax))) /
         planValidity.validity;
       plan_charges_per_day =
-        planValidity.price / planValidity.validity - plan_tax_per_day;
+      price / planValidity.validity - plan_tax_per_day;
     } else {
-      plan_charges_per_day = planValidity.price / planValidity.validity;
+      plan_charges_per_day = price / planValidity.validity;
       plan_tax_per_day =
-        (planValidity.price * (plan.tax / 100)) / planValidity.validity;
+        (price * (plan.tax / 100)) / planValidity.validity;
     }
     total_plan_charges =
       plan_charges_per_day * planValidity.validity +
@@ -73,8 +78,8 @@ class AdminController {
       through: {
         start_date: start_date_formatted,
         end_date: expiryDate,
-        price: planValidity.price,
         tax: plan.tax,
+        price,
         plan_validity_id,
         validity: planValidity.validity,
         screenshot,
@@ -227,11 +232,13 @@ class AdminController {
 
   addPlan = async (req, res) => {
     const business = await this.businesstypeService.businessTypeDao.findById(
-      req.body.businesstype_id
+      req.query.businesstype_id
     );
     const plan = await business.createPlan(req.body);
 
     const promises = req.body.planvalidities.map(async (tt) => {
+      console.log(tt)
+      tt['discount_expiry'] = parse(tt.discount_expiry, "dd/MM/yyyy", new Date());
       return await plan.createPlanvalidity(tt);
     });
     await Promise.all(promises);

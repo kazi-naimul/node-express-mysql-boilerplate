@@ -12,7 +12,9 @@ module.exports = (sequelize, DataTypes) => {
    PlanValidity.init(
     {
         validity:DataTypes.INTEGER,
-        price:DataTypes.FLOAT
+        price:DataTypes.FLOAT,
+        discount:{type:DataTypes.FLOAT,defaultValue:0},
+        discount_expiry:DataTypes.DATEONLY
         
      
     },
