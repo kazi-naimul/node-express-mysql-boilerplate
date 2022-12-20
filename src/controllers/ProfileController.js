@@ -75,7 +75,6 @@ class ProfileController {
         result.branch_status = branchStatus.STATUS_ACTIVE;
         result.activated_by_id = user.id
         result.activated_by_name = user.name
-
         result.activated_time = new Date()
         result.business_status = branchStatus.STATUS_ACTIVE;
       }
@@ -84,7 +83,6 @@ class ProfileController {
         result.business_status = branchStatus.STATUS_REJECT;
         result.rejected_by_id = user.id
         result.rejected_by_name = user.name
-
         result.rejected_time = new Date()
 
       }
