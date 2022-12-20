@@ -1,60 +1,5 @@
 [
-  {
-    "eligility": [
-      "PARTNER"
-    ],
-    "title": "Business Details",
-    "details": [
-      {
-        "eligility": [
-          "PARTNER"
-        ],
-        "title": "Branch Details",
-        "fields": [
-          {
-            "label": "Branch Name",
-            "type": "textbox",
-            "input": "text",
-            "isMandatory": true,
-            "requestKey": "branch_name",
-            "eligility": [
-              "PARTNER"
-            ]
-          },
-          {
-            "label": "Branch Number",
-            "type": "textbox",
-            "input": "number",
-            "isMandatory": true,
-            "requestKey": "branch_number",
-            "eligility": [
-              "PARTNER"
-            ]
-          },
-          {
-            "label": "Branch Type",
-            "type": "drop_down",
-            "input": "option",
-            "isMandatory": true,
-            "requestKey": "branch_type",
-            "fields": [
-              {
-                "label": "Head Office",
-                "id": 1
-              },
-              {
-                "label": "Branch",
-                "id": 2
-              }
-            ],
-            "eligility": [
-              "PARTNER"
-            ]
-          }
-        ]
-      }
-    ]
-  },
+ 
   {
     "title": "Branch Details",
     "eligility": [
@@ -64,7 +9,7 @@
        {
         "title": "Business Category",
         "eligility": [
-            "ADMIN"
+            "PARTNER"
         ],
         "fields": [
             {
@@ -73,7 +18,7 @@
                 "input": "select",
                 "requestKey": "business_category",
                 "eligility": [
-                    "ADMIN"
+                    "PARTNER"
                 ],
                 "fields": [
                     {
@@ -254,14 +199,14 @@
       {
         "title": "Business / Shop Image",
         "eligility": [
-          "ADMIN"
+          "PARTNER"
         ],
         "fields": [
           {
             "type": "grid",
             "subType": "image_picker",
             "eligility": [
-              "ADMIN"
+              "PARTNER"
             ],
             "requestKey": "business_shop_image",
             "fields": [
