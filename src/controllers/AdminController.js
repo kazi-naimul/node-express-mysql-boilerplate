@@ -50,15 +50,16 @@ class AdminController {
     const start_date_formatted = parse(start_date, "dd/MM/yyyy", new Date());
 
     const expiryDate = addDays(start_date_formatted, planValidity.validity);
-    console.log({ plan });
     let plan_charges_per_day = 0;
     let plan_tax_per_day = 0;
     let total_plan_charges = 0;
     const discountDifference = differenceInCalendarDays(
-      parse(planValidity.discount, "dd/MM/yyyy", new Date()),
+      parse(planValidity.discount_expiry, "yyyy-MM-dd", new Date()),
       new Date()
     );
-    const price= planValidity.price - discountDifference > 0 ? planValidity.discount : 0;
+    console.log(planValidity.discount_expiry,   parse(planValidity.discount_expiry, "dd/MM/yyyy", new Date()),{discountDifference})
+    const price= planValidity.price - (discountDifference > 0 ? planValidity.discount : 0);
+    console.log({price},planValidity.price,planValidity.discount)
     if (plan.tax_inclusive) {
       plan_tax_per_day =
         (price - price * (100 / (100 + plan.tax))) /
@@ -97,11 +98,9 @@ class AdminController {
       })
     )[0];
 
-    console.log({ branchPlanId });
 
     const promises = addons.map(async (tt) => {
       const addon = await this.addonService.addonDao.findById(tt.id);
-      console.log(addons);
       const totalValue = addon.price * tt.value * planValidity.validity;
       const total_addon_charges = plan.tax_inclusive
         ? totalValue * (100 / (addon.tax + 100))
