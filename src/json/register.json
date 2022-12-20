@@ -168,7 +168,7 @@
           {
             "type": "checkbox",
             "isHTML":true,
-            "label": "<p>I agree to mabliz <a href='https://www.google.co.in/'>Terms & condition</a></p>",
+            "label": "I agree to mabliz <a href='https://www.google.co.in/'>Terms & condition</a>",
             "validValue": true,
             "eligility": ["PARTNER","CUSTOMER"]
           }
