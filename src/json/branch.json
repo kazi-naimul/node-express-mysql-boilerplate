@@ -328,20 +328,6 @@
         "fields": []
       }
     ]
-  },
-  {
-    "title": "Plans / Version",
-    "eligility": [
-      "PARTNER"
-    ],
-    "details": [
-      {
-        "title": "Plans / Subscription",
-        "eligility": [
-          "PARTNER"
-        ],
-        "fields": []
-      }
-    ]
   }
+  
 ]
