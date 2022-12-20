@@ -65,6 +65,19 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: "mabliz",
       },
 
+      verified_by_id: DataTypes.INTEGER,
+      verified_by_name: DataTypes.STRING,
+      verified_time: DataTypes.DATE,
+      activated_by_id: DataTypes.INTEGER,
+      activated_by_name: DataTypes.STRING,
+      activated_time: DataTypes.DATE,
+
+
+      rejected_by_id: DataTypes.INTEGER,
+      rejected_by_name: DataTypes.STRING,
+      rejected_time: DataTypes.DATE,
+
+
       price_type_label: DataTypes.STRING,
       reject_legal_image: DataTypes.BOOLEAN,
       reject_legal_document: DataTypes.BOOLEAN,
@@ -143,19 +156,20 @@ module.exports = (sequelize, DataTypes) => {
 
   Branch.addHook("afterCreate", async (model, options) => {
     console.log({ model, options });
-    const {branch_type_id,id,businessId} = model.dataValues;
-    if(branch_type_id === 1){
-      Branch.update({branch_type:
+    const { branch_type_id, id, businessId } = model.dataValues;
+    if (branch_type_id === 1) {
+      Branch.update(
         {
-          "label": "Branch",
-          "id": 2
-        }
-      }, {where:{id : {[Op.notIn]: [id]}, businessId  }})
-
+          branch_type: {
+            label: "Branch",
+            id: 2,
+          },
+        },
+        { where: { id: { [Op.notIn]: [id] }, businessId } }
+      );
     }
     const business = await model.getBusiness();
     await business.update(model.dataValues);
-
   });
   return Branch;
 };

@@ -73,16 +73,28 @@ class ProfileController {
       )[0];
       if (user.isAdmin && req.body.action  === 'activate') {
         result.branch_status = branchStatus.STATUS_ACTIVE;
+        result.activated_by_id = user.id
+        result.activated_by_name = user.name
+
+        result.activated_time = new Date()
         result.business_status = branchStatus.STATUS_ACTIVE;
       }
       else if (user.isAdmin&& req.body.action  === 'reject') {
         result.branch_status = branchStatus.STATUS_REJECT;
         result.business_status = branchStatus.STATUS_REJECT;
+        result.rejected_by_id = user.id
+        result.rejected_by_name = user.name
+
+        result.rejected_time = new Date()
 
       }
       else if(user.isAdmin&& req.body.action  === 'verify'){
         result.branch_status = branchStatus.STATUS_VERFIED;
         result.business_status = branchStatus.STATUS_VERFIED;
+        result.verified_by_id = user.id
+        result.verified_by_name = user.name
+
+        result.verified_time = new Date()
       }
       await business.update(result);
       await branch.update(result);
