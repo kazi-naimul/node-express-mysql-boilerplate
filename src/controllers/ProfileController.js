@@ -62,7 +62,7 @@ class ProfileController {
         "uuid",
         "status",
       ]);
-      console.log(result.branchId, result.businessId,{userDetails});
+      console.log(userDetails,result.branchId, result.businessId,{userDetails});
 
       await userDetails.update(result);
       const business = (

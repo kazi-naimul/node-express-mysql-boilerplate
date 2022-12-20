@@ -27,14 +27,14 @@
                     "type": "textbox",
                     "input": "text",
                     "isMandatory": true,
-                    "requstKey": "plans_version"
+                    "requestKey": "plans_version"
                   },
                   {
                     "label": "Users",
                     "type": "drop_down",
                     "input": "option",
                     "isMandatory": true,
-                    "requstKey": "users",
+                    "requestKey": "users",
                     "fields": [{
                       "label":"No Tax",
                       "id":1
@@ -67,7 +67,7 @@
                     "type": "drop_down",
                     "input": "option",
                     "isMandatory": true,
-                    "requstKey": "sales_tax",
+                    "requestKey": "sales_tax",
                     "fields": [{
                       "label":"No Tax",
                       "id":1
@@ -94,7 +94,7 @@
                     "type": "drop_down",
                     "input": "option",
                     "isMandatory": true,
-                    "requstKey": "tax_method",
+                    "requestKey": "tax_method",
                     "fields": [
                       {
                         "label":"Inclusive",
@@ -122,7 +122,7 @@
                 "type": "drop_down",
                 "input": "option",
                 "isMandatory": true,
-                "requstKey": "validity",
+                "requestKey": "validity",
                 "fields": [
                   {
                     "label":"15 Days",
@@ -143,9 +143,16 @@
               {
                 "label": "Payment",
                 "type": "textbox",
-                "input": "tel",
+                "input": "number",
                 "isMandatory": true,
-                "requstKey": "payment"
+                "requestKey": "payment"
+              },
+              {
+                "label": "discount",
+                "type": "textbox",
+                "input": "number",
+                "isMandatory": true,
+                "requestKey": "discount"
               }
             ]
           },
@@ -162,7 +169,7 @@
                 "eligility": [
                   "ADMIN"
                 ],
-                "requstKey": "security_management",
+                "requestKey": "security_management",
                 "fields": [
                   {
                     "label": "Role Management",
@@ -180,7 +187,7 @@
                 "eligility": [
                   "ADMIN"
                 ],
-                "requstKey": "item_management",
+                "requestKey": "item_management",
                 "fields": [
                   {
                     "label": "Item-Add, Edit & Delete",
@@ -206,7 +213,7 @@
                 "eligility": [
                   "ADMIN"
                 ],
-                "requstKey": "order_management",
+                "requestKey": "order_management",
                 "fields": [
                   {
                     "label": "Billing",
@@ -224,7 +231,7 @@
                 "eligility": [
                   "ADMIN"
                 ],
-                "requstKey": "printer_management",
+                "requestKey": "printer_management",
                 "fields": [
                   {
                     "label": "Printer - Add, Edit & Delete",
@@ -242,7 +249,7 @@
                 "eligility": [
                   "ADMIN"
                 ],
-                "requstKey": "report",
+                "requestKey": "report",
                 "fields": [
                   {
                     "label": "Sales Report",
