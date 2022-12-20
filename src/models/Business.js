@@ -70,7 +70,7 @@ module.exports = (sequelize, DataTypes) => {
   Business.addHook("afterCreate", async (model, options) => {
     
     const branchData =await model.createBranch(model.inital_branch_details)
-
+await model.update({ ...model, inital_branch_details: "" });
    
   });
 
