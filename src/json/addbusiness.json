@@ -1,0 +1,438 @@
+[
+   
+    {
+        "eligility": [
+            "PARTNER"
+        ],
+        "title": "Business Details",
+        "details": [
+            {
+                "eligility": [
+                    "PARTNER"
+                ],
+                "title": "Business Details",
+                "fields": [
+                    {
+                        "label": "Business Name",
+                        "type": "textbox",
+                        "input": "text",
+                        "isMandatory": true,
+                        "error": "Please enter valid business Name",
+                        "requestKey": "business_name",
+                        "eligility": [
+                            "PARTNER"
+                        ]
+                    },
+                    {
+                        "label": "Business No",
+                        "type": "textbox",
+                        "input": "number",
+                        "isMandatory": true,
+                        "error": "Please enter valid business number",
+                        "requestKey": "business_name",
+                        "eligility": [
+                            "PARTNER"
+                        ]
+                    },
+                    {
+                        "label": "Business Location",
+                        "type": "location_picker",
+                        "requestKey": "business_location",
+                        "isMandatory": true,
+                        "eligility": [
+                            "PARTNER"
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Business",
+                "eligility": [
+                    "PARTNER"
+                ],
+                "fields": [
+                    {
+                        "type": "grid",
+                        "subType": "option",
+                        "eligility": [
+                            "PARTNER"
+                        ],
+                        "requestKey": "business_type",
+                        "fields": [
+                            {
+                                "id": 1,
+                                "label": "Lifestyle & Fashion",
+                                "image_url": null
+                            },
+                            {
+                                "id": 2,
+                                "label": "Test1234",
+                                "image_url": null
+                            },
+                            {
+                                "id": 3,
+                                "label": "Lifestyle & Fashion",
+                                "image_url": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Business Category",
+                "eligility": [
+                    "PARTNER"
+                ],
+                "fields": [
+                    {
+                        "label": "Business Type",
+                        "type": "drop_down",
+                        "input": "select",
+                        "requestKey": "business_category",
+                        "eligility": [
+                            "PARTNER"
+                        ],
+                        "fields": [
+                            {
+                                "label": "Bakery & Confectioneries",
+                                "id": 1,
+                                "businesstypeId": 1
+                            },
+                            {
+                                "label": "Bars & Breweries",
+                                "id": 8,
+                                "businesstypeId": 2
+                            },
+                            {
+                                "label": "Delivery / Take Away",
+                                "id": 9,
+                                "businesstypeId": 3
+                            },
+                            {
+                                "label": "Fine Dine",
+                                "id": 10,
+                                "businesstypeId": 4
+                            },
+                            {
+                                "label": "Quick Service Restaurant",
+                                "id": 11,
+                                "businesstypeId": 5
+                            },
+                            {
+                                "label": "Restaurant",
+                                "id": 12,
+                                "businesstypeId": 6
+                            },
+                            {
+                                "label": "Multi-Chain Operations",
+                                "id": 13,
+                                "businesstypeId": 7
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Business Activities",
+                "eligility": [
+                    "PARTNER"
+                ],
+                "fields": [
+                    {
+                        "type": "grid",
+                        "eligility": [
+                            "PARTNER"
+                        ],
+                        "subType": "chip",
+                        "requestKey": "business_activities",
+                        "fields": [
+                            {
+                                "id": 1,
+                                "label": "Lifestyle & Fashion",
+                                "image_url": null
+                            },
+                            {
+                                "id": 2,
+                                "label": "Test1234",
+                                "image_url": null
+                            },
+                            {
+                                "id": 3,
+                                "label": "Lifestyle & Fashion",
+                                "image_url": null
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Food Type",
+                "eligility": [
+                    "PARTNER"
+                ],
+                "fields": [
+                    {
+                        "label": "Food Type",
+                        "type": "drop_down",
+                        "input": "select",
+                        "requestKey": "food_type",
+                        "eligility": [
+                            "PARTNER"
+                        ],
+                        "fields": [
+                            {
+                                "label": "None",
+                                "id": 1,
+                                "foodtypeId": 1
+                            },
+                            {
+                                "label": "Pure Veg",
+                                "id": 2,
+                                "foodtypeId": 2
+                            },
+                            {
+                                "label": "Eggetarian",
+                                "id": 3,
+                                "foodtypeId": 3
+                            },
+                            {
+                                "label": "Veg & Non Veg",
+                                "id": 4,
+                                "foodtypeId": 4
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "fields": [
+                    {
+                        "label": "Order Type",
+                        "type": "text",
+                        "value": "Mabliz",
+                        "eligility": [
+                            "PARTNER"
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Price Type (Service Type)",
+                "eligility": [
+                    "PARTNER"
+                ],
+                "fields": [
+                    {
+                        "type": "grid",
+                        "eligility": [
+                            "PARTNER"
+                        ],
+                        "subType": "chip",
+                        "requestKey": "service_type",
+                        "fields": [
+                            {
+                                "label": "Dining",
+                                "id":1,
+                                "servicetypeid":1,
+                                "eligility": [
+                                    "PARTNER"
+                                ]
+                            },
+                            {
+                                "label": "A/C Dining",
+                                "id":2,
+                                "servicetypeid":2,
+                                "eligility": [
+                                    "PARTNER"
+                                ]
+                            },
+                            {
+                                "label": "Open Dining",
+                                "id":3,
+                                "servicetypeid":3,
+                                "eligility": [
+                                    "PARTNER"
+                                ]
+                            },
+                            {
+                                "label": "Rooftop Dining",
+                                "id":4,
+                                "servicetypeid":4,
+                                "eligility": [
+                                    "PARTNER"
+                                ]
+                            },
+                            {
+                                "label": "Self Service",
+                                "id":5,
+                                "servicetypeid":5,
+                                "eligility": [
+                                    "PARTNER"
+                                ]
+                            },
+                            {
+                                "label": "Take Away",
+                                "id":6,
+                                "servicetypeid":6,
+                                "eligility": [
+                                    "PARTNER"
+                                ]
+                            },
+                            {
+                                "label": "Delivery",
+                                "id":7,
+                                "servicetypeid":7,
+                                "eligility": [
+                                    "PARTNER"
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Business / Shop Image",
+                "eligility": [
+                    "PARTNER"
+                ],
+                "fields": [
+                    {
+                        "type": "grid",
+                        "subType": "image_picker",
+                        "eligility": [
+                            "PARTNER"
+                        ],
+                        "requestKey": "business_shop_image",
+                        "fields": [
+                            {
+                                "label": "Sign Board ",
+                               "id":1,
+                               "requestKey":"sign_board_image"
+                            },
+                            {
+                                "label": "Shop Photo",
+                                "id":2,
+                                "requestKey":"branch_photo"
+                            },
+                            {
+                                "label": "Business Card",
+                                "id":3,
+                                "requestKey":"business_card_image"
+                            },
+                            {
+                                "label": "Logo",
+                                "id":4,
+                                "requestKey":"logo"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Licence & Legal",
+        "eligility": [
+            "PARTNER"
+        ],
+        "details": [
+            {
+                "title": "GST",
+                "eligility": [
+                    "PARTNER"
+                ],
+                "fields": [
+                    {
+                        "label": "GST Number",
+                        "type": "textbox_image_picker",
+                        "input": "number",
+                        "requestKey": "gst_number",
+                        "imageKey": "gst_image",
+                        "eligility": [
+                            "PARTNER"
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Licence",
+                "eligility": [
+                    "PARTNER"
+                ],
+                "fields": [
+                    {
+                        "label": "Licence Number",
+                        "type": "textbox_image_picker",
+                        "input": "number",
+                        "requestKey": "licence_number",
+                        "imageKey": "licence_image",
+                        "eligility": [
+                            "PARTNER"
+                        ]
+                    },
+                    {
+                        "label": "Licence Expiry Date",
+                        "type": "date_picker",
+                        "requestKey": "licence_expiry_date",
+                        "eligility": [
+                            "PARTNER"
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "FSSAI",
+                "eligility": [
+                    "PARTNER"
+                ],
+                "fields": [
+                    {
+                        "label": "FSSAI Number",
+                        "type": "textbox_image_picker",
+                        "input": "number",
+                        "requestKey": "fssai_number",
+                        "imageKey": "fssai_image",
+                        "eligility": [
+                            "PARTNER"
+                        ]
+                    },
+                    {
+                        "label": "FSSAI Expiry Date",
+                        "type": "date_picker",
+                        "requestKey": "fssai_expiry_date",
+                        "eligility": [
+                            "PARTNER"
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Timing",
+        "eligility": [
+            "PARTNER"
+        ],
+        "details":   [
+            {
+                "title": "Business Timing",
+                "eligility":
+                [
+                    "PARTNER", "PARTNER"
+                ],
+                "fields":
+                [
+                    {
+                        "eligility":
+                        [
+                            "PARTNER", "PARTNER"
+                        ],
+                        "type": "timing",
+                        "requestKey":"business_timings"
+                    }
+                ]
+            }
+        ]
+    }
+   
+]
