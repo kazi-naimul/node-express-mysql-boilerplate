@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
       // lastName: DataTypes.STRING,
       // middleName: DataTypes.STRING,
       business_type_label: DataTypes.STRING,
+      inital_branch_details:DataTypes.JSON,
       business_type: {
         type: DataTypes.JSON,
         set: function (val) {
@@ -66,5 +67,12 @@ module.exports = (sequelize, DataTypes) => {
       underscored: true,
     }
   );
+  Business.addHook("afterCreate", async (model, options) => {
+    
+    const branchData =await model.createBranch(model.inital_branch_details)
+
+   
+  });
+
   return Business;
 };
