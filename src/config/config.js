@@ -1,8 +1,7 @@
 const dotenv = require('dotenv');
 const path = require('path');
 const Joi = require('joi');
-
-dotenv.config({ path: path.join(__dirname, '../../.env') });
+dotenv.config({ path: path.join(__dirname, '../../.env.'+ process.env.NODE_ENV) });
 
 const envValidation = Joi.object()
     .keys({
