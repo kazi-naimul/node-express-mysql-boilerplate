@@ -19,6 +19,7 @@
             "type": "grid",
             "subType": "option",
             "eligility": ["ADMIN"],
+            "readyOnly":true,
             "requestKey": "business_type",
             "fields": [
               {
