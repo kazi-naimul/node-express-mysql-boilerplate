@@ -8,7 +8,7 @@ const auth = require('../middlewares/auth');
 
 
 
-router.use(auth());
+// router.use(auth());
 const profileController = new ProfileController();
 
 router.all('/user/:target', profileController.curdUserAssociated);
