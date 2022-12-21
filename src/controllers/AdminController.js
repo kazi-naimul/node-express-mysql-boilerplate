@@ -235,7 +235,7 @@ class AdminController {
 
     const promises = req.body.planvalidities.map(async (tt) => {
       console.log(tt)
-      tt['discount_expiry'] = parse(tt.discount_expiry, "dd/MM/yyyy", new Date());
+   
       return await plan.createPlanvalidity(tt);
     });
     await Promise.all(promises);
