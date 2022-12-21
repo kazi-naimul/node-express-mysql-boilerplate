@@ -163,6 +163,15 @@ module.exports = (sequelize, DataTypes) => {
     }
     const business = await model.getBusiness();
     await business.update(model.dataValues);
+    global.io?.sockets.in('vuinodh@gmail.com').emit('new_msg', model.dataValues);
+
   });
+
+  Branch.addHook("afterUpdate", async (model, options) => {
+   
+    global.io?.sockets.in('vuinodh@gmail.com').emit('new_msg', model);
+
+  });
+
   return Branch;
 };

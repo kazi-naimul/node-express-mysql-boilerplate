@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+    <head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.4/socket.io.js" integrity="sha512-YeeA/Qxn5hYdkukScTCNNOhTrv1C2RubAGButJ1rmgQwZf/HdRaCGl+JAVkqsqaNRaYNHdheiuKKuPf9mDcqKg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>        <script type='text/javascript'>
+                var socket = io.connect(':3200');
+                 // optionally use io('http://localhost:3000');
+                 // but make *SURE* it matches the jScript src
+                socket.on ('Server 2 Client Message',
+                     function(messageFromServer)       {
+                        console.log ('server said: ' + messageFromServer);
+                     });
+
+                     socket.on ('new_msg',
+                     function(messageFromServer)       {
+                        console.log ('server said: ' , messageFromServer);
+                     });
+
+        </script>
+    </head>
+    <body>
+        <h5>Worlds smallest Socket.io example to uppercase strings</h5>
+        <p>
+        <a href='#' onClick="javascript:socket.emit('teste', 'vuinodh@gmail.com');">return UPPERCASED in the console</a>
+                <br />
+                socket.emit('join-room', 'try cut/paste this command in your console!');
+        </p>
+    </body>
+</html>

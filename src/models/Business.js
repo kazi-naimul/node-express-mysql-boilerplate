@@ -70,5 +70,7 @@ module.exports = (sequelize, DataTypes) => {
     await model.update({  ...model.dataValues, inital_request_details: "" });
   });
 
+
+  
   return Business;
 };
