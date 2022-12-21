@@ -24,12 +24,12 @@
                         ]
                     },
                     {
-                        "label": "Business No",
+                        "label": "Business Phone No",
                         "type": "textbox",
                         "input": "number",
                         "isMandatory": true,
                         "error": "Please enter valid business number",
-                        "requestKey": "business_name",
+                        "requestKey": "branch_phone_number",
                         "eligility": [
                             "PARTNER"
                         ]
