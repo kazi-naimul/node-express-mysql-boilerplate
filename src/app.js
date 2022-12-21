@@ -122,7 +122,7 @@ Planbranch.belongsToMany(Addon, { through: Planbranchaddon });
 Addon.belongsToMany(Planbranch, { through: Planbranchaddon });
 
 // db.sequelize.sync({force:true});
-db.sequelize.sync({alter:true});
+// db.sequelize.sync({alter:true});
 
-// db.sequelize.sync();
+db.sequelize.sync();
 module.exports = app;
