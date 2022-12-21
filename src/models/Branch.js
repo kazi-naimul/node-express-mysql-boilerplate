@@ -35,11 +35,7 @@ module.exports = (sequelize, DataTypes) => {
       branch_type_label: DataTypes.STRING,
       branch_type: {
         type: DataTypes.JSON,
-        defaultValue:{
-          id:1,
-          label: "Head office"
-          
-        },
+      
         set: function (val) {
           this.setDataValue("branch_type_label", val.label);
 

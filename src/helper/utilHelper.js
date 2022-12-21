@@ -54,7 +54,7 @@ const crudOperations = async ({ req, res, source, target, id }) => {
     case "POST":
       const createMixin = "create" + targetModelName;
 console.log(req.body)
-      const modelAddedData = await sourceModel[createMixin](req.body);
+      const modelAddedData = await sourceModel[createMixin]({...req.body,inital_request_details:req.body});
       res.json(
         responseHandler.returnSuccess(httpStatus.OK, "Success", modelAddedData)
       );

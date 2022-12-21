@@ -21,11 +21,11 @@ module.exports = (sequelize, DataTypes) => {
       // lastName: DataTypes.STRING,
       // middleName: DataTypes.STRING,
       business_type_label: DataTypes.STRING,
-      inital_branch_details:DataTypes.JSON,
+      inital_request_details: DataTypes.JSON,
       business_type: {
         type: DataTypes.JSON,
         set: function (val) {
-          console.log('vinodh',val,typeof val);
+          console.log("vinodh", val, typeof val);
           this.setDataValue("business_type_label", val.label);
 
           return this.setDataValue("business_type_id", val.id);
@@ -33,11 +33,9 @@ module.exports = (sequelize, DataTypes) => {
       },
       business_type_id: {
         type: DataTypes.INTEGER,
-
-      
       },
 
-      business_status:  {
+      business_status: {
         defaultValue: businessStatus.STATUS_INACTIVE,
         type: DataTypes.INTEGER,
       },
@@ -47,14 +45,10 @@ module.exports = (sequelize, DataTypes) => {
       licence_number: DataTypes.STRING,
       licence_expiry_date: DataTypes.DATEONLY,
       license_image: DataTypes.STRING,
-     
 
       fssai_number: DataTypes.STRING,
       fssai_expiry_date: DataTypes.DATEONLY,
       fssai_image: DataTypes.STRING,
-
-      
-  
 
       logo: DataTypes.STRING,
       business_card_image: DataTypes.STRING,
@@ -68,10 +62,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
   Business.addHook("afterCreate", async (model, options) => {
-    
-    const branchData =await model.createBranch(model.inital_branch_details)
-await model.update({ ...model, inital_branch_details: "" });
-   
+    console.log('after create',model.dataValues)
+    const branchData = await model.createBranch({
+      ...model.dataValues.inital_request_details,
+      branch_type: { id: 1, label: "Head office" },
+    });
+    await model.update({  ...model.dataValues, inital_request_details: "" });
   });
 
   return Business;
