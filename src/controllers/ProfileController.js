@@ -5,6 +5,7 @@ const UserService = require("../service/UserService");
 const logger = require("../config/logger");
 const { branchStatus } = require("../config/constant");
 const pluralize = require("pluralize");
+const sequelize = require('sequelize');
 const {
   crudOperations,
   crudOperationsTwoTargets,
@@ -15,6 +16,7 @@ const { omit } = require("lodash");
 class ProfileController {
   constructor() {
     this.userService = new UserService();
+
     this.tokenService = new TokenService();
     this.authService = new AuthService();
   }
@@ -69,28 +71,25 @@ class ProfileController {
       const branch = (
         await business.getBranches({ where: { id: result.branchId } })
       )[0];
-      if (user.isAdmin && req.body.action  === 'activate') {
+      if (user.isAdmin && req.body.action === "activate") {
         result.branch_status = branchStatus.STATUS_ACTIVE;
-        result.activated_by_id = user.id
-        result.activated_by_name = user.name
-        result.activated_time = new Date()
+        result.activated_by_id = user.id;
+        result.activated_by_name = user.name;
+        result.activated_time = new Date();
         result.business_status = branchStatus.STATUS_ACTIVE;
-      }
-      else if (user.isAdmin&& req.body.action  === 'reject') {
+      } else if (user.isAdmin && req.body.action === "reject") {
         result.branch_status = branchStatus.STATUS_REJECT;
         result.business_status = branchStatus.STATUS_REJECT;
-        result.rejected_by_id = user.id
-        result.rejected_by_name = user.name
-        result.rejected_time = new Date()
-
-      }
-      else if(user.isAdmin&& req.body.action  === 'verify'){
+        result.rejected_by_id = user.id;
+        result.rejected_by_name = user.name;
+        result.rejected_time = new Date();
+      } else if (user.isAdmin && req.body.action === "verify") {
         result.branch_status = branchStatus.STATUS_VERFIED;
         result.business_status = branchStatus.STATUS_VERFIED;
-        result.verified_by_id = user.id
-        result.verified_by_name = user.name
+        result.verified_by_id = user.id;
+        result.verified_by_name = user.name;
 
-        result.verified_time = new Date()
+        result.verified_time = new Date();
       }
       await business.update(result);
       await branch.update(result);
@@ -115,6 +114,25 @@ class ProfileController {
         )
       );
     }
+  };
+
+  getDashboardDetails = async (req, res) => {
+    const { user } = req;
+
+    const businessesCount = (await user.getBusinesses({
+      attributes: [
+        [sequelize.fn('COUNT', sequelize.col('id')), 'total_business_count'],
+      ],
+      raw:true
+    }))[0];
+
+    console.log(businessesCount);
+
+    return res.json(
+      responseHandler.returnSuccess(httpStatus.OK, "Success", {
+        ...businessesCount
+      })
+    );
   };
 
   curdUserAssociated = async (req, res) => {
