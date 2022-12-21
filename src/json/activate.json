@@ -455,6 +455,7 @@
     },
     {
         "title": "Timing",
+        "type":"timing",
         "eligility": [
             "ADMIN"
         ],

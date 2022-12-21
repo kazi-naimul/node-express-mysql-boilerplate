@@ -409,6 +409,8 @@
     },
     {
         "title": "Timing",
+        "type":"timing",
+
         "eligility": [
             "PARTNER"
         ],
