@@ -57,9 +57,7 @@ class AdminController {
       parse(planValidity.discount_expiry, "yyyy-MM-dd", new Date()),
       new Date()
     );
-    console.log(planValidity.discount_expiry,   parse(planValidity.discount_expiry, "dd/MM/yyyy", new Date()),{discountDifference})
     const price= planValidity.price - (discountDifference > 0 ? planValidity.discount : 0);
-    console.log({price},planValidity.price,planValidity.discount)
     if (plan.tax_inclusive) {
       plan_tax_per_day =
         (price - price * (100 / (100 + plan.tax))) /

@@ -25,7 +25,6 @@ module.exports = (sequelize, DataTypes) => {
       business_type: {
         type: DataTypes.JSON,
         set: function (val) {
-          console.log("vinodh", val, typeof val);
           this.setDataValue("business_type_label", val.label);
 
           return this.setDataValue("business_type_id", val.id);
@@ -62,9 +61,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
   Business.addHook("afterCreate", async (model, options) => {
-    console.log('after create',model.dataValues)
+    const data = model?.dataValues?.inital_request_details
     const branchData = await model.createBranch({
-      ...model.dataValues.inital_request_details,
+      ...data,
+      branch_name:data.locality + ' Branch',
       branch_type: { id: 1, label: "Head office" },
     });
     await model.update({  ...model.dataValues, inital_request_details: "" });

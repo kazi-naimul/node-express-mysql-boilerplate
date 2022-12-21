@@ -21,21 +21,13 @@ module.exports = (sequelize, DataTypes) => {
       uuid: DataTypes.UUID,
       branch_name: {
         type: DataTypes.STRING,
-        set(val) {
-          val
-            ? this.setDataValue("branch_name", val)
-            : this.setDataValue(
-                "branch_name",
-                this.getDataValue("locality") + " branch"
-              );
-        },
       },
       // lastName: DataTypes.STRING,
       // middleName: DataTypes.STRING,
       branch_type_label: DataTypes.STRING,
       branch_type: {
         type: DataTypes.JSON,
-      
+
         set: function (val) {
           this.setDataValue("branch_type_label", val.label);
 
@@ -54,11 +46,13 @@ module.exports = (sequelize, DataTypes) => {
 
       business_activities: {
         type: DataTypes.STRING,
-        get() {
-          return this.getDataValue("business_activities")?.split(";");
+        get: function () {
+          const value = this.getDataValue("business_activities")
+          return JSON.parse( value ?? '[]');
         },
-        set(val) {
-          this.setDataValue("business_activities", val?.join(";"));
+        set: function (val) {
+          console.log('businessacti',val)
+          return this.setDataValue("business_activities", JSON.stringify(val));
         },
       },
       order_type: {
@@ -73,11 +67,9 @@ module.exports = (sequelize, DataTypes) => {
       activated_by_name: DataTypes.STRING,
       activated_time: DataTypes.DATE,
 
-
       rejected_by_id: DataTypes.INTEGER,
       rejected_by_name: DataTypes.STRING,
       rejected_time: DataTypes.DATE,
-
 
       price_type_label: DataTypes.STRING,
       reject_reasons: DataTypes.STRING,

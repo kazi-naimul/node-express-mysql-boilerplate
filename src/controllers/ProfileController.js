@@ -48,7 +48,6 @@ class ProfileController {
   };
 
   updateDetailsForActivation = async (req, res) => {
-    console.log('body',req.body);
     const user = req.user;
     const userDetails = user.isAdmin
       ? await this.userService.userDao.findById(req.body.userId)
@@ -62,7 +61,6 @@ class ProfileController {
         "uuid",
         "status",
       ]);
-      console.log(userDetails,result.branchId, result.businessId,{userDetails});
 
       await userDetails.update(result);
       const business = (
