@@ -132,8 +132,8 @@ module.exports = (sequelize, DataTypes) => {
       gst_number: DataTypes.STRING,
       gst_image: DataTypes.STRING,
 
-      license_no: DataTypes.STRING,
-      license_expiry: DataTypes.DATE,
+      licence_number: DataTypes.STRING,
+      licence_expiry_date: DataTypes.DATE,
       license_image: DataTypes.STRING,
 
       address: DataTypes.STRING,
@@ -144,8 +144,8 @@ module.exports = (sequelize, DataTypes) => {
       longitude: DataTypes.FLOAT,
       head_office: { defaultValue: true, type: DataTypes.BOOLEAN },
 
-      fssai_no: DataTypes.STRING,
-      fssai_expiry: DataTypes.DATE,
+      fssai_number: DataTypes.STRING,
+      fssai_expiry_date: DataTypes.DATE,
       fssai_image: DataTypes.STRING,
       branch_photo: DataTypes.STRING,
       business_card_image: DataTypes.STRING,

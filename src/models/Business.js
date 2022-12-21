@@ -44,13 +44,13 @@ module.exports = (sequelize, DataTypes) => {
       gst_number: DataTypes.STRING,
       gst_image: DataTypes.STRING,
 
-      license_no: DataTypes.STRING,
-      license_expiry: DataTypes.DATE,
+      licence_number: DataTypes.STRING,
+      licence_expiry_date: DataTypes.DATE,
       license_image: DataTypes.STRING,
      
 
-      fssai_no: DataTypes.STRING,
-      fssai_expiry: DataTypes.DATE,
+      fssai_number: DataTypes.STRING,
+      fssai_expiry_date: DataTypes.DATE,
       fssai_image: DataTypes.STRING,
 
       
