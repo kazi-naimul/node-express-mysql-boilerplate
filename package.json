@@ -34,6 +34,7 @@
     "otp-generator": "^4.0.0",
     "passport": "^0.5.2",
     "passport-jwt": "^4.0.0",
+    "pg": "^8.8.0",
     "pluralize": "^8.0.0",
     "redis": "^4.0.6",
     "sequelize": "^6.6.5",
