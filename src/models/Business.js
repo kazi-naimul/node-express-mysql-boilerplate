@@ -64,7 +64,7 @@ module.exports = (sequelize, DataTypes) => {
     const data = model?.dataValues?.inital_request_details
     const branchData = await model.createBranch({
       ...data,
-      branch_name:data.locality + ' Branch',
+      branch_name:data?.locality + ' Branch',
       branch_type: { id: 1, label: "Head office" },
     });
     await model.update({  ...model.dataValues, inital_request_details: "" });

@@ -6,13 +6,10 @@ module.exports = {
         password: config.dbPass,
         database: config.dbName,
         host: config.dbHost,
-        port:5432,
-        dialect: 'postgres',
-        protocol: 'postgres',
+        dialect: 'mysql',
         dialectOptions: {
             bigNumberStrings: true,
-            ssl: true,
-            native:true
+
         },
  
           timezone: '+05:30', 
