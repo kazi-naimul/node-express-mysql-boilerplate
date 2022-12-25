@@ -48,7 +48,8 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         get: function () {
           const value = this.getDataValue("business_activities")
-          return JSON.parse( value ?? '[]');
+          // console.log({value})
+          return JSON.parse(!value || value === "" ? "[]" : value);
         },
         set: function (val) {
           console.log('businessacti',val)
