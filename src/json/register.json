@@ -152,7 +152,6 @@
             "type": "grid",
             "subType": "image_picker",
             "eligility": ["ADMIN", "PARTNER"],
-            "requestKey": "shop_image",
             "fields": [
               {
                 "label": "Sign Board",

@@ -336,42 +336,49 @@
                 ]
             },
             {
-                "title": "Business / Shop Image",
-                "eligility": [
-                    "ADMIN"
-                ],
-                "fields": [
+              "title": "Business / Shop Image",
+              "eligility": ["ADMIN", "PARTNER"],
+              "fields": [
+                {
+                  "type": "grid",
+                  "subType": "image_picker",
+                  "eligility": ["ADMIN", "PARTNER"],
+                  "fields": [
                     {
-                        "type": "grid",
-                        "subType": "image_picker",
-                        "eligility": [
-                            "ADMIN"
-                        ],
-                        "requestKey": "business_shop_image",
-                        "fields": [
-                            {
-                                "label": "Sign Board ",
-                               "id":1,
-                               "requestKey":"sign_board_image"
-                            },
-                            {
-                                "label": "Shop Photo",
-                                "id":2,
-                                "requestKey":"branch_photo"
-                            },
-                            {
-                                "label": "Business Card",
-                                "id":3,
-                                "requestKey":"business_card_image"
-                            },
-                            {
-                                "label": "Logo",
-                                "id":4,
-                                "requestKey":"logo"
-                            }
-                        ]
+                      "label": "Sign Board",
+                      "type": "grid",
+                      "isMandatory": true,
+                      "error": "Please upload your Sign Board image",
+                      "subType": "image_picker",
+                      "requestKey": "sign_board_image",
+                      "eligility": ["ADMIN", "PARTNER"]
+                    },
+                    {
+                      "label": "Shop Photo",
+                      "type": "grid",
+                      "isMandatory": true,
+                      "error": "Please upload your Shop image",
+                      "subType": "image_picker",
+                      "requestKey": "shop_image",
+                      "eligility": ["ADMIN", "PARTNER"]
+                    },
+                    {
+                      "label": "Business Card",
+                      "type": "grid",
+                      "subType": "image_picker",
+                      "requestKey": "business_card_image",
+                      "eligility": ["ADMIN", "PARTNER"]
+                    },
+                    {
+                      "label": "Logo",
+                      "type": "grid",
+                      "subType": "image_picker",
+                      "requestKey": "logo",
+                      "eligility": ["ADMIN", "PARTNER"]
                     }
-                ]
+                  ]
+                }
+              ]
             }
         ]
     },
