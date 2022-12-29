@@ -44,7 +44,7 @@ class AuthController {
      return res.json(
         responseHandler.returnSuccess(
           9999,
-          "User not found",
+          "Your number not registered, are you interested in registering with this number",
           {}
         )
       );
