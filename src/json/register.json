@@ -80,7 +80,6 @@
             "label": "Business Number",
             "type": "textbox",
             "input": "number",
-            "error": "Please enter valid Business Number",
             "requestKey": "branch_phone_number",
             "eligility": ["PARTNER"]
           }
@@ -93,6 +92,8 @@
           {
             "type": "grid",
             "subtype": "option",
+            "isMandatory": true,
+            "error": "Please select your Business Type",
             "eligility": ["PARTNER"],
             "requestKey": "business_type",
             "fields": [
@@ -152,31 +153,35 @@
             "requestKey": "shop_image",
             "fields": [
               {
-                "label": "Dining",
+                "label": "Sign Board",
                 "type": "grid",
+                "isMandatory": true,
+                "error": "Please upload your Sign Board image",
+                "subType": "image_picker",
+                "requestKey": "sign_board_image",
+                "eligility": ["ADMIN", "PARTNER"]
+              },
+              {
+                "label": "Shop Photo",
+                "type": "grid",
+                "isMandatory": true,
+                "error": "Please upload your Shop image",
                 "subType": "image_picker",
                 "requestKey": "shop_image",
                 "eligility": ["ADMIN", "PARTNER"]
               },
               {
-                "label": "A/C Dining",
+                "label": "Business Card",
                 "type": "grid",
                 "subType": "image_picker",
-                "requestKey": "shop_image_1",
+                "requestKey": "business_card_image",
                 "eligility": ["ADMIN", "PARTNER"]
               },
               {
-                "label": "Open Dining",
+                "label": "Logo",
                 "type": "grid",
                 "subType": "image_picker",
-                "requestKey": "shop_image_2",
-                "eligility": ["ADMIN", "PARTNER"]
-              },
-              {
-                "label": "Rooftop Dining",
-                "type": "grid",
-                "subType": "image_picker",
-                "requestKey": "shop_image_3",
+                "requestKey": "logo",
                 "eligility": ["ADMIN", "PARTNER"]
               }
             ]
