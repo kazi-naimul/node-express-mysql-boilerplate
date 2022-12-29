@@ -5,7 +5,7 @@ const httpStatus = require("http-status");
 const { omit } = require("lodash");
 
 const getAbsolutePath = (path) => {
-  return "https://mabliz.onrender.com/" + path;
+  return "https://mabliz-dev.onrender.com/" + path;
 };
 
 const getRecord = async ({ id, sourceModel, getMixin, res }) => {
