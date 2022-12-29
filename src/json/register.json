@@ -137,6 +137,8 @@
           {
             "label": "Business Location",
             "type": "location_picker",
+            "isMandatory": true,
+            "error": "Please select your Business Location",
             "requestKey": "business_location",
             "eligility": ["PARTNER"]
           }
