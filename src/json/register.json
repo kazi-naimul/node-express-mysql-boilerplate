@@ -1,22 +1,22 @@
 [
   {
     "title": "Personal Details",
-    "eligility": ["PARTNER","CUSTOMER"],
+    "eligility": ["PARTNER", "CUSTOMER"],
     "details": [
       {
         "title": "Register Mobile No",
-        "eligility": ["PARTNER","CUSTOMER"],
+        "eligility": ["PARTNER", "CUSTOMER"],
 
         "fields": [
           {
-            "eligility": ["PARTNER","CUSTOMER"],
+            "eligility": ["PARTNER", "CUSTOMER"],
             "label": "Mobile No",
             "isMandatory": true,
             "type": "textbox",
-            "error":"Please enter valid Mobile Number",
-            "readyOnly":true,
+            "error": "Please enter valid Mobile Number",
+            "readyOnly": true,
             "input": "number",
-            "requestKey":"phone_number"
+            "requestKey": "phone_number"
           }
         ]
       },
@@ -25,21 +25,21 @@
         "eligility": ["PARTNER", "CUSTOMER"],
         "fields": [
           {
-            "eligility":["PARTNER","CUSTOMER"],
+            "eligility": ["PARTNER", "CUSTOMER"],
             "label": "Name",
             "type": "textbox",
             "input": "text",
             "isMandatory": true,
-            "error":"Please enter valid Name",
+            "error": "Please enter valid Name",
             "requestKey": "name"
           },
           {
             "label": "Email ID",
-            "type":"textbox",
-            "input":"email",
+            "type": "textbox",
+            "input": "email",
             "isMandatory": true,
             "requestKey": "email",
-            "error":"Please enter valid Email Number",
+            "error": "Please enter valid Email Number",
             "eligility": ["PARTNER", "CUSTOMER"]
           }
         ]
@@ -53,9 +53,7 @@
             "type": "confirm_pin",
             "input": "number",
             "requestKey": "mpin",
-            "eligility": [
-              "PARTNER"
-            ]
+            "eligility": ["PARTNER"]
           }
         ]
       }
@@ -71,8 +69,8 @@
         "fields": [
           {
             "label": "Business Name",
-            "type":"textbox",
-            "input":"text",
+            "type": "textbox",
+            "input": "text",
             "isMandatory": true,
             "error": "Please enter valid business Name",
             "requestKey": "business_name",
@@ -80,11 +78,11 @@
           },
           {
             "label": "Business Number",
-            "type":"textbox",
-            "input":"number",
+            "type": "textbox",
+            "input": "number",
             "error": "Please enter valid Business Number",
-            "requestKey":"branch_phone_number",
-            "eligility":["PARTNER"]
+            "requestKey": "branch_phone_number",
+            "eligility": ["PARTNER"]
           }
         ]
       },
@@ -94,7 +92,7 @@
         "fields": [
           {
             "type": "grid",
-            "subtype":"option",
+            "subtype": "option",
             "eligility": ["PARTNER"],
             "requestKey": "business_type",
             "fields": [
@@ -127,9 +125,7 @@
             "input": "number",
             "requestKey": "gst_number",
             "imageKey": "gst_image",
-            "eligility": [
-              "PARTNER"
-            ]
+            "eligility": ["PARTNER"]
           }
         ]
       },
@@ -144,38 +140,80 @@
             "eligility": ["PARTNER"]
           }
         ]
+      },
+      {
+        "title": "Business / Shop Image",
+        "eligility": ["ADMIN", "PARTNER"],
+        "fields": [
+          {
+            "type": "grid",
+            "subType": "image_picker",
+            "eligility": ["ADMIN", "PARTNER"],
+            "requestKey": "shop_image",
+            "fields": [
+              {
+                "label": "Dining",
+                "type": "grid",
+                "subType": "image_picker",
+                "requestKey": "shop_image",
+                "eligility": ["ADMIN", "PARTNER"]
+              },
+              {
+                "label": "A/C Dining",
+                "type": "grid",
+                "subType": "image_picker",
+                "requestKey": "shop_image_1",
+                "eligility": ["ADMIN", "PARTNER"]
+              },
+              {
+                "label": "Open Dining",
+                "type": "grid",
+                "subType": "image_picker",
+                "requestKey": "shop_image_2",
+                "eligility": ["ADMIN", "PARTNER"]
+              },
+              {
+                "label": "Rooftop Dining",
+                "type": "grid",
+                "subType": "image_picker",
+                "requestKey": "shop_image_3",
+                "eligility": ["ADMIN", "PARTNER"]
+              }
+            ]
+          }
+        ]
       }
     ]
   },
   {
     "title": "Legal Terms",
-    "eligility": ["PARTNER","CUSTOMER"],
+    "eligility": ["PARTNER", "CUSTOMER"],
     "details": [
       {
         "title": "Referral Code ",
-        "eligility": ["PARTNER","CUSTOMER"],
+        "eligility": ["PARTNER", "CUSTOMER"],
         "fields": [
           {
             "label": "Referral Code",
             "type": "textbox",
             "input": "text",
-            "requestKey":"referral_code",
-            "eligility":["PARTNER","CUSTOMER"]
+            "requestKey": "referral_code",
+            "eligility": ["PARTNER", "CUSTOMER"]
           },
           {
             "type": "checkbox",
-            "defaultValue":true,
+            "defaultValue": true,
             "label": "I want to receive communications from mabliz on Whatsapp",
             "requestKey": "whatsapp_communication",
-            "eligility": ["PARTNER","CUSTOMER"]
+            "eligility": ["PARTNER", "CUSTOMER"]
           },
           {
             "type": "checkbox",
-            "isHTML":true,
+            "isHTML": true,
             "label": "I agree to mabliz <a href='https://www.google.co.in/'>Terms & condition</a>",
-            "isMandatory":true,
+            "isMandatory": true,
             "validValue": true,
-            "eligility": ["PARTNER","CUSTOMER"]
+            "eligility": ["PARTNER", "CUSTOMER"]
           }
         ]
       }
