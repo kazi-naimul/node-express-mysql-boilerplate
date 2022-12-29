@@ -220,7 +220,13 @@
             "isMandatory": true,
             "validValue": true,
             "eligility": ["PARTNER", "CUSTOMER"]
-          }
+          },
+          {
+            "type": "note",
+            "title":"Notes",
+            "label": "Each of these details will be verified by the Mabliz team and Mabliz has the power to disable your login if you provide any incorrect information",
+            "eligility": ["PARTNER", "CUSTOMER"]
+        }
         ]
       }
     ]
