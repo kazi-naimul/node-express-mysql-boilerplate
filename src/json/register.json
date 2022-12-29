@@ -13,6 +13,7 @@
             "label": "Mobile No",
             "isMandatory": true,
             "type": "textbox",
+            "error":"Please enter valid Mobile Number",
             "readyOnly":true,
             "input": "number",
             "requestKey":"phone_number"
@@ -29,6 +30,7 @@
             "type": "textbox",
             "input": "text",
             "isMandatory": true,
+            "error":"Please enter valid Name",
             "requestKey": "name"
           },
           {
@@ -37,6 +39,7 @@
             "input":"email",
             "isMandatory": true,
             "requestKey": "email",
+            "error":"Please enter valid Email Number",
             "eligility": ["PARTNER", "CUSTOMER"]
           }
         ]
@@ -161,6 +164,7 @@
           },
           {
             "type": "checkbox",
+            "defaultValue":true,
             "label": "I want to receive communications from mabliz on Whatsapp",
             "requestKey": "whatsapp_communication",
             "eligility": ["PARTNER","CUSTOMER"]
@@ -169,6 +173,7 @@
             "type": "checkbox",
             "isHTML":true,
             "label": "I agree to mabliz <a href='https://www.google.co.in/'>Terms & condition</a>",
+            "isMandatory":true,
             "validValue": true,
             "eligility": ["PARTNER","CUSTOMER"]
           }
