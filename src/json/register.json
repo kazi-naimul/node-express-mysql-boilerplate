@@ -91,7 +91,7 @@
         "fields": [
           {
             "type": "grid",
-            "subtype": "option",
+            "subType": "option",
             "isMandatory": true,
             "error": "Please select your Business Type",
             "eligility": ["PARTNER"],

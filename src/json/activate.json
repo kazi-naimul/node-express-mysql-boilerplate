@@ -69,12 +69,12 @@
                         ]
                     },
                     {
-                        "label": "Business No",
+                        "label": "Business Number",
                         "type": "textbox",
                         "input": "number",
                         "isMandatory": true,
                         "error": "Please enter valid business number",
-                        "requestKey": "business_name",
+                        "requestKey": "branch_phone_number",
                         "eligility": [
                             "ADMIN"
                         ]
@@ -106,19 +106,19 @@
                         "fields": [
                             {
                                 "id": 1,
-                                "label": "Lifestyle & Fashion",
-                                "image_url": null
-                            },
-                            {
+                                "label": "Fashion",
+                                "eligility": ["ADMIN"]
+                              },
+                              {
                                 "id": 2,
-                                "label": "Test1234",
-                                "image_url": null
-                            },
-                            {
+                                "label": "Food",
+                                "eligility": ["ADMIN"]
+                              },
+                              {
                                 "id": 3,
-                                "label": "Lifestyle & Fashion",
-                                "image_url": null
-                            }
+                                "label": "Gift & Toys",
+                                "eligility": ["ADMIN"]
+                              }
                         ]
                     }
                 ]
