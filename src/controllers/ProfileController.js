@@ -1,11 +1,14 @@
 const httpStatus = require("http-status");
 const AuthService = require("../service/AuthService");
 const TokenService = require("../service/TokenService");
+const BranchService = require("../service/BranchService");
+const { Op } = require("sequelize");
+
 const UserService = require("../service/UserService");
 const logger = require("../config/logger");
 const { branchStatus } = require("../config/constant");
 const pluralize = require("pluralize");
-const sequelize = require('sequelize');
+const sequelize = require("sequelize");
 const {
   crudOperations,
   crudOperationsTwoTargets,
@@ -18,6 +21,7 @@ class ProfileController {
     this.userService = new UserService();
 
     this.tokenService = new TokenService();
+    this.branchService = new BranchService();
     this.authService = new AuthService();
   }
 
@@ -119,20 +123,28 @@ class ProfileController {
   getDashboardDetails = async (req, res) => {
     const { user } = req;
 
-    const businessesCount = (await user.getBusinesses({
-      attributes: [
-        [sequelize.fn('COUNT', sequelize.col('id')), 'total_business_count'],
-      ],
-      raw:true
-    }))[0];
+    // const businessesCount = (await user.getBusinesses({
+    //   attributes: [
+    //     [sequelize.fn('COUNT', sequelize.col('id')), 'total_business_count'],
+    //   ],
+    //   raw:true
+    // }))[0];
 
-   
+    const businesses = await user.getBusinesses();
 
-    console.log(businessesCount);
+    const businessIds = businesses.map((value) => value.id);
+    const pendingForActivationBranches =
+      await this.branchService.branchDao.findByWhere({
+        businessId: { [Op.in]: businessIds },
+        branch_status: { [Op.lt]: branchStatus.STATUS_ACTIVE },
+      });
+
+    // console.log(businessesCount);
 
     return res.json(
       responseHandler.returnSuccess(httpStatus.OK, "Success", {
-        ...businessesCount
+        businessIds,
+        pendingForActivationBranches,
       })
     );
   };

@@ -37,6 +37,8 @@ async function sendSMS(phone, otp) {
 }
 
 async function createNewOTP(phone) {
+  console.groupCollapsed('otp');
+  console.log(phone)
   // Generate a 6 digit numeric OTP
   const otp = otpGenerator.generate(6, {
     lowerCaseAlphabets: false,
@@ -45,6 +47,8 @@ async function createNewOTP(phone) {
   });
   const ttl = 5 * 60 * 1000; //5 Minutes in miliseconds
   const expires = Date.now() + ttl; //timestamp to 5 minutes in the future
+  console.log(otp,expires);
+console.groupEnd();
   const data = `${phone}.${otp}.${expires}`; // phone.otp.expiry_timestamp
   const hash = crypto.createHmac("sha256", key).update(data).digest("hex"); // creating SHA256 hash of the data
   const fullHash = `${hash}.${expires}`; // Hash.expires, format to send to the user
