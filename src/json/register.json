@@ -137,6 +137,8 @@
           {
             "label": "Business Location",
             "type": "location_picker",
+            "isMandatory": true,
+            "error": "Please select your Business Location",
             "requestKey": "business_location",
             "eligility": ["PARTNER"]
           }
@@ -150,7 +152,6 @@
             "type": "grid",
             "subType": "image_picker",
             "eligility": ["ADMIN", "PARTNER"],
-            "requestKey": "shop_image",
             "fields": [
               {
                 "label": "Sign Board",

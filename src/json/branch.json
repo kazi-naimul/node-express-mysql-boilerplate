@@ -198,37 +198,44 @@
       },
       {
         "title": "Business / Shop Image",
-        "eligility": [
-          "PARTNER"
-        ],
+        "eligility": ["ADMIN", "PARTNER"],
         "fields": [
           {
             "type": "grid",
             "subType": "image_picker",
-            "eligility": [
-              "PARTNER"
-            ],
-            "requestKey": "business_shop_image",
+            "eligility": ["ADMIN", "PARTNER"],
             "fields": [
               {
-                "label": "Sign Board ",
-                "id": 1,
-                "requestKey": "sign_board_image"
+                "label": "Sign Board",
+                "type": "grid",
+                "isMandatory": true,
+                "error": "Please upload your Sign Board image",
+                "subType": "image_picker",
+                "requestKey": "sign_board_image",
+                "eligility": ["ADMIN", "PARTNER"]
               },
               {
                 "label": "Shop Photo",
-                "id": 2,
-                "requestKey": "branch_photo"
+                "type": "grid",
+                "isMandatory": true,
+                "error": "Please upload your Shop image",
+                "subType": "image_picker",
+                "requestKey": "shop_image",
+                "eligility": ["ADMIN", "PARTNER"]
               },
               {
                 "label": "Business Card",
-                "id": 3,
-                "requestKey": "business_card_image"
+                "type": "grid",
+                "subType": "image_picker",
+                "requestKey": "business_card_image",
+                "eligility": ["ADMIN", "PARTNER"]
               },
               {
                 "label": "Logo",
-                "id": 4,
-                "requestKey": "logo"
+                "type": "grid",
+                "subType": "image_picker",
+                "requestKey": "logo",
+                "eligility": ["ADMIN", "PARTNER"]
               }
             ]
           }
@@ -315,19 +322,31 @@
     ]
   },
   {
-    "title": "Timing",
-    "eligility": [
-      "PARTNER"
-    ],
-    "details": [
-      {
-        "title": "Business Timing",
-        "eligility": [
-          "PARTNER"
-        ],
-        "fields": []
-      }
-    ]
+      "title": "Timing",
+      "type":"timing",
+      "eligility": [
+          "ADMIN","PARTNER"
+      ],
+      "details":   [
+          {
+              "title": "Business Timing",
+              "eligility":
+              [
+                  "ADMIN", "PARTNER"
+              ],
+              "fields":
+              [
+                  {
+                      "eligility":
+                      [
+                          "ADMIN", "PARTNER"
+                      ],
+                      "type": "timing",
+                      "requestKey":"business_timings"
+                  }
+              ]
+          }
+      ]
   }
   
 ]
