@@ -19,7 +19,6 @@ const app = express();
 app.use(cors());
 app.options("*", cors());
 
-console.log(process.env.PWD);
 app.use(express.static(`${process.env.PWD}/public`));
 app.use(express.static(`${process.env.PWD}/registration`));
 // app.use(express.static(
@@ -41,18 +40,15 @@ const fileStorage = multer.diskStorage({
   },
 });
 const imagesMiddleWare = (req, res, next) => {
-  console.log(req.get("content-type"), req.files,req.body.details);
 
   if (req.is("multipart/form-data")) {
     const images = {};
-    console.log(req.files);
     req.files?.forEach((file) => {
       images[file.fieldname] = utilHandler.getAbsolutePath(file.filename);
     });
     req.body = { ...JSON.parse(req.body.details), ...images };
     req.headers["content-type"] = "application/json";
 
-    console.log(req.body);
   }
   next();
 };
@@ -64,7 +60,6 @@ app.use(passport.initialize());
 passport.use("jwt", jwtStrategy);
 
 app.get("/", async (req, res) => {
-  console.log("test");
   res.status(200).send("Congratulations! API is working!");
 });
 app.use("/api", routes);
@@ -95,8 +90,6 @@ const Addon = models.addon;
 
 const Planbranchaddon = models.planbranchaddon;
 
-console.log(models.businessType);
-console.log(Business, User, Branch);
 User.hasMany(Business);
 Business.belongsTo(User);
 BusinessTypes.belongsTo(User);

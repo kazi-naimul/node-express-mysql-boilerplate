@@ -3,9 +3,26 @@ const BusinessTypeService = require("../service/BusinesstypeService");
 const BusinesscategoryService = require("../service/BusinesscategoryService");
 const BusinessactivityService = require("../service/BusinessactivitiyService");
 const responseHandler = require("../helper/responseHandler");
-const {omit} = require('lodash');
+const { omit } = require("lodash");
 class OptionController {
-  async getFields(req, res) {
+
+  updateJson =({jsonFile,tabIndex,groupIndex,fieldIndex,value})=>{
+    jsonFile[tabIndex].details[groupIndex].fields[fieldIndex].fields =
+    value.map((dd) => {
+      return {
+        ...jsonFile[tabIndex].details[groupIndex].fields[fieldIndex]
+          .fields[0],
+        ...dd,
+      };
+    });
+
+    return jsonFile;
+  }
+
+
+
+
+   getFields=async(req, res)=> {
     const { type } = req.query;
     if (!type) {
       res.json(
@@ -14,119 +31,39 @@ class OptionController {
     }
     try {
       const jsonFile = require(`../json/${type}.json`);
-
-      if (type === "register") {
-        const data = await new BusinessTypeService().businessTypeDao.findAll({
-          raw: true,
-        });
-        jsonFile[1].details[1].fields[0].fields = data.map((dd) => {
-          return {
-            type: "option",
-            label: "Beauty",
-            requestKey: "business_type",
-            eligility: ["PARTNER"],
-            ...dd,
-          };
-        });
-      }
-      else if(type ==="activate"){
-        const data = await new BusinessTypeService().businessTypeDao.findAll({
-          raw: true,
-        });
-        const businesscategory = await new BusinesscategoryService().businesscategoryDao.findAll({
+      const businessType =
+        await new BusinessTypeService().businessTypeDao.findAll({
           raw: true,
         });
 
-        const businessactivity = await new BusinessactivityService().businessactivitiyDao.findAll({
+      const businessCategory =
+        await new BusinesscategoryService().businesscategoryDao.findAll({
           raw: true,
         });
+        const businessActivity =
+        await new BusinessactivityService().businessactivitiyDao.findAll({
+          raw: true,
+        });
+
+ 
+      jsonFile.forEach((tab, tabIndex) => {
+        tab.details.forEach((group, groupIndex) => {
+          group.fields.forEach((field, fieldIndex) => {
+            if (field.requestKey === "business_type") {
+              console.log(tabIndex, groupIndex, fieldIndex);
+              this.updateJson({jsonFile,tabIndex,groupIndex,fieldIndex,value:businessType})
+            }
+            else if(field.requestKey === "business_category"){
+              this.updateJson({jsonFile,tabIndex,groupIndex,fieldIndex,value:businessCategory})
+            }
+            else if(field.requestKey === "business_activities"){
+              this.updateJson({jsonFile,tabIndex,groupIndex,fieldIndex,value:businessActivity})
+            }
+          });
+        });
+      });
 
     
-
-        jsonFile[1].details[1].fields[0].fields = data.map((dd) => {
-          return {
-            ...jsonFile[1]?.details?.[1].fields?.[0]?.fields[0],
-            ...omit(dd,['createdAt','updatedAt','userId'])
-          };
-        });
-
-
-        jsonFile[1].details[2].fields = businesscategory.map((dd) => {
-          return {
-            ...jsonFile[1].details[2].fields[0],
-
-            ...omit(dd,['createdAt','updatedAt','userId'])
-            
-          };
-        });
-
-
-        jsonFile[1].details[3].fields[0].fields = businessactivity.map((dd) => {
-          return {
-            ...jsonFile[1].details[3].fields[0].fields[0],
-
-            ...omit(dd,['createdAt','updatedAt','userId'])
-            
-          };
-        });
-
-
-        // console.log('test',  jsonFile[1].details[3].fields[0].fields )
-        console.log('test',  businessactivity)
-        businessactivity.map((dd) => {
-          return {
-            ...jsonFile[1].details[3].fields[0].fields,
-
-            ...omit(dd,['createdAt','updatedAt','userId'])
-            
-          };
-        })
-
-      }
-      else if(type==="business"){
-        const data = await new BusinessTypeService().businessTypeDao.findAll({
-          raw: true,
-        });
-
-        jsonFile[0].details[0].fields[1].fields = data.map((dd) => {
-          return {
-            ...jsonFile[0]?.details?.[0].fields?.[1]?.fields[0],
-            ...omit(dd,['createdAt','updatedAt','userId'])
-          };
-        });
-
-      }
-
-      else if(type==="branch"){
-
-        const businesscategory = await new BusinesscategoryService().businesscategoryDao.findAll({
-          raw: true,
-        });
-
-        const businessactivity = await new BusinessactivityService().businessactivitiyDao.findAll({
-          raw: true,
-        });
-
-        jsonFile[1].details[0].fields[0].fields = businesscategory.map((dd) => {
-          return {
-            ...jsonFile[1].details[0].fields[0].fields[0],
-
-            ...omit(dd,['createdAt','updatedAt','userId'])
-            
-          };
-        });
-
-
-        jsonFile[1].details[1].fields[0].fields = businessactivity.map((dd) => {
-          return {
-            ...jsonFile[1].details[1].fields[0].fields[0],
-
-            ...omit(dd,['createdAt','updatedAt','userId'])
-            
-          };
-        });
-
-      }
 
       res.json(
         responseHandler.returnSuccess(httpStatus.OK, "Success", jsonFile)

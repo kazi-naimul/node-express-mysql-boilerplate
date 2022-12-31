@@ -1,30 +1,23 @@
 const { Model } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
-  class  PlanValidity extends Model {
-  
+  class Tax extends Model {
     static associate(models) {
       // define association here
       //  User.belongsTo(models.agency, { foreignKey: 'agency_id', targetKey: 'id' });
     }
   }
 
-   PlanValidity.init(
+  Tax.init(
     {
-        validity:DataTypes.INTEGER,
-        price:DataTypes.FLOAT,
-        discount:{type:DataTypes.FLOAT,defaultValue:0},
-        discount_expiry:DataTypes.DATEONLY
-        
-     
+      label: { type: DataTypes.STRING, defaultValue: "GST" },
+      value: DataTypes.FLOAT,
     },
-
     {
       sequelize,
-      modelName: "planvalidity",
+      modelName: "tax",
       underscored: true,
     }
   );
-  return  PlanValidity;
+  return Tax;
 };
-

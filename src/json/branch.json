@@ -1,60 +1,5 @@
 [
-  {
-    "eligility": [
-      "PARTNER"
-    ],
-    "title": "Business Details",
-    "details": [
-      {
-        "eligility": [
-          "PARTNER"
-        ],
-        "title": "Branch Details",
-        "fields": [
-          {
-            "label": "Branch Name",
-            "type": "textbox",
-            "input": "text",
-            "isMandatory": true,
-            "requestKey": "branch_name",
-            "eligility": [
-              "PARTNER"
-            ]
-          },
-          {
-            "label": "Branch Number",
-            "type": "textbox",
-            "input": "number",
-            "isMandatory": true,
-            "requestKey": "branch_number",
-            "eligility": [
-              "PARTNER"
-            ]
-          },
-          {
-            "label": "Branch Type",
-            "type": "drop_down",
-            "input": "option",
-            "isMandatory": true,
-            "requestKey": "branch_type",
-            "fields": [
-              {
-                "label": "Head Office",
-                "id": 1
-              },
-              {
-                "label": "Branch",
-                "id": 2
-              }
-            ],
-            "eligility": [
-              "PARTNER"
-            ]
-          }
-        ]
-      }
-    ]
-  },
+ 
   {
     "title": "Branch Details",
     "eligility": [
@@ -64,7 +9,7 @@
        {
         "title": "Business Category",
         "eligility": [
-            "ADMIN"
+            "PARTNER"
         ],
         "fields": [
             {
@@ -73,7 +18,7 @@
                 "input": "select",
                 "requestKey": "business_category",
                 "eligility": [
-                    "ADMIN"
+                    "PARTNER"
                 ],
                 "fields": [
                     {
@@ -151,20 +96,39 @@
       {
         "title": "Food Type",
         "eligility": [
-          "PARTNER"
+            "ADMIN"
         ],
         "fields": [
-          {
-            "label": "Food Type",
-            "type": "drop_down",
-            "input": "option",
-            "requestKey": "food_type",
-            "eligility": [
-              "PARTNER"
-            ]
-          }
+            {
+                "type": "grid",
+                "subType": "chip",
+                "isMandatory": true,
+                "error": "Please Select your Food Type",
+                "requestKey": "food_type",
+                "eligility": [
+                    "ADMIN"
+                ],
+                "fields": [
+                    {
+                        "label": "None",
+                        "id": 1
+                    },
+                    {
+                        "label": "Pure Veg",
+                        "id": 2
+                    },
+                    {
+                        "label": "Eggetarian",
+                        "id": 3
+                    },
+                    {
+                        "label": "Veg & Non Veg",
+                        "id": 4
+                    }
+                ]
+            }
         ]
-      },
+    },
       {
         "fields": [
           {
@@ -253,37 +217,44 @@
       },
       {
         "title": "Business / Shop Image",
-        "eligility": [
-          "ADMIN"
-        ],
+        "eligility": ["ADMIN", "PARTNER"],
         "fields": [
           {
             "type": "grid",
             "subType": "image_picker",
-            "eligility": [
-              "ADMIN"
-            ],
-            "requestKey": "business_shop_image",
+            "eligility": ["ADMIN", "PARTNER"],
             "fields": [
               {
-                "label": "Sign Board ",
-                "id": 1,
-                "requestKey": "sign_board_image"
+                "label": "Sign Board",
+                "type": "grid",
+                "isMandatory": true,
+                "error": "Please upload your Sign Board image",
+                "subType": "image_picker",
+                "requestKey": "sign_board_image",
+                "eligility": ["ADMIN", "PARTNER"]
               },
               {
                 "label": "Shop Photo",
-                "id": 2,
-                "requestKey": "branch_photo"
+                "type": "grid",
+                "isMandatory": true,
+                "error": "Please upload your Shop image",
+                "subType": "image_picker",
+                "requestKey": "shop_image",
+                "eligility": ["ADMIN", "PARTNER"]
               },
               {
                 "label": "Business Card",
-                "id": 3,
-                "requestKey": "business_card_image"
+                "type": "grid",
+                "subType": "image_picker",
+                "requestKey": "business_card_image",
+                "eligility": ["ADMIN", "PARTNER"]
               },
               {
                 "label": "Logo",
-                "id": 4,
-                "requestKey": "logo"
+                "type": "grid",
+                "subType": "image_picker",
+                "requestKey": "logo",
+                "eligility": ["ADMIN", "PARTNER"]
               }
             ]
           }
@@ -370,33 +341,31 @@
     ]
   },
   {
-    "title": "Timing",
-    "eligility": [
-      "PARTNER"
-    ],
-    "details": [
-      {
-        "title": "Business Timing",
-        "eligility": [
-          "PARTNER"
-        ],
-        "fields": []
-      }
-    ]
-  },
-  {
-    "title": "Plans / Version",
-    "eligility": [
-      "PARTNER"
-    ],
-    "details": [
-      {
-        "title": "Plans / Subscription",
-        "eligility": [
-          "PARTNER"
-        ],
-        "fields": []
-      }
-    ]
+      "title": "Timing",
+      "type":"timing",
+      "eligility": [
+          "ADMIN","PARTNER"
+      ],
+      "details":   [
+          {
+              "title": "Business Timing",
+              "eligility":
+              [
+                  "ADMIN", "PARTNER"
+              ],
+              "fields":
+              [
+                  {
+                      "eligility":
+                      [
+                          "ADMIN", "PARTNER"
+                      ],
+                      "type": "timing",
+                      "requestKey":"business_timings"
+                  }
+              ]
+          }
+      ]
   }
+  
 ]

@@ -21,20 +21,22 @@ module.exports = (sequelize, DataTypes) => {
       uuid: DataTypes.UUID,
       branch_name: {
         type: DataTypes.STRING,
-        set(val) {
-          val
-            ? this.setDataValue("branch_name", val)
-            : this.setDataValue(
-                "branch_name",
-                this.getDataValue("locality") + " branch"
-              );
-        },
       },
       // lastName: DataTypes.STRING,
       // middleName: DataTypes.STRING,
       branch_type_label: DataTypes.STRING,
       branch_type: {
         type: DataTypes.JSON,
+
+        set: function (val) {
+          this.setDataValue("branch_type_label", val.label);
+
+          return this.setDataValue("branch_type_id", val.id);
+        },
+      },
+      service_type: {
+        type: DataTypes.JSON,
+
         set: function (val) {
           this.setDataValue("branch_type_label", val.label);
 
@@ -45,7 +47,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
       },
       branch_phone_number: DataTypes.STRING,
-      branch_sub_type: DataTypes.STRING,
       open_timing: DataTypes.DATE,
       close_timing: DataTypes.DATE,
 
@@ -53,11 +54,14 @@ module.exports = (sequelize, DataTypes) => {
 
       business_activities: {
         type: DataTypes.STRING,
-        get() {
-          return this.getDataValue("business_activities")?.split(";");
+        get: function () {
+          const value = this.getDataValue("business_activities")
+          // console.log({value})
+          return JSON.parse(!value || value === "" ? "[]" : value);
         },
-        set(val) {
-          this.setDataValue("business_activities", val?.join(";"));
+        set: function (val) {
+          console.log('businessacti',val)
+          return this.setDataValue("business_activities", JSON.stringify(val));
         },
       },
       order_type: {
@@ -65,9 +69,19 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: "mabliz",
       },
 
+      verified_by_id: DataTypes.INTEGER,
+      verified_by_name: DataTypes.STRING,
+      verified_time: DataTypes.DATE,
+      activated_by_id: DataTypes.INTEGER,
+      activated_by_name: DataTypes.STRING,
+      activated_time: DataTypes.DATE,
+
+      rejected_by_id: DataTypes.INTEGER,
+      rejected_by_name: DataTypes.STRING,
+      rejected_time: DataTypes.DATE,
+
       price_type_label: DataTypes.STRING,
-      reject_legal_image: DataTypes.BOOLEAN,
-      reject_legal_document: DataTypes.BOOLEAN,
+      reject_reasons: DataTypes.STRING,
 
       price_type_id: {
         type: DataTypes.INTEGER,
@@ -86,13 +100,13 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.TEXT,
         get: function () {
           console.log(this.getDataValue("business_timings"));
-          return JSON.parse(this.getDataValue("business_timings") || "{}");
+          return JSON.parse(this.getDataValue("business_timings") || "[]");
         },
         set: function (value) {
           // this.setDataValue('open_timing',value[0].time[0].start_time);
           // this.setDataValue('open_timing',value[0].time[value[0].time.length-1].end_time);
 
-          this.setDataValue("business_timings", JSON.stringify(value || {}));
+          this.setDataValue("business_timings", JSON.stringify(value || []));
         },
       },
 
@@ -113,10 +127,11 @@ module.exports = (sequelize, DataTypes) => {
       },
 
       gst_number: DataTypes.STRING,
+
       gst_image: DataTypes.STRING,
 
-      license_no: DataTypes.STRING,
-      license_expiry: DataTypes.DATE,
+      licence_number: DataTypes.STRING,
+      licence_expiry_date: DataTypes.DATEONLY,
       license_image: DataTypes.STRING,
 
       address: DataTypes.STRING,
@@ -127,8 +142,8 @@ module.exports = (sequelize, DataTypes) => {
       longitude: DataTypes.FLOAT,
       head_office: { defaultValue: true, type: DataTypes.BOOLEAN },
 
-      fssai_no: DataTypes.STRING,
-      fssai_expiry: DataTypes.DATE,
+      fssai_number: DataTypes.STRING,
+      fssai_expiry_date: DataTypes.DATEONLY,
       fssai_image: DataTypes.STRING,
       branch_photo: DataTypes.STRING,
       business_card_image: DataTypes.STRING,
@@ -143,19 +158,29 @@ module.exports = (sequelize, DataTypes) => {
 
   Branch.addHook("afterCreate", async (model, options) => {
     console.log({ model, options });
-    const {branch_type_id,id,businessId} = model.dataValues;
-    if(branch_type_id === 1){
-      Branch.update({branch_type:
+    const { branch_type_id, id, businessId } = model.dataValues;
+    if (branch_type_id === 1) {
+      Branch.update(
         {
-          "label": "Branch",
-          "id": 2
-        }
-      }, {where:{id : {[Op.notIn]: [id]}, businessId  }})
-
+          branch_type: {
+            label: "Branch",
+            id: 2,
+          },
+        },
+        { where: { id: { [Op.notIn]: [id] }, businessId } }
+      );
     }
     const business = await model.getBusiness();
     await business.update(model.dataValues);
+    global.io?.sockets.in('vuinodh@gmail.com').emit('new_msg', model.dataValues);
 
   });
+
+  Branch.addHook("afterUpdate", async (model, options) => {
+   
+    global.io?.sockets.in('vuinodh@gmail.com').emit('new_msg', model);
+
+  });
+
   return Branch;
 };

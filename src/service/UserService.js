@@ -45,8 +45,8 @@ class UserService {
             }
           
             if(userBody.mode.includes('PARTNER')){
-                const businessData = await userData.createBusiness(userBody);
-                const branchData =await businessData.createBranch(userBody)
+                const businessData = await userData.createBusiness({'inital_request_details':userBody, ...userBody});
+             
       
            
                 

@@ -1,7 +1,7 @@
 const { Model } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
-  class  PlanValidity extends Model {
+  class  Validity extends Model {
   
     static associate(models) {
       // define association here
@@ -9,22 +9,21 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
 
-   PlanValidity.init(
+   Validity.init(
     {
-        validity:DataTypes.INTEGER,
-        price:DataTypes.FLOAT,
-        discount:{type:DataTypes.FLOAT,defaultValue:0},
-        discount_expiry:DataTypes.DATEONLY
-        
-     
+     value:DataTypes.INTEGER,
+     unit:{
+         type:DataTypes.STRING,
+         defaultValue:'days'
+     }
     },
 
     {
       sequelize,
-      modelName: "planvalidity",
+      modelName: "validity",
       underscored: true,
     }
   );
-  return  PlanValidity;
+  return  Validity;
 };
 
