@@ -34,11 +34,19 @@ module.exports = (sequelize, DataTypes) => {
           return this.setDataValue("branch_type_id", val.id);
         },
       },
+      service_type: {
+        type: DataTypes.JSON,
+
+        set: function (val) {
+          this.setDataValue("branch_type_label", val.label);
+
+          return this.setDataValue("branch_type_id", val.id);
+        },
+      },
       branch_type_id: {
         type: DataTypes.INTEGER,
       },
       branch_phone_number: DataTypes.STRING,
-      branch_sub_type: DataTypes.STRING,
       open_timing: DataTypes.DATE,
       close_timing: DataTypes.DATE,
 
