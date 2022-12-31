@@ -19,6 +19,7 @@ class BranchService {
   }
 
   getBranchesForActivation = async () => {
+
     const branches = (
       await this.branchDao.Model.findAll({
         include: [
@@ -33,7 +34,7 @@ class BranchService {
     console.log({ branches });
 
     const flattenBranches = branches.map((branch) => {
-      const temp = { ...branch, ...branch.business, ...branch.business.user,branch_id:branch.id };
+      const temp = { ...branch, ...branch?.business, ...branch?.business?.user,branch_id:branch.id };
 
       return omit(temp, ["business", "user","id"]);
     });

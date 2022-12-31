@@ -1,59 +1,14 @@
 [
-    {
-        "title": "Owner Details",
-        "eligility": [
-            "ADMIN"
-        ],
-        "details": [
-            {
-                "title": "Owner Details",
-                "eligility": [
-                    "ADMIN"
-                ],
-                "fields": [
-                    {
-                        "eligility": [
-                            "ADMIN"
-                        ],
-                        "label": "Owner Name",
-                        "type": "textbox",
-                        "input": "text",
-                        "isMandatory": true,
-                        "requestKey": "name"
-                    },
-                    {
-                        "eligility": [
-                            "ADMIN"
-                        ],
-                        "label": "Mobile No",
-                        "isMandatory": true,
-                        "type": "textbox",
-                        "input": "number",
-                        "requestKey": "phone_number"
-                    },
-                    {
-                        "label": "Email ID",
-                        "type": "textbox",
-                        "input": "email",
-                        "isMandatory": true,
-                        "requestKey": "email",
-                        "eligility": [
-                            "ADMIN"
-                        ]
-                    }
-                ]
-            }
-        ]
-    },
+   
     {
         "eligility": [
-            "ADMIN"
+            "PARTNER"
         ],
         "title": "Business Details",
         "details": [
             {
                 "eligility": [
-                    "ADMIN"
+                    "PARTNER"
                 ],
                 "title": "Business Details",
                 "fields": [
@@ -65,18 +20,18 @@
                         "error": "Please enter valid business Name",
                         "requestKey": "business_name",
                         "eligility": [
-                            "ADMIN"
+                            "PARTNER"
                         ]
                     },
                     {
-                        "label": "Business Number",
+                        "label": "Business Phone No",
                         "type": "textbox",
                         "input": "number",
                         "isMandatory": true,
                         "error": "Please enter valid business number",
                         "requestKey": "branch_phone_number",
                         "eligility": [
-                            "ADMIN"
+                            "PARTNER"
                         ]
                     },
                     {
@@ -85,7 +40,7 @@
                         "requestKey": "business_location",
                         "isMandatory": true,
                         "eligility": [
-                            "ADMIN"
+                            "PARTNER"
                         ]
                     }
                 ]
@@ -93,32 +48,32 @@
             {
                 "title": "Business",
                 "eligility": [
-                    "ADMIN"
+                    "PARTNER"
                 ],
                 "fields": [
                     {
                         "type": "grid",
                         "subType": "option",
                         "eligility": [
-                            "ADMIN"
+                            "PARTNER"
                         ],
                         "requestKey": "business_type",
                         "fields": [
                             {
                                 "id": 1,
-                                "label": "Fashion",
-                                "eligility": ["ADMIN"]
-                              },
-                              {
+                                "label": "Lifestyle & Fashion",
+                                "image_url": null
+                            },
+                            {
                                 "id": 2,
-                                "label": "Food",
-                                "eligility": ["ADMIN"]
-                              },
-                              {
+                                "label": "Test1234",
+                                "image_url": null
+                            },
+                            {
                                 "id": 3,
-                                "label": "Gift & Toys",
-                                "eligility": ["ADMIN"]
-                              }
+                                "label": "Lifestyle & Fashion",
+                                "image_url": null
+                            }
                         ]
                     }
                 ]
@@ -126,7 +81,7 @@
             {
                 "title": "Business Category",
                 "eligility": [
-                    "ADMIN"
+                    "PARTNER"
                 ],
                 "fields": [
                     {
@@ -135,7 +90,7 @@
                         "input": "select",
                         "requestKey": "business_category",
                         "eligility": [
-                            "ADMIN"
+                            "PARTNER"
                         ],
                         "fields": [
                             {
@@ -180,13 +135,13 @@
             {
                 "title": "Business Activities",
                 "eligility": [
-                    "ADMIN"
+                    "PARTNER"
                 ],
                 "fields": [
                     {
                         "type": "grid",
                         "eligility": [
-                            "ADMIN"
+                            "PARTNER"
                         ],
                         "subType": "chip",
                         "requestKey": "business_activities",
@@ -253,7 +208,7 @@
                         "type": "text",
                         "value": "Mabliz",
                         "eligility": [
-                            "ADMIN"
+                            "PARTNER"
                         ]
                     }
                 ]
@@ -261,13 +216,13 @@
             {
                 "title": "Price Type (Service Type)",
                 "eligility": [
-                    "ADMIN"
+                    "PARTNER"
                 ],
                 "fields": [
                     {
                         "type": "grid",
                         "eligility": [
-                            "ADMIN"
+                            "PARTNER"
                         ],
                         "subType": "chip",
                         "requestKey": "service_type",
@@ -277,7 +232,7 @@
                                 "id":1,
                                 "servicetypeid":1,
                                 "eligility": [
-                                    "ADMIN"
+                                    "PARTNER"
                                 ]
                             },
                             {
@@ -285,7 +240,7 @@
                                 "id":2,
                                 "servicetypeid":2,
                                 "eligility": [
-                                    "ADMIN"
+                                    "PARTNER"
                                 ]
                             },
                             {
@@ -293,7 +248,7 @@
                                 "id":3,
                                 "servicetypeid":3,
                                 "eligility": [
-                                    "ADMIN"
+                                    "PARTNER"
                                 ]
                             },
                             {
@@ -301,7 +256,7 @@
                                 "id":4,
                                 "servicetypeid":4,
                                 "eligility": [
-                                    "ADMIN"
+                                    "PARTNER"
                                 ]
                             },
                             {
@@ -309,7 +264,7 @@
                                 "id":5,
                                 "servicetypeid":5,
                                 "eligility": [
-                                    "ADMIN"
+                                    "PARTNER"
                                 ]
                             },
                             {
@@ -317,7 +272,7 @@
                                 "id":6,
                                 "servicetypeid":6,
                                 "eligility": [
-                                    "ADMIN"
+                                    "PARTNER"
                                 ]
                             },
                             {
@@ -325,70 +280,70 @@
                                 "id":7,
                                 "servicetypeid":7,
                                 "eligility": [
-                                    "ADMIN"
+                                    "PARTNER"
                                 ]
                             }
                         ]
                     }
                 ]
             },
-            {
-              "title": "Business / Shop Image",
-              "eligility": ["ADMIN", "PARTNER"],
-              "fields": [
-                {
-                  "type": "grid",
-                  "subType": "image_picker",
-                  "eligility": ["ADMIN", "PARTNER"],
-                  "fields": [
-                    {
-                      "label": "Sign Board",
-                      "type": "grid",
-                      "isMandatory": true,
-                      "error": "Please upload your Sign Board image",
-                      "subType": "image_picker",
-                      "requestKey": "sign_board_image",
-                      "eligility": ["ADMIN", "PARTNER"]
-                    },
-                    {
-                      "label": "Shop Photo",
-                      "type": "grid",
-                      "isMandatory": true,
-                      "error": "Please upload your Shop image",
-                      "subType": "image_picker",
-                      "requestKey": "shop_image",
-                      "eligility": ["ADMIN", "PARTNER"]
-                    },
-                    {
-                      "label": "Business Card",
-                      "type": "grid",
-                      "subType": "image_picker",
-                      "requestKey": "business_card_image",
-                      "eligility": ["ADMIN", "PARTNER"]
-                    },
-                    {
-                      "label": "Logo",
-                      "type": "grid",
-                      "subType": "image_picker",
-                      "requestKey": "logo",
-                      "eligility": ["ADMIN", "PARTNER"]
-                    }
-                  ]
-                }
-              ]
-            }
+      {
+        "title": "Business / Shop Image",
+        "eligility": ["ADMIN", "PARTNER"],
+        "fields": [
+          {
+            "type": "grid",
+            "subType": "image_picker",
+            "eligility": ["ADMIN", "PARTNER"],
+            "fields": [
+              {
+                "label": "Sign Board",
+                "type": "grid",
+                "isMandatory": true,
+                "error": "Please upload your Sign Board image",
+                "subType": "image_picker",
+                "requestKey": "sign_board_image",
+                "eligility": ["ADMIN", "PARTNER"]
+              },
+              {
+                "label": "Shop Photo",
+                "type": "grid",
+                "isMandatory": true,
+                "error": "Please upload your Shop image",
+                "subType": "image_picker",
+                "requestKey": "shop_image",
+                "eligility": ["ADMIN", "PARTNER"]
+              },
+              {
+                "label": "Business Card",
+                "type": "grid",
+                "subType": "image_picker",
+                "requestKey": "business_card_image",
+                "eligility": ["ADMIN", "PARTNER"]
+              },
+              {
+                "label": "Logo",
+                "type": "grid",
+                "subType": "image_picker",
+                "requestKey": "logo",
+                "eligility": ["ADMIN", "PARTNER"]
+              }
+            ]
+          }
+        ]
+      }
         ]
     },
     {
         "title": "Licence & Legal",
         "eligility": [
-            "ADMIN"
+            "PARTNER"
         ],
         "details": [
             {
                 "title": "GST",
                 "eligility": [
-                    "ADMIN"
+                    "PARTNER"
                 ],
                 "fields": [
                     {
@@ -398,7 +353,7 @@
                         "requestKey": "gst_number",
                         "imageKey": "gst_image",
                         "eligility": [
-                            "ADMIN"
+                            "PARTNER"
                         ]
                     }
                 ]
@@ -406,7 +361,7 @@
             {
                 "title": "Licence",
                 "eligility": [
-                    "ADMIN"
+                    "PARTNER"
                 ],
                 "fields": [
                     {
@@ -416,7 +371,7 @@
                         "requestKey": "licence_number",
                         "imageKey": "licence_image",
                         "eligility": [
-                            "ADMIN"
+                            "PARTNER"
                         ]
                     },
                     {
@@ -424,7 +379,7 @@
                         "type": "date_picker",
                         "requestKey": "licence_expiry_date",
                         "eligility": [
-                            "ADMIN"
+                            "PARTNER"
                         ]
                     }
                 ]
@@ -432,7 +387,7 @@
             {
                 "title": "FSSAI",
                 "eligility": [
-                    "ADMIN"
+                    "PARTNER"
                 ],
                 "fields": [
                     {
@@ -442,7 +397,7 @@
                         "requestKey": "fssai_number",
                         "imageKey": "fssai_image",
                         "eligility": [
-                            "ADMIN"
+                            "PARTNER"
                         ]
                     },
                     {
@@ -450,7 +405,7 @@
                         "type": "date_picker",
                         "requestKey": "fssai_expiry_date",
                         "eligility": [
-                            "ADMIN"
+                            "PARTNER"
                         ]
                     }
                 ]
@@ -460,22 +415,23 @@
     {
         "title": "Timing",
         "type":"timing",
+
         "eligility": [
-            "ADMIN"
+            "PARTNER"
         ],
         "details":   [
             {
                 "title": "Business Timing",
                 "eligility":
                 [
-                    "ADMIN", "PARTNER"
+                    "PARTNER", "PARTNER"
                 ],
                 "fields":
                 [
                     {
                         "eligility":
                         [
-                            "ADMIN", "PARTNER"
+                            "PARTNER", "PARTNER"
                         ],
                         "type": "timing",
                         "requestKey":"business_timings"

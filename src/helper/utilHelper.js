@@ -5,7 +5,7 @@ const httpStatus = require("http-status");
 const { omit } = require("lodash");
 
 const getAbsolutePath = (path) => {
-  return "https://mabliz.onrender.com/" + path;
+  return "https://mabliz-dev.onrender.com/" + path;
 };
 
 const getRecord = async ({ id, sourceModel, getMixin, res }) => {
@@ -53,8 +53,8 @@ const crudOperations = async ({ req, res, source, target, id }) => {
       break;
     case "POST":
       const createMixin = "create" + targetModelName;
-
-      const modelAddedData = await sourceModel[createMixin](req.body);
+console.log(req.body)
+      const modelAddedData = await sourceModel[createMixin]({...req.body,inital_request_details:req.body});
       res.json(
         responseHandler.returnSuccess(httpStatus.OK, "Success", modelAddedData)
       );
@@ -84,35 +84,42 @@ const crudOperations = async ({ req, res, source, target, id }) => {
   }
 };
 
-const basicCrudOperations = async (req, res) => {
-  const modelName = req.path.split("/")[1];
+const basicCrudOperations = async (req, res, path) => {
+  const modelName = path || req.path.split("/")?.[1];
   const Dao = require("./../dao/" + capitalize(modelName) + "Dao");
   const model = new Dao();
-  //  console.log(req.body)
+   console.log(req.method)
+  let data ={}
   switch (req.method) {
     case "GET":
-      const modelListData = await model.findAll();
-      res.json(
-        responseHandler.returnSuccess(httpStatus.OK, "Success", modelListData)
-      );
+       data = await model.findAll();
+     
       break;
     case "POST":
-      const data = await model.create(req.body);
-      res.json(responseHandler.returnSuccess(httpStatus.OK, "Success", data));
+      data = await model.create(req.body);
       break;
     case "PUT":
      await model.updateWhere(req.body,{id:req.body.id})
-     
-     res.json(responseHandler.returnSuccess(httpStatus.OK, "Success"));
+    
 
       break;
 
     case "DELETE":
     await model.deleteByWhere({id:req.body.id})
-        res.json(responseHandler.returnSuccess(httpStatus.OK, "Success"));
+ 
       
       break;
   }
+  if(path){
+    console.log({data});
+
+    return data
+  }
+  else{
+    return res.json(responseHandler.returnSuccess(httpStatus.OK, "Success", data));
+
+  }
+
 };
 
 const crudOperationsTwoTargets = async (object) => {

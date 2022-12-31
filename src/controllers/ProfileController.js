@@ -1,10 +1,14 @@
 const httpStatus = require("http-status");
 const AuthService = require("../service/AuthService");
 const TokenService = require("../service/TokenService");
+const BranchService = require("../service/BranchService");
+const { Op } = require("sequelize");
+
 const UserService = require("../service/UserService");
 const logger = require("../config/logger");
 const { branchStatus } = require("../config/constant");
 const pluralize = require("pluralize");
+const sequelize = require("sequelize");
 const {
   crudOperations,
   crudOperationsTwoTargets,
@@ -15,7 +19,9 @@ const { omit } = require("lodash");
 class ProfileController {
   constructor() {
     this.userService = new UserService();
+
     this.tokenService = new TokenService();
+    this.branchService = new BranchService();
     this.authService = new AuthService();
   }
 
@@ -48,7 +54,6 @@ class ProfileController {
   };
 
   updateDetailsForActivation = async (req, res) => {
-    console.log('body',req.body);
     const user = req.user;
     const userDetails = user.isAdmin
       ? await this.userService.userDao.findById(req.body.userId)
@@ -62,7 +67,6 @@ class ProfileController {
         "uuid",
         "status",
       ]);
-      console.log(userDetails,result.branchId, result.businessId,{userDetails});
 
       await userDetails.update(result);
       const business = (
@@ -71,18 +75,25 @@ class ProfileController {
       const branch = (
         await business.getBranches({ where: { id: result.branchId } })
       )[0];
-      if (user.isAdmin && req.body.action  === 'activate') {
+      if (user.isAdmin && req.body.action === "activate") {
         result.branch_status = branchStatus.STATUS_ACTIVE;
+        result.activated_by_id = user.id;
+        result.activated_by_name = user.name;
+        result.activated_time = new Date();
         result.business_status = branchStatus.STATUS_ACTIVE;
-      }
-      else if (user.isAdmin&& req.body.action  === 'reject') {
+      } else if (user.isAdmin && req.body.action === "reject") {
         result.branch_status = branchStatus.STATUS_REJECT;
         result.business_status = branchStatus.STATUS_REJECT;
-
-      }
-      else if(user.isAdmin&& req.body.action  === 'verify'){
+        result.rejected_by_id = user.id;
+        result.rejected_by_name = user.name;
+        result.rejected_time = new Date();
+      } else if (user.isAdmin && req.body.action === "verify") {
         result.branch_status = branchStatus.STATUS_VERFIED;
         result.business_status = branchStatus.STATUS_VERFIED;
+        result.verified_by_id = user.id;
+        result.verified_by_name = user.name;
+
+        result.verified_time = new Date();
       }
       await business.update(result);
       await branch.update(result);
@@ -107,6 +118,35 @@ class ProfileController {
         )
       );
     }
+  };
+
+  getDashboardDetails = async (req, res) => {
+    const { user } = req;
+
+    // const businessesCount = (await user.getBusinesses({
+    //   attributes: [
+    //     [sequelize.fn('COUNT', sequelize.col('id')), 'total_business_count'],
+    //   ],
+    //   raw:true
+    // }))[0];
+
+    const businesses = await user.getBusinesses();
+
+    const businessIds = businesses.map((value) => value.id);
+    const pendingForActivationBranches =
+      await this.branchService.branchDao.findByWhere({
+        businessId: { [Op.in]: businessIds },
+        branch_status: { [Op.lt]: branchStatus.STATUS_ACTIVE },
+      });
+
+    // console.log(businessesCount);
+
+    return res.json(
+      responseHandler.returnSuccess(httpStatus.OK, "Success", {
+        businessIds,
+        pendingForActivationBranches,
+      })
+    );
   };
 
   curdUserAssociated = async (req, res) => {

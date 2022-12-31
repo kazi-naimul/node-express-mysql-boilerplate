@@ -1,20 +1,22 @@
 [
   {
     "title": "Personal Details",
-    "eligility": ["PARTNER","CUSTOMER"],
+    "eligility": ["PARTNER", "CUSTOMER"],
     "details": [
       {
         "title": "Register Mobile No",
-        "eligility": ["PARTNER","CUSTOMER"],
+        "eligility": ["PARTNER", "CUSTOMER"],
 
         "fields": [
           {
-            "eligility": ["PARTNER","CUSTOMER"],
+            "eligility": ["PARTNER", "CUSTOMER"],
             "label": "Mobile No",
             "isMandatory": true,
             "type": "textbox",
+            "error": "Please enter valid Mobile Number",
+            "readyOnly": true,
             "input": "number",
-            "requestKey":"phone_number"
+            "requestKey": "phone_number"
           }
         ]
       },
@@ -23,19 +25,21 @@
         "eligility": ["PARTNER", "CUSTOMER"],
         "fields": [
           {
-            "eligility":["PARTNER","CUSTOMER"],
+            "eligility": ["PARTNER", "CUSTOMER"],
             "label": "Name",
             "type": "textbox",
             "input": "text",
             "isMandatory": true,
+            "error": "Please enter valid Name",
             "requestKey": "name"
           },
           {
             "label": "Email ID",
-            "type":"textbox",
-            "input":"email",
+            "type": "textbox",
+            "input": "email",
             "isMandatory": true,
             "requestKey": "email",
+            "error": "Please enter valid Email Number",
             "eligility": ["PARTNER", "CUSTOMER"]
           }
         ]
@@ -49,9 +53,7 @@
             "type": "confirm_pin",
             "input": "number",
             "requestKey": "mpin",
-            "eligility": [
-              "PARTNER"
-            ]
+            "eligility": ["PARTNER"]
           }
         ]
       }
@@ -67,8 +69,8 @@
         "fields": [
           {
             "label": "Business Name",
-            "type":"textbox",
-            "input":"text",
+            "type": "textbox",
+            "input": "text",
             "isMandatory": true,
             "error": "Please enter valid business Name",
             "requestKey": "business_name",
@@ -76,11 +78,10 @@
           },
           {
             "label": "Business Number",
-            "type":"textbox",
-            "input":"number",
-            "error": "Please enter valid Business Number",
-            "requestKey":"branch_phone_number",
-            "eligility":["PARTNER"]
+            "type": "textbox",
+            "input": "number",
+            "requestKey": "branch_phone_number",
+            "eligility": ["PARTNER"]
           }
         ]
       },
@@ -90,7 +91,9 @@
         "fields": [
           {
             "type": "grid",
-            "subtype":"option",
+            "subType": "option",
+            "isMandatory": true,
+            "error": "Please select your Business Type",
             "eligility": ["PARTNER"],
             "requestKey": "business_type",
             "fields": [
@@ -123,9 +126,7 @@
             "input": "number",
             "requestKey": "gst_number",
             "imageKey": "gst_image",
-            "eligility": [
-              "PARTNER"
-            ]
+            "eligility": ["PARTNER"]
           }
         ]
       },
@@ -136,8 +137,55 @@
           {
             "label": "Business Location",
             "type": "location_picker",
+            "isMandatory": true,
+            "error": "Please select your Business Location",
             "requestKey": "business_location",
             "eligility": ["PARTNER"]
+          }
+        ]
+      },
+      {
+        "title": "Business / Shop Image",
+        "eligility": ["ADMIN", "PARTNER"],
+        "fields": [
+          {
+            "type": "grid",
+            "subType": "image_picker",
+            "eligility": ["ADMIN", "PARTNER"],
+            "fields": [
+              {
+                "label": "Sign Board",
+                "type": "grid",
+                "isMandatory": true,
+                "error": "Please upload your Sign Board image",
+                "subType": "image_picker",
+                "requestKey": "sign_board_image",
+                "eligility": ["ADMIN", "PARTNER"]
+              },
+              {
+                "label": "Shop Photo",
+                "type": "grid",
+                "isMandatory": true,
+                "error": "Please upload your Shop image",
+                "subType": "image_picker",
+                "requestKey": "shop_image",
+                "eligility": ["ADMIN", "PARTNER"]
+              },
+              {
+                "label": "Business Card",
+                "type": "grid",
+                "subType": "image_picker",
+                "requestKey": "business_card_image",
+                "eligility": ["ADMIN", "PARTNER"]
+              },
+              {
+                "label": "Logo",
+                "type": "grid",
+                "subType": "image_picker",
+                "requestKey": "logo",
+                "eligility": ["ADMIN", "PARTNER"]
+              }
+            ]
           }
         ]
       }
@@ -145,32 +193,46 @@
   },
   {
     "title": "Legal Terms",
-    "eligility": ["PARTNER","CUSTOMER"],
+    "eligility": ["PARTNER", "CUSTOMER"],
     "details": [
       {
         "title": "Referral Code ",
-        "eligility": ["PARTNER","CUSTOMER"],
+        "eligility": ["PARTNER", "CUSTOMER"],
         "fields": [
           {
             "label": "Referral Code",
             "type": "textbox",
             "input": "text",
-            "requestKey":"referral_code",
-            "eligility":["PARTNER","CUSTOMER"]
-          },
+            "requestKey": "referral_code",
+            "eligility": ["PARTNER", "CUSTOMER"]
+          }
+        ]
+      },
+      {
+        "eligility": ["PARTNER", "CUSTOMER"],
+        "fields": [
+         
           {
             "type": "checkbox",
+            "defaultValue": true,
             "label": "I want to receive communications from mabliz on Whatsapp",
             "requestKey": "whatsapp_communication",
-            "eligility": ["PARTNER","CUSTOMER"]
+            "eligility": ["PARTNER", "CUSTOMER"]
           },
           {
             "type": "checkbox",
-            "isHTML":true,
-            "label": "<p>I agree to mabliz <a href='https://www.google.co.in/'>Terms & condition</a></p>",
+            "isHTML": true,
+            "label": "I agree to mabliz <a href='https://www.google.co.in/'>Terms & condition</a>",
+            "isMandatory": true,
             "validValue": true,
-            "eligility": ["PARTNER","CUSTOMER"]
-          }
+            "eligility": ["PARTNER", "CUSTOMER"]
+          },
+          {
+            "type": "note",
+            "title":"Notes",
+            "label": "Each of these details will be verified by the Mabliz team and Mabliz has the power to disable your login if you provide any incorrect information",
+            "eligility": ["PARTNER", "CUSTOMER"]
+        }
         ]
       }
     ]

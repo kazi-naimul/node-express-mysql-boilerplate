@@ -36,8 +36,21 @@ class AuthController {
   };
 
   sendOtp = async (req, res) => {
-    console.log(req.body);
-    const hash = await createNewOTP(req.body.phone_number);
+    
+    const {phone_number,acknowledged} = req.body;
+    let user = await this.authService.userDao.findByPhoneNumber(phone_number);
+
+    if(!user && !acknowledged){
+     return res.json(
+        responseHandler.returnSuccess(
+          9999,
+          "Your number not registered, are you interested in registering with this number",
+          {}
+        )
+      );
+    }
+
+    const hash = await createNewOTP(phone_number);
     res.json(
       responseHandler.returnSuccess(
         httpStatus[200],

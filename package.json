@@ -4,8 +4,8 @@
   "description": "Boilerplate for Node-Express with sequelize ORM",
   "main": "src/index.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=testing nodemon src/index.js",
-    "start": "cross-env NODE_ENV=testing node src/index.js",
+    "dev": "cross-env NODE_ENV=development nodemon src/index.js",
+    "start": "cross-env NODE_ENV=development node src/index.js",
     "test": "mocha './specs/**/*.spec.js' --watch"
   },
   "author": "Kazi Naimul Hoque (Aoyan)",
@@ -34,6 +34,7 @@
     "otp-generator": "^4.0.0",
     "passport": "^0.5.2",
     "passport-jwt": "^4.0.0",
+    "pg": "^8.8.0",
     "pluralize": "^8.0.0",
     "redis": "^4.0.6",
     "sequelize": "^6.6.5",
