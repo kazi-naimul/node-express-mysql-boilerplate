@@ -168,37 +168,34 @@
             {
                 "title": "Food Type",
                 "eligility": [
-                    "PARTNER"
+                    "ADMIN"
                 ],
                 "fields": [
                     {
-                        "label": "Food Type",
-                        "type": "drop_down",
-                        "input": "select",
+                        "type": "grid",
+                        "subType": "chip",
+                        "isMandatory": true,
+                        "error": "Please Select your Food Type",
                         "requestKey": "food_type",
                         "eligility": [
-                            "PARTNER"
+                            "ADMIN"
                         ],
                         "fields": [
                             {
                                 "label": "None",
-                                "id": 1,
-                                "foodtypeId": 1
+                                "id": 1
                             },
                             {
                                 "label": "Pure Veg",
-                                "id": 2,
-                                "foodtypeId": 2
+                                "id": 2
                             },
                             {
                                 "label": "Eggetarian",
-                                "id": 3,
-                                "foodtypeId": 3
+                                "id": 3
                             },
                             {
                                 "label": "Veg & Non Veg",
-                                "id": 4,
-                                "foodtypeId": 4
+                                "id": 4
                             }
                         ]
                     }
