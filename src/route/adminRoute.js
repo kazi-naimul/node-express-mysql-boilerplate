@@ -14,7 +14,11 @@ router.get('/get-pending-activation-group', adminController.getActivationGroup);
 router.all('/addon',adminController.crudOperations)
 router.all('/tax',adminController.crudOperations)
 router.all('/validity',adminController.crudOperations)
-router.all('/plandetails',adminController.multipleCrudOperations)
+router.get('/plandetails',(req,res,next)=>{
+    req.body ={"tax":{},"validity":{}};
+    console.log(req.body)
+    next();
+},adminController.multipleCrudOperations)
 
 router.post('/plans', adminController.addPlan);
 router.get('/plans', adminController.getPlansByBusinessId);
