@@ -5,6 +5,8 @@ const BusinesstypeService = require("../service/BusinesstypeService");
 const UserService = require("../service/UserService");
 const PlanService = require("../service/PlanService");
 const AddonService = require("../service/AddonService");
+const TaxService = require("../service/TaxService");
+
 const parse = require("date-fns/parse");
 const differenceInCalendarDays = require("date-fns/differenceInCalendarDays");
 
@@ -31,6 +33,18 @@ class AdminController {
     this.addonService = new AddonService();
   }
 
+  multipleCrudOperations = async (req, res) => {
+    const { body, method } = req;
+    const paths = Object.keys(body);
+    const updatedValues ={}
+    const promises = paths.map(async(value) => {
+     const result =  await basicCrudOperations({ method }, { method }, value);
+     updatedValues[value] = result;
+     return result;
+    });
+    await Promise.all(promises)
+    res.json(updatedValues);
+  };
   subscribeToPlan = async (req, res) => {
     const { plan_id, branch_id } = req.query;
     const {
@@ -57,17 +71,15 @@ class AdminController {
       parse(planValidity.discount_expiry, "yyyy-MM-dd", new Date()),
       new Date()
     );
-    const price= planValidity.price - (discountDifference > 0 ? planValidity.discount : 0);
+    const price =
+      planValidity.price - (discountDifference > 0 ? planValidity.discount : 0);
     if (plan.tax_inclusive) {
       plan_tax_per_day =
-        (price - price * (100 / (100 + plan.tax))) /
-        planValidity.validity;
-      plan_charges_per_day =
-      price / planValidity.validity - plan_tax_per_day;
+        (price - price * (100 / (100 + plan.tax))) / planValidity.validity;
+      plan_charges_per_day = price / planValidity.validity - plan_tax_per_day;
     } else {
       plan_charges_per_day = price / planValidity.validity;
-      plan_tax_per_day =
-        (price * (plan.tax / 100)) / planValidity.validity;
+      plan_tax_per_day = (price * (plan.tax / 100)) / planValidity.validity;
     }
     total_plan_charges =
       plan_charges_per_day * planValidity.validity +
@@ -95,7 +107,6 @@ class AdminController {
         branch_id,
       })
     )[0];
-
 
     const promises = addons.map(async (tt) => {
       const addon = await this.addonService.addonDao.findById(tt.id);
@@ -234,8 +245,8 @@ class AdminController {
     const plan = await business.createPlan(req.body);
 
     const promises = req.body.planvalidities.map(async (tt) => {
-      console.log(tt)
-   
+      console.log(tt);
+
       return await plan.createPlanvalidity(tt);
     });
     await Promise.all(promises);
