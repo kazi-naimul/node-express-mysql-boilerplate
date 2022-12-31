@@ -62,6 +62,7 @@ module.exports = (sequelize, DataTypes) => {
   );
   Business.addHook("afterCreate", async (model, options) => {
     const data = model?.dataValues?.inital_request_details
+    console.log({data})
     const branchData = await model.createBranch({
       ...data,
       branch_name:data?.locality + ' Branch',
