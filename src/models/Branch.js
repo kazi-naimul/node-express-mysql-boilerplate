@@ -92,13 +92,13 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.TEXT,
         get: function () {
           console.log(this.getDataValue("business_timings"));
-          return JSON.parse(this.getDataValue("business_timings") || "{}");
+          return JSON.parse(this.getDataValue("business_timings") || "[]");
         },
         set: function (value) {
           // this.setDataValue('open_timing',value[0].time[0].start_time);
           // this.setDataValue('open_timing',value[0].time[value[0].time.length-1].end_time);
 
-          this.setDataValue("business_timings", JSON.stringify(value || {}));
+          this.setDataValue("business_timings", JSON.stringify(value || []));
         },
       },
 
