@@ -369,7 +369,7 @@
                         "type": "textbox_image_picker",
                         "input": "number",
                         "requestKey": "licence_number",
-                        "imageKey": "licence_image",
+                        "imageKey": "license_image",
                         "eligility": [
                             "PARTNER"
                         ]
