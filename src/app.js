@@ -41,5 +41,7 @@ app.use(errorConverter);
 app.use(errorHandler);
 const db = require('./models');
 
-db.sequelize.sync();
+// Uncomment this line if you want to sync database model
+// db.sequelize.sync()
+
 module.exports = app;
