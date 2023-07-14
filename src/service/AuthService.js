@@ -55,7 +55,7 @@ class AuthService {
             blacklisted: false,
         });
         if (!refreshTokenDoc) {
-            res.status(httpStatus.NOT_FOUND).send({ message: 'User Not found!' });
+            return false;
         }
         await this.tokenDao.remove({
             token: req.body.refresh_token,
@@ -69,6 +69,7 @@ class AuthService {
         });
         await this.redisService.removeToken(req.body.access_token, 'access_token');
         await this.redisService.removeToken(req.body.refresh_token, 'refresh_token');
+        return true;
     };
 }
 
