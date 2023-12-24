@@ -9,7 +9,7 @@ By running this project you will get a production ready environment with all nec
 Clone the repo:
 
 ```bash
-git clone https://github.com/aoyan107/node-express-mysql-boilerplate
+git clone https://github.com/kazi-naimul/node-express-mysql-boilerplate
 cd node-express-mysql-boilerplate
 ```
 
